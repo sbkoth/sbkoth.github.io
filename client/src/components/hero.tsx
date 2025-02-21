@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Avatar } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import type { Profile } from "@shared/schema";
-import { ArrowRight } from "lucide-react";
 
 interface HeroProps {
   profile: Profile;
@@ -33,11 +31,8 @@ export default function Hero({ profile }: HeroProps) {
           <p className="mt-4 max-w-xl text-lg text-foreground/80">
             {profile.bio}
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <div className="mt-8 flex justify-center md:justify-start">
             <div ref={calendarButtonRef} className="inline-block"></div>
-            <Button variant="outline" size="lg" asChild>
-              <a href="#projects">View My Work</a>
-            </Button>
           </div>
         </div>
       </div>
