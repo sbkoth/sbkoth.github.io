@@ -82,7 +82,7 @@ export default function Process() {
               <ul className="space-y-2">
                 {selectedStep?.steps.map((item, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-primary" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span className="text-muted-foreground">{item}</span>
                   </li>
                 ))}
