@@ -4,7 +4,6 @@ import { db } from "./db";
 import { loadBlogPosts } from "./blog-utils";
 import { loadProjects } from "./project-utils";
 import { loadServices, type Service } from "./services-utils";
-import { loadTestimonials, type Testimonial } from "./testimonials-utils";
 import { loadFeatures } from "./features-utils";
 import { loadProcess } from "./process-utils";
 import { cacheService } from "./cache-service";
@@ -16,7 +15,6 @@ export interface IStorage {
   updateProfilePhoto(photoUrl: string): Promise<Profile>;
   getBlogPosts(): Promise<BlogPost[]>;
   getServices(): Promise<Service[]>;
-  getTestimonials(): Promise<Testimonial[]>;
   syncBlogPosts(): Promise<void>;
   syncProjects(): Promise<void>;
   getFeatures(): Promise<Feature[]>;
@@ -100,15 +98,6 @@ export class DatabaseStorage implements IStorage {
     const services = await loadServices();
     cacheService.set('services', services);
     return services;
-  }
-
-  async getTestimonials(): Promise<Testimonial[]> {
-    const cached = cacheService.get('testimonials');
-    if (cached) return cached;
-
-    const testimonials = await loadTestimonials();
-    cacheService.set('testimonials', testimonials);
-    return testimonials;
   }
 
   async getFeatures(): Promise<Feature[]> {

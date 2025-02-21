@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import Hero from "@/components/hero";
 import Services from "@/components/services";
 import ProjectGrid from "@/components/project-grid";
-import Testimonials from "@/components/testimonials";
 import BlogSection from "@/components/blog-section";
 import Contact from "@/components/contact";
 import Features from "@/components/features";
@@ -33,7 +32,6 @@ export default function Home() {
       <Process />
       <Services />
       <ProjectGrid projects={projects} />
-      <Testimonials />
       <BlogSection posts={posts} />
       <Contact profile={profile} />
     </div>

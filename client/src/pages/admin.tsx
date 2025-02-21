@@ -31,12 +31,6 @@ export default function Admin() {
       implementation: "",
       outcomes: [],
       technologies: [],
-      clientTestimonial: {
-        quote: "",
-        author: "",
-        role: "",
-        company: "",
-      },
       thumbnail: "",
     },
   });
@@ -234,68 +228,6 @@ export default function Admin() {
                           />
                         </Badge>
                       ))}
-                    </div>
-                  </div>
-
-                  {/* Client Testimonial */}
-                  <div className="space-y-4">
-                    <h3 className="font-medium">Client Testimonial</h3>
-                    <FormField
-                      control={form.control}
-                      name="clientTestimonial.quote"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Quote</FormLabel>
-                          <FormControl>
-                            <Textarea {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="clientTestimonial.author"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Author</FormLabel>
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="clientTestimonial.role"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Role</FormLabel>
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="clientTestimonial.company"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Company</FormLabel>
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
                     </div>
                   </div>
                 </>
