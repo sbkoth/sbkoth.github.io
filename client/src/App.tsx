@@ -20,7 +20,7 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="system" enableSystem>
+    <ThemeProvider defaultTheme="system" storageKey="ui-theme" attribute="data-theme">
       <QueryClientProvider client={queryClient}>
         <div className="relative min-h-screen">
           <div className="fixed top-4 right-4 z-50">

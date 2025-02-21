@@ -10,18 +10,18 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 
 export function useTheme() {
   const [mounted, setMounted] = React.useState(false)
-  const { theme, setTheme } = useNextThemes()
+  const { resolvedTheme, setTheme } = useNextThemes()
 
   React.useEffect(() => {
     setMounted(true)
   }, [])
 
   const toggleTheme = React.useCallback(() => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }, [theme, setTheme])
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
+  }, [resolvedTheme, setTheme])
 
   return {
-    theme: mounted ? theme : undefined,
+    theme: mounted ? resolvedTheme : undefined,
     toggleTheme,
     mounted
   }
