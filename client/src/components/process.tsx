@@ -20,29 +20,36 @@ export default function Process() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-16 bg-accent/5">
-      <h2 className="text-3xl font-bold mb-8 text-center">Our Process</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="container mx-auto px-4 py-24">
+      <div className="max-w-2xl mx-auto text-center mb-16">
+        <h2 className="text-3xl font-bold mb-4">Our Process</h2>
+        <p className="text-lg text-muted-foreground">
+          A systematic approach to delivering exceptional results
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {steps.map((step, index) => (
-          <Card key={index} className="relative hover:shadow-lg transition-shadow">
-            <div className="absolute -top-4 left-4 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
-              {step.order}
+          <Card key={index} className="relative border-none shadow-none bg-transparent">
+            <div className="absolute -left-4 top-0 flex items-center justify-center w-8 h-8">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+              {index < steps.length - 1 && (
+                <div className="absolute top-8 left-1 w-[1px] h-[calc(100%-2rem)] bg-primary/20" />
+              )}
             </div>
-            <CardHeader className="pt-8">
-              <div className="flex items-center gap-4">
+            <CardHeader className="pl-8">
+              <div className="flex items-center gap-4 mb-2">
                 <div className="text-primary">
                   {iconMap[step.icon]}
                 </div>
-                <CardTitle>{step.title}</CardTitle>
+                <CardTitle className="text-xl">{step.title}</CardTitle>
               </div>
+              <p className="text-muted-foreground">{step.description}</p>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">{step.description}</p>
-              <ul className="space-y-2">
+            <CardContent className="pl-8">
+              <ul className="space-y-3">
                 {step.steps.map((item, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span className="text-sm">{item}</span>
+                  <li key={i} className="text-sm text-muted-foreground">
+                    {item}
                   </li>
                 ))}
               </ul>
