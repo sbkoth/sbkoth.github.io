@@ -14,14 +14,9 @@ export default function Hero({ profile }: HeroProps) {
     // Create a function to check and initialize the calendar
     const initCalendar = () => {
       if (calendarButtonRef.current && window.calendar?.schedulingButton) {
-        // Get the computed primary color value
-        const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-        // Convert to a hex color that the calendar script can understand
-        const color = `hsl(${primaryHue}, 50%, 50%)`;
-
         window.calendar.schedulingButton.load({
           url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3jn57Z8GRePdNpJDHhz1kInTrYIl_KwK6RYDkBOp6eWZ1BIIiFnG-sNf1oPI4RPgwFDsTD69dZ?gv=true',
-          color,
+          color: '#0066cc', // Fixed primary color matching our theme
           label: 'Schedule a Consultation',
           target: calendarButtonRef.current,
         });
