@@ -14,32 +14,32 @@ export class MemStorage implements IStorage {
   constructor() {
     this.profile = {
       id: 1,
-      name: "John Doe",
-      title: "Full Stack Developer",
-      bio: "Passionate developer with expertise in web technologies and system design. I love creating beautiful and functional applications.",
+      name: "Sebastian Koth",
+      title: "Staff Software Engineer at Shopify",
+      bio: "Software engineer with over 14 years of experience, specializing in building scalable applications and cloud infrastructure. Currently leading development teams at Shopify, focusing on e-commerce solutions and developer platforms.",
       avatar: "https://images.unsplash.com/photo-1507679799987-c73779587ccf",
       socials: {
-        github: "https://github.com/johndoe",
-        linkedin: "https://linkedin.com/in/johndoe",
-        twitter: "https://twitter.com/johndoe",
-        email: "john@example.com"
+        github: "https://github.com/sbkoth",
+        linkedin: "https://linkedin.com/in/sbkoth",
+        twitter: "https://twitter.com/sbkoth",
+        email: "sebastian@example.com"
       }
     };
 
     this.blogPosts = [
       {
         id: 1,
-        title: "Getting Started with React",
+        title: "Scaling E-commerce Platforms",
         content: "Full blog post content here...",
-        excerpt: "Learn the fundamentals of React and how to build modern web applications.",
+        excerpt: "Insights on building and scaling modern e-commerce platforms with cloud infrastructure.",
         publishedAt: new Date("2024-02-15").toISOString(),
         thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee"
       },
       {
         id: 2,
-        title: "The Future of Web Development",
+        title: "Developer Experience in Modern Teams",
         content: "Full blog post content here...",
-        excerpt: "Exploring upcoming trends and technologies in web development.",
+        excerpt: "Exploring best practices for improving developer experience and team productivity.",
         publishedAt: new Date("2024-02-10").toISOString(),
         thumbnail: "https://images.unsplash.com/photo-1504639725590-34d0984388bd"
       }
@@ -48,8 +48,8 @@ export class MemStorage implements IStorage {
     this.projects = [
       {
         id: 1,
-        title: "Project One",
-        description: "A beautiful web application",
+        title: "E-commerce Platform",
+        description: "A scalable e-commerce solution built with modern cloud infrastructure",
         type: "image",
         content: {
           url: "https://images.unsplash.com/photo-1484981138541-3d074aa97716"
@@ -59,8 +59,8 @@ export class MemStorage implements IStorage {
       },
       {
         id: 2,
-        title: "Project Two",
-        description: "Technical documentation",
+        title: "Cloud Architecture Documentation",
+        description: "Comprehensive guide on cloud infrastructure design",
         type: "pdf",
         content: {
           url: "https://example.com/sample.pdf"
@@ -70,8 +70,8 @@ export class MemStorage implements IStorage {
       },
       {
         id: 3,
-        title: "Project Three",
-        description: "Presentation deck",
+        title: "Team Leadership Workshop",
+        description: "Training materials for technical team leadership",
         type: "slides",
         content: {
           slides: [
