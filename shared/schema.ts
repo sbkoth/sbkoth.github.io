@@ -25,6 +25,17 @@ export const projects = pgTable("projects", {
   publishedAt: timestamp("published_at").notNull().defaultNow(),
   thumbnail: text("thumbnail").notNull(),
   type: text("type", { enum: ["image", "pdf", "slides", "text"] }).notNull(),
+  challenge: text("challenge"),
+  approach: text("approach"),
+  implementation: text("implementation"),
+  outcomes: jsonb("outcomes").$type<string[]>(),
+  clientTestimonial: jsonb("client_testimonial").$type<{
+    quote: string;
+    author: string;
+    role: string;
+    company: string;
+  }>(),
+  technologies: jsonb("technologies").$type<string[]>(),
 });
 
 export const blogPosts = pgTable("blog_posts", {
