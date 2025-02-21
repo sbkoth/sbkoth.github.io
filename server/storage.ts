@@ -1,10 +1,13 @@
-import type { Project, Profile, InsertProject, BlogPost, InsertBlogPost } from "@shared/schema";
+import type { Project, Profile, InsertProject, BlogPost, InsertBlogPost, Feature, ProcessStep } from "@shared/schema";
 import { projects, profile, blogPosts } from "@shared/schema";
 import { db } from "./db";
 import { loadBlogPosts } from "./blog-utils";
 import { loadProjects } from "./project-utils";
 import { loadServices, type Service } from "./services-utils";
 import { loadTestimonials, type Testimonial } from "./testimonials-utils";
+import { loadFeatures } from "./features-utils"; // Assumed file
+import { loadProcess } from "./process-utils"; // Assumed file
+
 
 export interface IStorage {
   getProfile(): Promise<Profile>;
@@ -16,6 +19,8 @@ export interface IStorage {
   getTestimonials(): Promise<Testimonial[]>;
   syncBlogPosts(): Promise<void>;
   syncProjects(): Promise<void>;
+  getFeatures(): Promise<Feature[]>;
+  getProcess(): Promise<ProcessStep[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -73,6 +78,13 @@ export class DatabaseStorage implements IStorage {
 
   async getTestimonials(): Promise<Testimonial[]> {
     return loadTestimonials();
+  }
+  async getFeatures(): Promise<Feature[]> {
+    return loadFeatures();
+  }
+
+  async getProcess(): Promise<ProcessStep[]> {
+    return loadProcess();
   }
 }
 

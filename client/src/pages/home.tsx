@@ -5,6 +5,8 @@ import ProjectGrid from "@/components/project-grid";
 import Testimonials from "@/components/testimonials";
 import BlogSection from "@/components/blog-section";
 import Contact from "@/components/contact";
+import Features from "@/components/features";
+import Process from "@/components/process";
 import type { Profile, Project, BlogPost } from "@shared/schema";
 
 export default function Home() {
@@ -27,6 +29,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Hero profile={profile} />
+      <Features />
+      <Process />
       <Services />
       <ProjectGrid projects={projects} />
       <Testimonials />
