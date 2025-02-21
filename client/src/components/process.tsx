@@ -32,33 +32,28 @@ export default function Process() {
             A systematic approach to delivering exceptional results
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {steps.map((step, index) => (
             <Card 
               key={index} 
-              className="relative border-none shadow-none bg-transparent cursor-pointer hover:bg-accent/5 transition-colors"
+              className="hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02]"
               onClick={() => setSelectedStep(step)}
             >
-              <div className="absolute -left-4 top-0 flex items-center justify-center w-8 h-8">
-                <div className="w-2 h-2 rounded-full bg-primary" />
-                {index < steps.length - 1 && (
-                  <div className="absolute top-8 left-1 w-[1px] h-[calc(100%-2rem)] bg-primary/20" />
-                )}
-              </div>
-              <CardHeader className="pl-8">
-                <div className="flex items-center gap-4 mb-2">
+              <CardHeader>
+                <div className="flex items-center gap-4">
                   <div className="text-primary">
                     {iconMap[step.icon]}
                   </div>
                   <CardTitle className="text-xl">{step.title}</CardTitle>
                 </div>
-                <p className="text-muted-foreground">{step.description}</p>
+                <p className="text-muted-foreground mt-2">{step.description}</p>
               </CardHeader>
-              <CardContent className="pl-8">
-                <ul className="space-y-3">
+              <CardContent>
+                <ul className="space-y-2">
                   {step.steps.map((item, i) => (
-                    <li key={i} className="text-sm text-muted-foreground">
-                      {item}
+                    <li key={i} className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                      <span className="text-sm text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>

@@ -13,12 +13,12 @@ export default function ContentDialog({ title, content, isOpen, onClose }: Conte
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
         </DialogHeader>
         <div 
-          className="prose dark:prose-invert mt-4"
+          className="prose dark:prose-invert prose-primary mt-4 max-w-none"
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       </DialogContent>
