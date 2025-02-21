@@ -39,7 +39,8 @@ export default function Admin() {
       outcomes: [],
       technologies: [],
       thumbnail: "",
-      thumbnailFile: undefined, //Added default value for thumbnailFile
+      thumbnailFile: undefined,
+      slug: "",
     },
   });
 
@@ -68,7 +69,7 @@ export default function Admin() {
       }
 
       // Format the data
-      const projectData = {
+      const projectData: Partial<AdminProject> = {
         ...data,
         slug: data.title.toLowerCase().replace(/\s+/g, '-'),
         technologies,
@@ -171,7 +172,7 @@ export default function Admin() {
                       <FormItem>
                         <FormLabel>Challenge</FormLabel>
                         <FormControl>
-                          <Textarea {...field} />
+                          <Textarea {...field} value={field.value || ''} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -185,7 +186,7 @@ export default function Admin() {
                       <FormItem>
                         <FormLabel>Approach</FormLabel>
                         <FormControl>
-                          <Textarea {...field} />
+                          <Textarea {...field} value={field.value || ''} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -199,7 +200,7 @@ export default function Admin() {
                       <FormItem>
                         <FormLabel>Implementation</FormLabel>
                         <FormControl>
-                          <Textarea {...field} />
+                          <Textarea {...field} value={field.value || ''} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -246,11 +247,16 @@ export default function Admin() {
               <FormField
                 control={form.control}
                 name="thumbnailFile"
-                render={({ field }) => (
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
                     <FormLabel>Thumbnail</FormLabel>
                     <FormControl>
-                      <Input type="file" accept="image/*" {...field} />
+                      <Input 
+                        type="file" 
+                        accept="image/*"
+                        onChange={(e) => onChange(e.target.files)}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

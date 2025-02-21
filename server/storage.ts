@@ -43,7 +43,7 @@ export class DatabaseStorage implements IStorage {
   async createProject(insertProject: InsertProject): Promise<Project> {
     const [project] = await db
       .insert(projects)
-      .values(insertProject)
+      .values([insertProject])
       .returning();
 
     // Invalidate projects cache when new project is created
@@ -75,7 +75,7 @@ export class DatabaseStorage implements IStorage {
     const posts = await loadBlogPosts();
     await db.delete(blogPosts);
     if (posts.length > 0) {
-      await db.insert(blogPosts).values(posts);
+      await db.insert(blogPosts).values(posts.map(post => ({ ...post })));
     }
     // Invalidate blog posts cache after sync
     cacheService.invalidate('blogPosts');
@@ -85,7 +85,7 @@ export class DatabaseStorage implements IStorage {
     const projectsList = await loadProjects();
     await db.delete(projects);
     if (projectsList.length > 0) {
-      await db.insert(projects).values(projectsList);
+      await db.insert(projects).values(projectsList.map(project => ({ ...project })));
     }
     // Invalidate projects cache after sync
     cacheService.invalidate('projects');
