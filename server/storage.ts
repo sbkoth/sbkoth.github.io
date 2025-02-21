@@ -14,32 +14,32 @@ export class MemStorage implements IStorage {
   constructor() {
     this.profile = {
       id: 1,
-      name: "Sebastian Koth",
-      title: "Staff Software Engineer at Shopify",
-      bio: "Software engineer with over 14 years of experience, specializing in building scalable applications and cloud infrastructure. Currently leading development teams at Shopify, focusing on e-commerce solutions and developer platforms.",
+      name: "John Doe",
+      title: "Full Stack Developer",
+      bio: "Passionate developer with expertise in web technologies and system design. I love creating beautiful and functional applications.",
       avatar: "https://images.unsplash.com/photo-1507679799987-c73779587ccf",
       socials: {
-        github: "https://github.com/sbkoth",
-        linkedin: "https://linkedin.com/in/sbkoth",
-        twitter: "https://twitter.com/sbkoth",
-        email: "sebastian@example.com"
+        github: "https://github.com/johndoe",
+        linkedin: "https://linkedin.com/in/johndoe",
+        twitter: "https://twitter.com/johndoe",
+        email: "john@example.com"
       }
     };
 
     this.blogPosts = [
       {
         id: 1,
-        title: "Scaling E-commerce Platforms",
+        title: "Getting Started with React",
         content: "Full blog post content here...",
-        excerpt: "Insights on building and scaling modern e-commerce platforms with cloud infrastructure.",
+        excerpt: "Learn the fundamentals of React and how to build modern web applications.",
         publishedAt: new Date("2024-02-15").toISOString(),
         thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee"
       },
       {
         id: 2,
-        title: "Developer Experience in Modern Teams",
+        title: "The Future of Web Development",
         content: "Full blog post content here...",
-        excerpt: "Exploring best practices for improving developer experience and team productivity.",
+        excerpt: "Exploring upcoming trends and technologies in web development.",
         publishedAt: new Date("2024-02-10").toISOString(),
         thumbnail: "https://images.unsplash.com/photo-1504639725590-34d0984388bd"
       }
@@ -48,8 +48,8 @@ export class MemStorage implements IStorage {
     this.projects = [
       {
         id: 1,
-        title: "E-commerce Platform",
-        description: "A scalable e-commerce solution built with modern cloud infrastructure",
+        title: "Project One",
+        description: "A beautiful web application",
         type: "image",
         content: {
           url: "https://images.unsplash.com/photo-1484981138541-3d074aa97716"
@@ -59,8 +59,8 @@ export class MemStorage implements IStorage {
       },
       {
         id: 2,
-        title: "Cloud Architecture Documentation",
-        description: "Comprehensive guide on cloud infrastructure design",
+        title: "Project Two",
+        description: "Technical documentation",
         type: "pdf",
         content: {
           url: "https://example.com/sample.pdf"
@@ -70,8 +70,8 @@ export class MemStorage implements IStorage {
       },
       {
         id: 3,
-        title: "Team Leadership Workshop",
-        description: "Training materials for technical team leadership",
+        title: "Project Three",
+        description: "Presentation deck",
         type: "slides",
         content: {
           slides: [
