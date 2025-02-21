@@ -9,19 +9,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      (function() {
-        window.addEventListener('load', function() {
-          window.initializeGoogleCalendar = function(target) {
-            calendar.schedulingButton.load({
-              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3jn57Z8GRePdNpJDHhz1kInTrYIl_KwK6RYDkBOp6eWZ1BIIiFnG-sNf1oPI4RPgwFDsTD69dZ?gv=true',
-              color: '#039BE5',
-              label: 'Schedule a Consultation',
-              target,
-            });
-          };
-        });
-      })();
-    </script>
   </body>
 </html>

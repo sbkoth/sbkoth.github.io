@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import type { Profile } from "@shared/schema";
+import { Button } from "@/components/ui/button";
 
 interface HeroProps {
   profile: Profile;
@@ -10,9 +11,35 @@ export default function Hero({ profile }: HeroProps) {
   const calendarButtonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (calendarButtonRef.current && window.initializeGoogleCalendar) {
-      window.initializeGoogleCalendar(calendarButtonRef.current);
+    // Create a function to check and initialize the calendar
+    const initCalendar = () => {
+      if (calendarButtonRef.current && window.calendar?.schedulingButton) {
+        // Get the computed primary color value
+        const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+        // Convert to a hex color that the calendar script can understand
+        const color = `hsl(${primaryHue}, 50%, 50%)`;
+
+        window.calendar.schedulingButton.load({
+          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3jn57Z8GRePdNpJDHhz1kInTrYIl_KwK6RYDkBOp6eWZ1BIIiFnG-sNf1oPI4RPgwFDsTD69dZ?gv=true',
+          color,
+          label: 'Schedule a Consultation',
+          target: calendarButtonRef.current,
+        });
+      }
+    };
+
+    // Check if calendar script is already loaded
+    if (window.calendar?.schedulingButton) {
+      initCalendar();
+    } else {
+      // If not loaded, wait for it
+      window.addEventListener('load', initCalendar);
     }
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('load', initCalendar);
+    };
   }, []);
 
   return (
@@ -43,6 +70,15 @@ export default function Hero({ profile }: HeroProps) {
 // Add TypeScript type definition for the window object
 declare global {
   interface Window {
-    initializeGoogleCalendar?: (target: HTMLElement) => void;
+    calendar?: {
+      schedulingButton: {
+        load: (config: {
+          url: string;
+          color: string;
+          label: string;
+          target: HTMLElement;
+        }) => void;
+      };
+    };
   }
 }
