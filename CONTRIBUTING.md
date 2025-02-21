@@ -107,6 +107,26 @@ icon: IconName    # From lucide-react
 Content in Markdown format
 ```
 
+## Database Management
+
+### Backup and Restore
+
+The project includes a script for backing up the database:
+
+```bash
+# Create a backup
+npm run db:backup
+
+# The backup will be saved in the backup/ directory with timestamp
+```
+
+To restore from a backup:
+
+```bash
+# Replace <backup-file> with the actual backup file name
+psql $DATABASE_URL < backup/<backup-file>
+```
+
 ## Development Workflow
 
 1. Create a new branch for your feature/fix:

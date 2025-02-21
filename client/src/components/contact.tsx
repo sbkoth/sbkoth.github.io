@@ -14,22 +14,22 @@ export default function Contact({ profile }: ContactProps) {
       <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
       <div className="flex justify-center gap-4">
         <Button variant="outline" size="icon" asChild>
-          <a href={`https://github.com/${profile.socials.github}`} target="_blank" rel="noopener">
+          <a href={`https://github.com/sbkoth`} target="_blank" rel="noopener">
             <FaGithub className="h-5 w-5" />
           </a>
         </Button>
         <Button variant="outline" size="icon" asChild>
-          <a href={`https://linkedin.com/in/${profile.socials.linkedin}`} target="_blank" rel="noopener">
+          <a href={`https://linkedin.com/in/sbkoth`} target="_blank" rel="noopener">
             <FaLinkedin className="h-5 w-5" />
           </a>
         </Button>
         <Button variant="outline" size="icon" asChild>
-          <a href={`https://x.com/${profile.socials.x}`} target="_blank" rel="noopener">
+          <a href={`https://x.com/sbkoth`} target="_blank" rel="noopener">
             <SiX className="h-5 w-5" />
           </a>
         </Button>
         <Button variant="outline" size="icon" asChild>
-          <a href={`mailto:${profile.socials.email}`}>
+          <a href={`mailto:bobby@prameya.legal`}>
             <MdEmail className="h-5 w-5" />
           </a>
         </Button>
