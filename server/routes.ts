@@ -40,16 +40,9 @@ export async function registerRoutes(app: Express) {
       }
 
       const data = JSON.parse(req.body.data);
-      const projectFile = req.files.file;
       const thumbnailFile = req.files.thumbnail;
 
-      if (!Array.isArray(projectFile) && projectFile) {
-        const filename = `${Date.now()}-${projectFile.name}`;
-        const filepath = path.join(UPLOAD_DIR, filename);
-        await projectFile.mv(filepath);
-        data.content = { url: `/uploads/${filename}` };
-      }
-
+      // Handle thumbnail upload
       if (!Array.isArray(thumbnailFile) && thumbnailFile) {
         const filename = `${Date.now()}-${thumbnailFile.name}`;
         const filepath = path.join(UPLOAD_DIR, filename);
@@ -57,11 +50,12 @@ export async function registerRoutes(app: Express) {
         data.thumbnail = `/uploads/${filename}`;
       }
 
+      // Create the project
       const project = await storage.createProject(data);
       res.json(project);
     } catch (error) {
-      console.error("Error uploading project:", error);
-      res.status(500).json({ message: "Failed to upload project" });
+      console.error("Error creating project:", error);
+      res.status(500).json({ message: "Failed to create project" });
     }
   });
 

@@ -9,35 +9,56 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { apiRequest } from "@/lib/queryClient";
-import { queryClient } from "@/lib/queryClient";
-import { Upload } from "lucide-react";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Upload, Plus, X } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export default function Admin() {
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
+  const [technologies, setTechnologies] = useState<string[]>([]);
+  const [newTechnology, setNewTechnology] = useState("");
 
   const form = useForm<InsertProject>({
     resolver: zodResolver(insertProjectSchema),
     defaultValues: {
       title: "",
       description: "",
-      type: "pdf",
-      content: { url: "" },
+      type: "text",
+      content: "",
+      challenge: "",
+      approach: "",
+      implementation: "",
+      outcomes: [],
+      technologies: [],
+      clientTestimonial: {
+        quote: "",
+        author: "",
+        role: "",
+        company: "",
+      },
       thumbnail: "",
     },
   });
+
+  const addTechnology = () => {
+    if (newTechnology && !technologies.includes(newTechnology)) {
+      setTechnologies([...technologies, newTechnology]);
+      form.setValue("technologies", [...technologies, newTechnology]);
+      setNewTechnology("");
+    }
+  };
+
+  const removeTechnology = (tech: string) => {
+    const updatedTech = technologies.filter(t => t !== tech);
+    setTechnologies(updatedTech);
+    form.setValue("technologies", updatedTech);
+  };
 
   const onSubmit = async (data: InsertProject) => {
     try {
       setIsUploading(true);
       const formData = new FormData();
-
-      // Add project file if it exists
-      const projectFile = form.getValues("projectFile");
-      if (projectFile) {
-        formData.append("file", projectFile[0]);
-      }
 
       // Add thumbnail if it exists
       const thumbnailFile = form.getValues("thumbnailFile");
@@ -45,8 +66,15 @@ export default function Admin() {
         formData.append("thumbnail", thumbnailFile[0]);
       }
 
-      // Add other project data
-      formData.append("data", JSON.stringify(data));
+      // Format the data
+      const projectData = {
+        ...data,
+        slug: data.title.toLowerCase().replace(/\s+/g, '-'),
+        technologies,
+      };
+
+      // Add project data
+      formData.append("data", JSON.stringify(projectData));
 
       await apiRequest("POST", "/api/projects", formData);
 
@@ -57,6 +85,7 @@ export default function Admin() {
       });
 
       form.reset();
+      setTechnologies([]);
     } catch (error) {
       toast({
         title: "Error",
@@ -118,10 +147,10 @@ export default function Admin() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
+                        <SelectItem value="text">Case Study</SelectItem>
                         <SelectItem value="pdf">PDF</SelectItem>
                         <SelectItem value="slides">Slides</SelectItem>
                         <SelectItem value="image">Image</SelectItem>
-                        <SelectItem value="text">Text</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -129,23 +158,148 @@ export default function Admin() {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="projectFile"
-                render={({ field: { onChange, value, ...field } }) => (
-                  <FormItem>
-                    <FormLabel>Project File</FormLabel>
-                    <FormControl>
+              {form.watch("type") === "text" && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="challenge"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Challenge</FormLabel>
+                        <FormControl>
+                          <Textarea {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="approach"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Approach</FormLabel>
+                        <FormControl>
+                          <Textarea {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="implementation"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Implementation</FormLabel>
+                        <FormControl>
+                          <Textarea {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Technologies */}
+                  <div className="space-y-2">
+                    <FormLabel>Technologies</FormLabel>
+                    <div className="flex gap-2">
                       <Input
-                        type="file"
-                        onChange={(e) => onChange(e.target.files)}
-                        {...field}
+                        value={newTechnology}
+                        onChange={(e) => setNewTechnology(e.target.value)}
+                        placeholder="Add a technology..."
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="icon"
+                        onClick={addTechnology}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="flex items-center gap-1"
+                        >
+                          {tech}
+                          <X
+                            className="h-3 w-3 cursor-pointer"
+                            onClick={() => removeTechnology(tech)}
+                          />
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Client Testimonial */}
+                  <div className="space-y-4">
+                    <h3 className="font-medium">Client Testimonial</h3>
+                    <FormField
+                      control={form.control}
+                      name="clientTestimonial.quote"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Quote</FormLabel>
+                          <FormControl>
+                            <Textarea {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="clientTestimonial.author"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Author</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="clientTestimonial.role"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Role</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="clientTestimonial.company"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Company</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
 
               <FormField
                 control={form.control}
@@ -172,7 +326,7 @@ export default function Admin() {
                 ) : (
                   <>
                     <Upload className="mr-2 h-4 w-4" />
-                    Upload Project
+                    Create Project
                   </>
                 )}
               </Button>
