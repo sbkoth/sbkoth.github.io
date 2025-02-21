@@ -8,6 +8,11 @@ export async function registerRoutes(app: Express) {
     res.json(profile);
   });
 
+  app.get("/api/blog-posts", async (_req, res) => {
+    const posts = await storage.getBlogPosts();
+    res.json(posts);
+  });
+
   app.get("/api/projects", async (_req, res) => {
     const projects = await storage.getProjects();
     res.json(projects);

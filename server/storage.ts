@@ -1,13 +1,15 @@
-import type { Project, Profile, InsertProject, InsertProfile } from "@shared/schema";
+import type { Project, Profile, BlogPost } from "@shared/schema";
 
 export interface IStorage {
   getProfile(): Promise<Profile>;
   getProjects(): Promise<Project[]>;
+  getBlogPosts(): Promise<BlogPost[]>;
 }
 
 export class MemStorage implements IStorage {
   private profile: Profile;
   private projects: Project[];
+  private blogPosts: BlogPost[];
 
   constructor() {
     this.profile = {
@@ -23,6 +25,25 @@ export class MemStorage implements IStorage {
         email: "john@example.com"
       }
     };
+
+    this.blogPosts = [
+      {
+        id: 1,
+        title: "Getting Started with React",
+        content: "Full blog post content here...",
+        excerpt: "Learn the fundamentals of React and how to build modern web applications.",
+        publishedAt: new Date("2024-02-15").toISOString(),
+        thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee"
+      },
+      {
+        id: 2,
+        title: "The Future of Web Development",
+        content: "Full blog post content here...",
+        excerpt: "Exploring upcoming trends and technologies in web development.",
+        publishedAt: new Date("2024-02-10").toISOString(),
+        thumbnail: "https://images.unsplash.com/photo-1504639725590-34d0984388bd"
+      }
+    ];
 
     this.projects = [
       {
@@ -67,6 +88,12 @@ export class MemStorage implements IStorage {
 
   async getProfile(): Promise<Profile> {
     return this.profile;
+  }
+
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return this.blogPosts.sort((a, b) => 
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
   }
 
   async getProjects(): Promise<Project[]> {
