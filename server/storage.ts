@@ -1,13 +1,16 @@
-import type { Project, Profile, InsertProject } from "@shared/schema";
-import { projects, profile } from "@shared/schema";
+import type { Project, Profile, InsertProject, BlogPost, InsertBlogPost } from "@shared/schema";
+import { projects, profile, blogPosts } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
+import { loadBlogPosts } from "./blog-utils";
 
 export interface IStorage {
   getProfile(): Promise<Profile>;
   getProjects(): Promise<Project[]>;
   createProject(project: InsertProject): Promise<Project>;
   updateProfilePhoto(photoUrl: string): Promise<Profile>;
+  getBlogPosts(): Promise<BlogPost[]>;
+  syncBlogPosts(): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -34,6 +37,20 @@ export class DatabaseStorage implements IStorage {
       .set({ avatar: photoUrl })
       .returning();
     return updatedProfile;
+  }
+
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return db.select().from(blogPosts);
+  }
+
+  async syncBlogPosts(): Promise<void> {
+    const posts = await loadBlogPosts();
+
+    // Clear existing posts and insert new ones
+    await db.delete(blogPosts);
+    if (posts.length > 0) {
+      await db.insert(blogPosts).values(posts);
+    }
   }
 }
 

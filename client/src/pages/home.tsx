@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import Hero from "@/components/hero";
 import ProjectGrid from "@/components/project-grid";
+import BlogSection from "@/components/blog-section";
 import Contact from "@/components/contact";
-import type { Profile, Project } from "@shared/schema";
+import type { Profile, Project, BlogPost } from "@shared/schema";
 
 export default function Home() {
   const { data: profile } = useQuery<Profile>({ 
@@ -13,7 +14,11 @@ export default function Home() {
     queryKey: ["/api/projects"]
   });
 
-  if (!profile || !projects) {
+  const { data: posts } = useQuery<BlogPost[]>({
+    queryKey: ["/api/blog-posts"]
+  });
+
+  if (!profile || !projects || !posts) {
     return null; // Add loading skeleton later if needed
   }
 
@@ -21,6 +26,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Hero profile={profile} />
       <ProjectGrid projects={projects} />
+      <BlogSection posts={posts} />
       <Contact profile={profile} />
     </div>
   );

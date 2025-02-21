@@ -1,4 +1,4 @@
-import { pgTable, text, serial, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, jsonb, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -25,10 +25,23 @@ export const projects = pgTable("projects", {
   thumbnail: text("thumbnail").notNull(),
 });
 
+export const blogPosts = pgTable("blog_posts", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt").notNull(),
+  content: text("content").notNull(),
+  publishedAt: timestamp("published_at").notNull().defaultNow(),
+  thumbnail: text("thumbnail").notNull(),
+});
+
 export const insertProjectSchema = createInsertSchema(projects).omit({ id: true });
 export const insertProfileSchema = createInsertSchema(profile).omit({ id: true });
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({ id: true });
 
 export type Project = typeof projects.$inferSelect;
 export type Profile = typeof profile.$inferSelect;
+export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertProject = z.infer<typeof insertProjectSchema>;
 export type InsertProfile = z.infer<typeof insertProfileSchema>;
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;

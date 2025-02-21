@@ -6,6 +6,7 @@ import path from "path";
 import fs from "fs";
 import fsPromises from "fs/promises";
 import express from "express";
+import { ensureBlogDir } from "./blog-utils";
 
 const UPLOAD_DIR = path.join(process.cwd(), "uploads");
 
@@ -79,9 +80,16 @@ export async function registerRoutes(app: Express) {
     }
   });
 
+  app.get("/api/blog-posts", async (_req, res) => {
+    const posts = await storage.getBlogPosts();
+    res.json(posts);
+  });
+
   // Serve uploaded files
   app.use("/uploads", express.static(UPLOAD_DIR));
 
   const httpServer = createServer(app);
+  await ensureBlogDir();
+  await storage.syncBlogPosts();
   return httpServer;
 }
