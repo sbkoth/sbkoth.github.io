@@ -2,6 +2,14 @@ import { pgTable, text, serial, jsonb, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// Add admin users table for CMS authentication
+export const adminUsers = pgTable("admin_users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull(),
+  password: text("password").notNull(), // Will be hashed
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -35,13 +43,18 @@ export const blogPosts = pgTable("blog_posts", {
   thumbnail: text("thumbnail").notNull(),
 });
 
+// Export schemas
 export const insertProjectSchema = createInsertSchema(projects).omit({ id: true, order: true });
 export const insertProfileSchema = createInsertSchema(profile).omit({ id: true });
 export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({ id: true });
+export const insertAdminUserSchema = createInsertSchema(adminUsers).omit({ id: true, createdAt: true });
 
+// Export types
 export type Project = typeof projects.$inferSelect;
 export type Profile = typeof profile.$inferSelect;
 export type BlogPost = typeof blogPosts.$inferSelect;
+export type AdminUser = typeof adminUsers.$inferSelect;
 export type InsertProject = z.infer<typeof insertProjectSchema>;
 export type InsertProfile = z.infer<typeof insertProfileSchema>;
 export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type InsertAdminUser = z.infer<typeof insertAdminUserSchema>;
