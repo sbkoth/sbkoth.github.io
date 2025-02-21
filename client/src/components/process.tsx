@@ -48,7 +48,7 @@ export default function Process() {
                 </div>
                 <p className="text-muted-foreground mt-2">{step.description}</p>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent>
                 <ul className="space-y-2">
                   {step.steps.map((item, i) => (
                     <li key={i} className="flex items-center gap-2">
@@ -57,9 +57,6 @@ export default function Process() {
                     </li>
                   ))}
                 </ul>
-                <div className="text-sm text-muted-foreground mt-4">
-                  {step.content}
-                </div>
               </CardContent>
             </Card>
           ))}
