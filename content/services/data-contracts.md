@@ -8,11 +8,14 @@ description: Implement robust data contracts for reliable producer-consumer rela
 
 We establish clear, enforceable data contracts between producers and consumers to ensure reliable, consistent data exchange. Our services include:
 
-- Schema registry implementation with Confluent
-- Data contract definition and documentation
-- Schema evolution and compatibility management
-- Contract testing frameworks and CI/CD integration
-- Producer and consumer validation systems
-- Event schema standardization
-- Cross-team data governance implementation
-- Contract monitoring and enforcement mechanisms
+- Multi-datacenter Schema Registry architecture and implementation
+- Schema governance frameworks and approval workflows
+- Schema evolution patterns and backward compatibility strategies
+- Enterprise data contract standardization
+- Developer-friendly governance processes
+- Contract testing and validation frameworks
+- CI/CD pipeline integration for schema validation
+- Producer and consumer application testing
+- Data quality monitoring and enforcement
+- Schema visualization and documentation tools
+- Developer training on schema best practices

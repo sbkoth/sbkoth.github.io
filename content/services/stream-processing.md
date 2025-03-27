@@ -8,11 +8,14 @@ description: Build scalable real-time data processing pipelines with Kafka, Flin
 
 We design and implement high-performance real-time data streaming and processing solutions that drive immediate insights and actions. Our services include:
 
-- Kafka cluster design and implementation
-- Confluent Cloud architecture and deployment
-- Apache Flink applications for stateful stream processing
-- Real-time ETL pipeline development
-- Stream analytics and monitoring solutions
+- Enterprise Kafka/Confluent architecture and implementation
+- Multi-datacenter and hybrid cloud streaming architectures
+- Confluent Cloud design, deployment, and optimization
+- Kafka Streams applications for real-time data transformations
+- Kafka Connect for reliable data integration
+- Spring Boot and Micronaut stream processing applications
+- Containerized deployment on Kubernetes/OpenShift
+- Infrastructure as code with Terraform and Ansible
+- Stream monitoring and operational excellence
+- Disaster recovery strategy and implementation
 - Event-driven microservices architecture
-- Exactly-once processing guarantees
-- High-throughput, low-latency system optimization
