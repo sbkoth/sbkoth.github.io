@@ -39,9 +39,26 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
+    // Explicitly extract only the fields defined in the schema
+    const projectData = {
+      title: insertProject.title,
+      slug: insertProject.slug,
+      description: insertProject.description,
+      content: insertProject.content,
+      thumbnail: insertProject.thumbnail,
+      type: insertProject.type,
+      publishedAt: insertProject.publishedAt,
+      challenge: insertProject.challenge,
+      approach: insertProject.approach,
+      implementation: insertProject.implementation,
+      outcomes: insertProject.outcomes,
+      technologies: insertProject.technologies,
+    };
+    
+    // Insert as a single record (not an array)
     const [project] = await db
       .insert(projects)
-      .values([insertProject])
+      .values(projectData)
       .returning();
 
     // Invalidate projects cache when new project is created
@@ -73,7 +90,17 @@ export class DatabaseStorage implements IStorage {
     const posts = await loadBlogPosts();
     await db.delete(blogPosts);
     if (posts.length > 0) {
-      await db.insert(blogPosts).values(posts.map(post => ({ ...post })));
+      // Insert posts one by one with properly typed fields
+      for (const post of posts) {
+        await db.insert(blogPosts).values({
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt,
+          content: post.content,
+          publishedAt: post.publishedAt,
+          thumbnail: post.thumbnail
+        });
+      }
     }
     // Invalidate blog posts cache after sync
     cacheService.invalidate('blogPosts');
@@ -83,7 +110,23 @@ export class DatabaseStorage implements IStorage {
     const projectsList = await loadProjects();
     await db.delete(projects);
     if (projectsList.length > 0) {
-      await db.insert(projects).values(projectsList.map(project => ({ ...project })));
+      // Insert projects one by one with properly typed fields
+      for (const project of projectsList) {
+        await db.insert(projects).values({
+          title: project.title,
+          slug: project.slug,
+          description: project.description,
+          content: project.content,
+          thumbnail: project.thumbnail,
+          type: project.type,
+          publishedAt: project.publishedAt,
+          challenge: project.challenge,
+          approach: project.approach,
+          implementation: project.implementation,
+          outcomes: project.outcomes,
+          technologies: project.technologies
+        });
+      }
     }
     // Invalidate projects cache after sync
     cacheService.invalidate('projects');

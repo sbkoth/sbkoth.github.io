@@ -25,7 +25,8 @@ export async function loadBlogPosts(): Promise<InsertBlogPost[]> {
 
     const content = await fs.readFile(path.join(BLOG_DIR, file), "utf-8");
     const { data, content: markdown } = matter(content);
-    const html = marked(markdown);
+    // Convert Promise<string> to string using await
+    const html = await Promise.resolve(marked(markdown));
 
     posts.push({
       slug: file.replace(".md", ""),

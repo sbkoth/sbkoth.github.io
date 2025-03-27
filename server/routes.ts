@@ -84,20 +84,10 @@ export async function registerRoutes(app: Express) {
     res.json(services);
   });
 
-  app.get("/api/testimonials", async (_req, res) => {
-    const testimonials = await storage.getTestimonials();
-    res.json(testimonials);
-  });
-
-  // Add new routes
+  // Features route
   app.get("/api/features", async (_req, res) => {
     const features = await storage.getFeatures();
     res.json(features);
-  });
-
-  app.get("/api/process", async (_req, res) => {
-    const process = await storage.getProcess();
-    res.json(process);
   });
 
   // Serve uploaded files

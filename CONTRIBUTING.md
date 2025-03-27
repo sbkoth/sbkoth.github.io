@@ -1,6 +1,6 @@
 # Contributing Guide
 
-Welcome to our freelancer portfolio platform! This guide will help you set up the project locally and understand our development workflow.
+Welcome to our freelancer portfolio platform! This guide will help you set up the project locally, understand our development workflow, and provide detailed instructions for managing content.
 
 ## Project Overview
 
@@ -14,6 +14,230 @@ This is a strategic freelancer portfolio platform designed to maximize professio
 - Database: PostgreSQL
 - Content: Markdown-based with gray-matter for frontmatter
 - State Management: TanStack Query
+
+## Content Management
+
+This portfolio uses a markdown-based content management system for all dynamic content. The system is designed to be easy to extend and modify without requiring code changes. Below is a detailed explanation of how to work with different content types.
+
+### Adding Content Cards
+
+The portfolio uses a card-based UI pattern for displaying various types of content. Each content type (Features, Services, Projects, Blog Posts) follows a similar pattern but with specific requirements. Here's how to add new content cards for each type:
+
+#### 1. Feature Cards
+
+Feature cards highlight your key professional strengths and capabilities.
+
+**File Location**: `content/features/your-feature-name.md`
+
+**Required Frontmatter**:
+```md
+---
+title: Feature Title
+icon: Code2
+description: A brief description of the feature (1-2 sentences)
+highlights:
+  - First key point about this feature
+  - Second key point about this feature
+  - Third key point about this feature
+---
+
+Content goes here in Markdown format.
+```
+
+**Icon Options**: Use icon names from the [Lucide React](https://lucide.dev/) library. Common options include:
+- `Code2` - For development features
+- `GitMerge` - For version control/collaboration features
+- `AlertCircle` - For quality assurance features
+- `Zap` - For performance-related features
+
+**Component Structure**:
+- Card with hover effect and shadow
+- Icon + Title in header
+- Description text
+- Bullet points for highlights
+- Clicking opens a dialog with full content
+
+#### 2. Service Cards
+
+Service cards showcase the services you offer to clients.
+
+**File Location**: `content/services/your-service-name.md`
+
+**Required Frontmatter**:
+```md
+---
+title: Service Title
+icon: Database
+description: A brief description of what this service entails
+---
+
+Detailed explanation of the service in Markdown format.
+```
+
+**Icon Options**: Use icon names from the [Lucide React](https://lucide.dev/) library. Common options include:
+- `Database` - For database services
+- `Cloud` - For cloud services
+- `Shield` - For security services
+- `Code` - For development services
+- `Brain` - For AI/ML services
+- `ChartBar` - For analytics services
+
+**Component Structure**:
+- Card with hover effect and shadow
+- Icon + Title in header
+- Description text
+- Clicking opens a dialog with full content
+
+#### 3. Project Cards
+
+Project cards showcase your past work and portfolio items.
+
+**File Location**: `content/projects/your-project-slug.md`
+
+**Required Frontmatter**:
+```md
+---
+title: Project Title
+description: Brief overview of the project
+thumbnail: /path/to/thumbnail.jpg
+type: image
+publishedAt: 2023-01-15
+challenge: Description of the challenge you faced
+approach: How you approached solving the problem
+implementation: Technical details of implementation
+outcomes:
+  - First measurable outcome
+  - Second measurable outcome
+technologies:
+  - React
+  - Node.js
+  - PostgreSQL
+---
+
+Detailed project description in Markdown format.
+```
+
+**Type Options**:
+- `image` - Standard image thumbnail
+- `pdf` - Project with PDF attachments
+- `slides` - Project with slide deck
+- `text` - Text-only project
+
+**Component Structure**:
+- Card with thumbnail image
+- Title and brief description
+- Publication date
+- Clicking opens a case study view with:
+  - Challenge section
+  - Approach section
+  - Implementation details
+  - Outcomes list
+  - Technologies used
+  - Full content in Markdown
+
+#### 4. Blog Post Cards
+
+Blog post cards feature your articles and thought leadership content.
+
+**File Location**: `content/blogs/your-post-slug.md`
+
+**Required Frontmatter**:
+```md
+---
+title: Blog Post Title
+excerpt: A brief excerpt or summary (1-2 sentences)
+thumbnail: /path/to/thumbnail.jpg
+publishedAt: 2023-02-20
+---
+
+Blog post content in Markdown format.
+```
+
+**Component Structure**:
+- Card with thumbnail image
+- Title and excerpt
+- Publication date
+- Clicking opens the full blog post
+
+### Card Component Implementation Details
+
+All content cards are built using the `Card` component from Shadcn UI, which provides a consistent look and feel across the site. The card component includes:
+
+1. **Card** - The main container with rounded borders and shadow
+2. **CardHeader** - Contains the title and icon or image
+3. **CardContent** - Contains the main content or description
+4. **CardFooter** - Contains additional information or actions (optional)
+
+#### Styling Guidelines
+
+To maintain a consistent look across all cards:
+
+1. Use the hover effect `hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02]` for interactive cards
+2. Use `text-primary` for icons to maintain brand color
+3. Use `text-muted-foreground` for descriptions to maintain hierarchy
+4. Maintain consistent spacing with `gap-4` for icon/content spacing
+5. Use consistent padding with `p-6` for card content
+
+#### Adding New Icon Types
+
+If you need to add a new icon that isn't in the existing `iconMap`:
+
+1. Import the icon from `lucide-react` in the appropriate component file
+2. Add the icon to the `iconMap` at the top of the component
+3. Use the icon name in the markdown frontmatter
+
+Example:
+```tsx
+import { NewIcon } from 'lucide-react';
+
+const iconMap: Record<string, React.ReactNode> = {
+  // Existing icons...
+  NewIcon: <NewIcon className="h-8 w-8" />,
+};
+```
+
+#### Image Guidelines
+
+For thumbnails and images:
+
+1. Use consistent dimensions (recommended: 16:9 aspect ratio)
+2. Optimize images for web (compress to <100KB where possible)
+3. Store images in the `public` directory
+4. Use relative paths starting with `/` in frontmatter
+
+### Content Dialog Integration
+
+When a user clicks on a card, a `ContentDialog` component displays the full content. This component renders Markdown content as HTML, allowing for rich text formatting.
+
+To modify the dialog behavior:
+
+1. Update the `ContentDialog` component in `client/src/components/content-dialog.tsx`
+2. Customize the dialog size, animation, or styling as needed
+
+### Handling Markdown Content
+
+The application uses the `marked` library to parse Markdown. Supported Markdown features include:
+
+- Headers (H1-H6)
+- Lists (ordered and unordered)
+- Links and images
+- Code blocks
+- Blockquotes
+- Tables
+- Emphasis (bold, italic)
+
+### Adding New Content Types
+
+To add an entirely new content type:
+
+1. Create a new directory in `/content` (e.g., `/content/testimonials`)
+2. Define a schema in `shared/schema.ts`
+3. Create a utils file in `/server` (e.g., `testimonials-utils.ts`)
+4. Add loading function in the utils file
+5. Update `server/storage.ts` to include the new content type
+6. Create a React component to display the content
+7. Add an API endpoint in `server/routes.ts`
+8. Update the homepage to include the new component
 
 ## Prerequisites
 
@@ -96,6 +320,103 @@ The application will be available at `http://localhost:5000`.
 ```
 
 ## Production Deployment
+
+### Cloud Platform Deployment
+
+#### Deploying to Vercel
+
+1. Set up your Vercel account and connect your repository
+2. Configure the project:
+   - Build Command: `npm run build`
+   - Output Directory: `dist/client`
+   - Environment Variables: Add your `DATABASE_URL` and any other secrets
+   - Install Command: `npm ci`
+
+3. Configure the serverless function:
+   Create a `vercel.json` file in the root directory:
+   ```json
+   {
+     "version": 2,
+     "builds": [
+       {
+         "src": "server/index.ts",
+         "use": "@vercel/node"
+       },
+       {
+         "src": "package.json",
+         "use": "@vercel/static-build",
+         "config": { "distDir": "dist/client" }
+       }
+     ],
+     "routes": [
+       {
+         "src": "/api/(.*)",
+         "dest": "server/index.ts"
+       },
+       {
+         "src": "/(.*)",
+         "dest": "dist/client/$1"
+       }
+     ]
+   }
+   ```
+
+4. Deploy using the Vercel CLI:
+   ```bash
+   vercel --prod
+   ```
+
+#### Deploying to Netlify
+
+1. Set up your Netlify account and connect your repository
+2. Configure the build settings:
+   - Build Command: `npm run build`
+   - Publish Directory: `dist/client`
+   - Environment Variables: Add all required secrets
+
+3. Create a `netlify.toml` file:
+   ```toml
+   [build]
+     command = "npm run build"
+     publish = "dist/client"
+     functions = "netlify/functions"
+
+   [functions]
+     directory = "netlify/functions"
+     node_bundler = "esbuild"
+
+   [[redirects]]
+     from = "/api/*"
+     to = "/.netlify/functions/api/:splat"
+     status = 200
+
+   [[redirects]]
+     from = "/*"
+     to = "/index.html"
+     status = 200
+   ```
+
+4. Create a serverless function for the API:
+   Create `netlify/functions/api.ts`:
+   ```typescript
+   import serverless from 'serverless-http';
+   import { app } from '../../server/index';
+
+   export const handler = serverless(app);
+   ```
+
+#### Deploying to Railway
+
+1. Create an account on Railway.app
+2. Connect your GitHub repository
+3. Add PostgreSQL service from the dashboard
+4. Configure project environment variables:
+   - `DATABASE_URL` will be automatically linked to the PostgreSQL service
+   - Add any other required secrets
+5. Deploy with settings:
+   - Build Command: `npm run build`
+   - Start Command: `npm start`
+   - Root Directory: `/`
 
 ### Docker Deployment
 
