@@ -16,12 +16,13 @@ export default function ContentDialog({ title, content, isOpen, onClose }: Conte
     
     // Replace default list items with custom styled ones (both ordered and unordered)
     // This uses regex to find list items and add our custom styling
+    // Updated to match the CardBulletItem styling exactly
     const withBullets = html.replace(
       /<li>(.*?)<\/li>/g, 
-      '<li class="flex items-center gap-2 my-2"><div class="h-2 w-2 rounded-full bg-primary flex-shrink-0"></div><span>$1</span></li>'
+      '<li class="flex items-center gap-2 my-2"><div class="h-2 w-2 rounded-full bg-primary flex-shrink-0"></div><span class="text-sm">$1</span></li>'
     );
     
-    // Enhance the styling of unordered lists
+    // Enhance the styling of unordered lists to match CardBulletList
     const withUnorderedLists = withBullets.replace(
       /<ul>(.*?)<\/ul>/g, 
       '<ul class="space-y-2 my-4 list-none pl-0">$1</ul>'
