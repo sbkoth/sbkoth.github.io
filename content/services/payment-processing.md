@@ -1,6 +1,6 @@
 ---
 title: Payment Processing & Financial Data
-icon: SiStripe
+icon: CreditCard
 description: Architect secure, reliable payment processing systems with real-time analytics and regulatory compliance 
 ---
 

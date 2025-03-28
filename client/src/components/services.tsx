@@ -18,9 +18,10 @@ const iconMap: Record<string, React.ReactNode> = {
   Bot: <Bot className="h-8 w-8" />,
   GitMerge: <GitMerge className="h-8 w-8" />,
   Cpu: <Cpu className="h-8 w-8" />,
-  Boxes: <SiKubernetes className="h-8 w-8" />,  // Replace Boxes with Kubernetes icon
-  Waves: <SiApachekafka className="h-8 w-8" />,  // Replace Waves with Kafka icon
-  SiStripe: <SiStripe className="h-8 w-8" />,   // Stripe icon for payment processing
+  // Use standard icons instead of specialized ones for consistent styling
+  Boxes: <Boxes className="h-8 w-8" />,
+  Waves: <Waves className="h-8 w-8" />,
+  SiStripe: <CreditCard className="h-8 w-8" />,
   CreditCard: <CreditCard className="h-8 w-8" />,
 };
 
