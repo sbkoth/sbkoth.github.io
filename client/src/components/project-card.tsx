@@ -7,7 +7,7 @@ import PdfViewer from "./pdf-viewer";
 import SlideViewer from "./slide-viewer";
 import CaseStudy from "./case-study";
 import { ArrowRight, Database, Cloud, GitMerge, Server, Network, Code, Cpu } from "lucide-react";
-import { SiKubernetes, SiApachekafka, SiAmazonaws, SiGooglecloud, SiTerraform, SiDocker, SiOracle } from "react-icons/si";
+import { SiKubernetes, SiApachekafka, SiAmazon, SiGooglecloud, SiTerraform, SiDocker, SiOracle } from "react-icons/si";
 
 interface ProjectCardProps {
   project: Project;
@@ -21,15 +21,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       case "image":
         return (
           <img 
-            src={project.content.url} 
+            src={typeof project.content === 'string' ? project.content : project.content.url} 
             alt={project.title}
             className="w-full h-full object-cover"
           />
         );
       case "pdf":
-        return <PdfViewer url={project.content.url} />;
+        return <PdfViewer url={typeof project.content === 'string' ? project.content : project.content.url} />;
       case "slides":
-        return <SlideViewer slides={project.content.slides} />;
+        return <SlideViewer slides={typeof project.content === 'string' ? [project.content] : project.content.slides} />;
       case "text":
         return <CaseStudy project={project} />;
     }
@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     } else if (lowerTechs.some(tech => tech.includes('kafka'))) {
       return <SiApachekafka className="h-5 w-5 text-primary" />;
     } else if (lowerTechs.some(tech => tech.includes('aws'))) {
-      return <SiAmazonaws className="h-5 w-5 text-primary" />;
+      return <SiAmazon className="h-5 w-5 text-primary" />;
     } else if (lowerTechs.some(tech => tech.includes('google cloud'))) {
       return <SiGooglecloud className="h-5 w-5 text-primary" />;
     } else if (lowerTechs.some(tech => tech.includes('terraform'))) {

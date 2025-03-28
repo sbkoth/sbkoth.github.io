@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Database, Cloud, Shield, Code, Brain, ChartBar, Server, Network, Bot, GitMerge, Cpu } from "lucide-react";
+import { Database, Cloud, Shield, Code, Brain, ChartBar, Server, Network, Bot, GitMerge, Cpu, Boxes, Waves } from "lucide-react";
 import { useState } from "react";
 import type { Service } from "../../../server/services-utils";
 import ContentDialog from "./content-dialog";
+import { SiKubernetes, SiApachekafka } from "react-icons/si";
 
 const iconMap: Record<string, React.ReactNode> = {
   Database: <Database className="h-8 w-8" />,
@@ -17,6 +18,8 @@ const iconMap: Record<string, React.ReactNode> = {
   Bot: <Bot className="h-8 w-8" />,
   GitMerge: <GitMerge className="h-8 w-8" />,
   Cpu: <Cpu className="h-8 w-8" />,
+  Boxes: <SiKubernetes className="h-8 w-8" />,  // Replace Boxes with Kubernetes icon
+  Waves: <SiApachekafka className="h-8 w-8" />,  // Replace Waves with Kafka icon
 };
 
 export default function Services() {
