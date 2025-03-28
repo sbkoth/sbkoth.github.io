@@ -6,7 +6,7 @@ description: We implement and scale SRE practices to build highly reliable and r
 
 # Site Reliability Engineering
 
-We help organizations implement Google's Site Reliability Engineering methodology to build and maintain highly reliable, scalable, and resilient systems. Our services include:
+Downtime isn't just an inconvenience—it's a business crisis. Drawing on Google's proven SRE methodology, our team transforms traditional operations into a data-driven reliability practice focused on customer experience. By balancing feature velocity with system stability through error budgets and automation, we elevate reliability from an aspiration to a measurable engineering discipline. Our comprehensive SRE services include:
 
 - SRE team structure and practice implementation
 - Error budget definition and SLO/SLI framework design

@@ -6,7 +6,7 @@ description: We build robust retrieval-augmented generation systems for AI appli
 
 # Retrieval Augmented Generation (RAG) Data Pipelines
 
-We design and implement advanced RAG pipelines that enhance AI applications with contextual knowledge retrieval. Our services include:
+Give your AI applications the power of specific, accurate knowledge without hallucinations. Our expertise in RAG systems connects large language models with your organization's private information, creating intelligent assistants that provide precise, factual responses grounded in your data. From document processing to vector search optimization, our end-to-end solutions include:
 
 - Document ingestion and chunking pipeline setup
 - Vector database selection and implementation

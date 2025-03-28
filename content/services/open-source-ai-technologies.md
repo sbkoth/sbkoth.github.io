@@ -6,7 +6,7 @@ description: We implement and customize open source AI solutions like Ollama and
 
 # Open Source AI Technologies
 
-We specialize in implementing and customizing open source AI technologies to create cost-effective, self-hosted AI solutions. Our services include:
+Want AI capabilities without the eye-watering costs of commercial solutions? Our team harnesses the power of open source AI frameworks to build sovereign, controlled, and cost-effective solutions tailored to your specific needs. Breaking free from vendor lock-in, we craft:
 
 - Ollama implementation for local model deployment
 - LangChain development for complex AI application workflows
