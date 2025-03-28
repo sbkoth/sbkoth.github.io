@@ -1,12 +1,12 @@
 ---
 title: Site Reliability Engineering
 icon: Shield
-description: Implements and scales SRE practices to build highly reliable and resilient systems
+description: We implement and scale SRE practices to build highly reliable and resilient systems
 ---
 
 # Site Reliability Engineering
 
-The consultant helps organizations implement Google's Site Reliability Engineering methodology to build and maintain highly reliable, scalable, and resilient systems. Services include:
+We help organizations implement Google's Site Reliability Engineering methodology to build and maintain highly reliable, scalable, and resilient systems. Our services include:
 
 - SRE team structure and practice implementation
 - Error budget definition and SLO/SLI framework design

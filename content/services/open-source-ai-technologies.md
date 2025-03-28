@@ -1,12 +1,12 @@
 ---
 title: Open Source AI Technologies
 icon: Cpu
-description: Implements and customizes open source AI solutions like Ollama and LangChain
+description: We implement and customize open source AI solutions like Ollama and LangChain
 ---
 
 # Open Source AI Technologies
 
-The consultant specializes in implementing and customizing open source AI technologies to create cost-effective, self-hosted AI solutions. Services include:
+We specialize in implementing and customizing open source AI technologies to create cost-effective, self-hosted AI solutions. Our services include:
 
 - Ollama implementation for local model deployment
 - LangChain development for complex AI application workflows

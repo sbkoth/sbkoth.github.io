@@ -1,12 +1,12 @@
 ---
 title: Observability Engineering
 icon: ChartBar
-description: Designs and implements comprehensive observability solutions for complex distributed systems
+description: We design and implement comprehensive observability solutions for complex distributed systems
 ---
 
 # Observability Engineering
 
-The consultant designs and implements robust observability solutions that provide deep insights into system behavior, enabling proactive problem detection and faster resolution. Services include:
+We design and implement robust observability solutions that provide deep insights into system behavior, enabling proactive problem detection and faster resolution. Our services include:
 
 - End-to-end observability architecture design
 - Prometheus and Grafana implementation for metrics collection and visualization

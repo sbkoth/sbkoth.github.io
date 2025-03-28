@@ -1,12 +1,12 @@
 ---
 title: Data Architecture
 icon: Database
-description: Designs and implements scalable data solutions, from warehouses to lakes
+description: We design and implement scalable data solutions, from warehouses to lakes
 ---
 
 # Data Architecture Services
 
-The consultant's data architecture services focus on building robust, scalable data infrastructure that serves business needs. The services specialize in:
+Our data architecture services focus on building robust, scalable data infrastructure that serves business needs. We specialize in:
 
 - Data warehouse design and optimization
 - Data lake implementation

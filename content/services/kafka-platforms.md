@@ -1,12 +1,12 @@
 ---
 title: Kafka & Stream Processing
 icon: Waves
-description: Delivers end-to-end Kafka platform implementation with advanced stream processing capabilities for real-time data pipelines
+description: We deliver end-to-end Kafka platform implementation with advanced stream processing capabilities for real-time data pipelines
 ---
 
 # Kafka & Stream Processing
 
-The consultant specializes in designing, implementing, and optimizing Kafka-based stream processing platforms that enable real-time data processing at scale. Services include:
+We specialize in designing, implementing, and optimizing Kafka-based stream processing platforms that enable real-time data processing at scale. Our services include:
 
 - Confluent Platform architecture and deployment
 - Multi-datacenter Kafka cluster design and implementation

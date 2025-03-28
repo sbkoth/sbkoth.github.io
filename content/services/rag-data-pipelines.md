@@ -1,12 +1,12 @@
 ---
 title: RAG Data Pipelines
 icon: Database
-description: Builds robust retrieval-augmented generation systems for AI applications
+description: We build robust retrieval-augmented generation systems for AI applications
 ---
 
 # Retrieval Augmented Generation (RAG) Data Pipelines
 
-The consultant designs and implements advanced RAG pipelines that enhance AI applications with contextual knowledge retrieval. Services include:
+We design and implement advanced RAG pipelines that enhance AI applications with contextual knowledge retrieval. Our services include:
 
 - Document ingestion and chunking pipeline setup
 - Vector database selection and implementation

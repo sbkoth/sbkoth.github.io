@@ -1,12 +1,12 @@
 ---
 title: Stream Processing
 icon: Activity
-description: Builds scalable real-time data processing pipelines with Kafka, Flink, and related technologies
+description: We build scalable real-time data processing pipelines with Kafka, Flink, and related technologies
 ---
 
 # Stream Processing
 
-The consultant designs and implements high-performance real-time data streaming and processing solutions that drive immediate insights and actions. Services include:
+We design and implement high-performance real-time data streaming and processing solutions that drive immediate insights and actions. Our services include:
 
 - Enterprise Kafka/Confluent architecture and implementation
 - Multi-datacenter and hybrid cloud streaming architectures

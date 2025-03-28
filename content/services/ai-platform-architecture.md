@@ -1,12 +1,12 @@
 ---
 title: AI Platform Architecture
 icon: Server
-description: Designs and implements scalable AI platforms for enterprise applications
+description: We design and implement scalable AI platforms for enterprise applications
 ---
 
 # AI Platform Architecture
 
-The consultant designs and implements scalable, production-ready AI platforms that support the full machine learning lifecycle. Services include:
+We design and implement scalable, production-ready AI platforms that support the full machine learning lifecycle. Our services include:
 
 - AI infrastructure design and architecture planning
 - MLOps pipeline implementation

@@ -1,12 +1,12 @@
 ---
 title: AI System Integration
 icon: Network
-description: Seamlessly integrates AI capabilities into existing enterprise systems and workflows
+description: We seamlessly integrate AI capabilities into existing enterprise systems and workflows
 ---
 
 # AI System Integration
 
-The consultant specializes in integrating AI solutions with existing enterprise systems and workflows to maximize business value. Services include:
+We specialize in integrating AI solutions with existing enterprise systems and workflows to maximize business value. Our services include:
 
 - AI-enabled business process automation
 - Legacy system AI augmentation

@@ -1,12 +1,12 @@
 ---
 title: Conversational AI Generation
 icon: Bot
-description: Designs and implements conversational AI systems with custom personas and capabilities
+description: We design and implement conversational AI systems with custom personas and capabilities
 ---
 
 # Conversational AI Generation (CAG)
 
-The consultant builds sophisticated conversational AI systems that provide natural, context-aware interactions. Services include:
+We build sophisticated conversational AI systems that provide natural, context-aware interactions. Our services include:
 
 - Conversational AI strategy and architecture design
 - Custom AI assistant development with domain-specific knowledge
