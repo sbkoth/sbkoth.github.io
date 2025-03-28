@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import PdfViewer from "./pdf-viewer";
 import SlideViewer from "./slide-viewer";
 import CaseStudy from "./case-study";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Database, Cloud, GitMerge, Server, Network, Code, Cpu } from "lucide-react";
+import { SiKubernetes, SiApachekafka, SiAmazonaws, SiGooglecloud, SiTerraform, SiDocker, SiOracle } from "react-icons/si";
 
 interface ProjectCardProps {
   project: Project;
@@ -34,13 +35,55 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     }
   };
 
+  // Function to determine the primary technology icon for the project
+  const getPrimaryTechIcon = () => {
+    if (!project.technologies || project.technologies.length === 0) {
+      return <Database className="h-5 w-5 text-primary" />;
+    }
+
+    const lowerTechs = project.technologies.map(tech => tech.toLowerCase());
+    
+    if (lowerTechs.some(tech => tech.includes('kubernetes'))) {
+      return <SiKubernetes className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('kafka'))) {
+      return <SiApachekafka className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('aws'))) {
+      return <SiAmazonaws className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('google cloud'))) {
+      return <SiGooglecloud className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('terraform'))) {
+      return <SiTerraform className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('docker'))) {
+      return <SiDocker className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('oracle'))) {
+      return <SiOracle className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('cloud'))) {
+      return <Cloud className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('data'))) {
+      return <Database className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('server'))) {
+      return <Server className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('network'))) {
+      return <Network className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('git'))) {
+      return <GitMerge className="h-5 w-5 text-primary" />;
+    } else if (lowerTechs.some(tech => tech.includes('python') || tech.includes('java') || tech.includes('typescript'))) {
+      return <Code className="h-5 w-5 text-primary" />;
+    } else {
+      return <Cpu className="h-5 w-5 text-primary" />;
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Card className="cursor-pointer group hover:shadow-lg transition-shadow">
           <CardHeader className="space-y-1">
             <div className="flex justify-between items-start">
-              <CardTitle>{project.title}</CardTitle>
+              <div className="flex items-center gap-2">
+                {getPrimaryTechIcon()}
+                <CardTitle>{project.title}</CardTitle>
+              </div>
               <ArrowRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           </CardHeader>
