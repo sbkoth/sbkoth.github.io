@@ -44,12 +44,12 @@ export default function Services() {
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className="hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02]"
+              className="hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02] border-t-4 border-t-primary"
               onClick={() => setSelectedService(service)}
             >
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="text-primary">
+                  <div className="text-primary bg-primary/10 p-3 rounded-lg">
                     {iconMap[service.icon]}
                   </div>
                   <CardTitle className="text-xl">{service.title}</CardTitle>

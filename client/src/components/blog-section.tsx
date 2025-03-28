@@ -26,19 +26,23 @@ export default function BlogSection({ posts }: BlogSectionProps) {
           {posts.map((post) => (
             <Card 
               key={post.id} 
-              className="group hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02]"
+              className="group hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02] border-t-4 border-t-primary"
               onClick={() => setSelectedPost(post)}
             >
               <CardHeader className="space-y-1">
                 <div className="flex justify-between items-start">
-                  <CardTitle className="group-hover:text-primary transition-colors">
-                    {post.title}
-                  </CardTitle>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div>
+                    <CardTitle className="group-hover:text-primary transition-colors">
+                      {post.title}
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {format(new Date(post.publishedAt), 'MMMM d, yyyy')}
+                    </p>
+                  </div>
+                  <div className="bg-primary/10 p-2 rounded-lg">
+                    <ArrowRight className="h-5 w-5 text-primary" />
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {format(new Date(post.publishedAt), 'MMMM d, yyyy')}
-                </p>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
