@@ -73,20 +73,24 @@ export class DatabaseStorage implements IStorage {
     if (projectsList.length > 0) {
       // Process and insert projects one by one
       for (const project of projectsList) {
-        await db.insert(projects).values({
-          title: project.title,
+        // Prepare the data with proper type handling
+        const projectData = {
           slug: project.slug,
+          title: project.title,
           description: project.description,
           content: project.content,
+          publishedAt: project.publishedAt ? new Date(project.publishedAt) : new Date(),
           thumbnail: project.thumbnail,
-          type: project.type,
-          publishedAt: project.publishedAt,
-          challenge: project.challenge,
-          approach: project.approach,
-          implementation: project.implementation,
-          outcomes: project.outcomes,
-          technologies: project.technologies
-        });
+          type: project.type as "image" | "pdf" | "slides" | "text",
+          challenge: project.challenge || null,
+          approach: project.approach || null,
+          implementation: project.implementation || null,
+          outcomes: project.outcomes || [],
+          clientTestimonial: project.clientTestimonial || null,
+          technologies: project.technologies || []
+        };
+        
+        await db.insert(projects).values(projectData);
       }
     }
     // Invalidate projects cache after sync

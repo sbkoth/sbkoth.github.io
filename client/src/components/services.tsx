@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Database, Cloud, Shield, Code, Brain, ChartBar, Server, Network, Bot, GitMerge, Cpu, Boxes, Waves, CreditCard, Activity } from "lucide-react";
-import type { Service } from "../../../server/services-utils";
+// Define the Service interface locally to avoid import issues
+interface Service {
+  title: string;
+  icon: string;
+  description: string;
+  content: string;
+}
 import ContentDialog from "./content-dialog";
 import { SiKubernetes, SiApachekafka, SiStripe } from "react-icons/si";
 

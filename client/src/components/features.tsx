@@ -19,7 +19,7 @@ import {
   Shield,
   CreditCard
 } from "lucide-react";
-import type { Feature } from "../../../server/features-utils";
+import type { Feature } from "@shared/schema";
 import ContentDialog from "./content-dialog";
 
 const iconMap: Record<string, React.ReactNode> = {
