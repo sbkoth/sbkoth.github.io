@@ -3,11 +3,10 @@ import { Suspense } from "react";
 import Hero from "@/components/hero";
 import Services from "@/components/services";
 import ProjectGrid from "@/components/project-grid";
-import BlogSection from "@/components/blog-section";
 import Contact from "@/components/contact";
 import Features from "@/components/features";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { Profile, Project, BlogPost } from "@shared/schema";
+import type { Profile, Project } from "@shared/schema";
 
 // Loading skeleton component
 const LoadingSkeleton = () => (
@@ -29,11 +28,7 @@ export default function Home() {
     queryKey: ["/api/projects"]
   });
 
-  const { data: posts, isError: postsError } = useQuery<BlogPost[]>({
-    queryKey: ["/api/blog-posts"]
-  });
-
-  if (profileError || projectsError || postsError) {
+  if (profileError || projectsError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-destructive">Failed to load content. Please try again later.</p>
@@ -41,7 +36,7 @@ export default function Home() {
     );
   }
 
-  if (!profile || !projects || !posts) {
+  if (!profile || !projects) {
     return <LoadingSkeleton />;
   }
 
@@ -52,7 +47,6 @@ export default function Home() {
         <Features />
         <Services />
         <ProjectGrid projects={projects} />
-        <BlogSection posts={posts} />
         <Contact profile={profile} />
       </Suspense>
     </div>
