@@ -38,16 +38,6 @@ export const projects = pgTable("projects", {
   technologies: jsonb("technologies").$type<string[]>(),
 });
 
-export const blogPosts = pgTable("blog_posts", {
-  id: serial("id").primaryKey(),
-  slug: text("slug").notNull().unique(),
-  title: text("title").notNull(),
-  excerpt: text("excerpt").notNull(),
-  content: text("content").notNull(),
-  publishedAt: timestamp("published_at").notNull().defaultNow(),
-  thumbnail: text("thumbnail").notNull(),
-});
-
 // Feature schema
 export const featureSchema = z.object({
   title: z.string(),
@@ -65,13 +55,10 @@ export const insertProjectSchema = createInsertSchema(projects)
   });
 
 export const insertProfileSchema = createInsertSchema(profile).omit({ id: true });
-export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({ id: true });
 
 // Type exports
 export type Project = typeof projects.$inferSelect;
 export type Profile = typeof profile.$inferSelect;
-export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertProject = z.infer<typeof insertProjectSchema>;
 export type InsertProfile = z.infer<typeof insertProfileSchema>;
-export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
 export type Feature = z.infer<typeof featureSchema>;

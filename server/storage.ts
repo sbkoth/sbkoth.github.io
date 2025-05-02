@@ -1,7 +1,6 @@
-import type { Project, Profile, BlogPost, InsertBlogPost, Feature } from "@shared/schema";
-import { projects, profile, blogPosts } from "@shared/schema";
+import type { Project, Profile, Feature } from "@shared/schema";
+import { projects, profile } from "@shared/schema";
 import { db } from "./db";
-import { loadBlogPosts } from "./blog-utils";
 import { loadProjects } from "./project-utils";
 import { loadServices, type Service } from "./services-utils";
 import { loadFeatures } from "./features-utils";
@@ -10,9 +9,7 @@ import { cacheService } from "./cache-service";
 export interface IStorage {
   getProfile(): Promise<Profile>;
   getProjects(): Promise<Project[]>;
-  getBlogPosts(): Promise<BlogPost[]>;
   getServices(): Promise<Service[]>;
-  syncBlogPosts(): Promise<void>;
   syncProjects(): Promise<void>;
   getFeatures(): Promise<Feature[]>;
 }
@@ -37,35 +34,6 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Admin-related methods have been removed
-
-  async getBlogPosts(): Promise<BlogPost[]> {
-    const cached = cacheService.get('blogPosts');
-    if (cached) return cached;
-
-    const posts = await db.select().from(blogPosts);
-    cacheService.set('blogPosts', posts);
-    return posts;
-  }
-
-  async syncBlogPosts(): Promise<void> {
-    const posts = await loadBlogPosts();
-    await db.delete(blogPosts);
-    if (posts.length > 0) {
-      // Process and insert blog posts one by one
-      for (const post of posts) {
-        await db.insert(blogPosts).values({
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt,
-          content: post.content,
-          publishedAt: post.publishedAt,
-          thumbnail: post.thumbnail
-        });
-      }
-    }
-    // Invalidate blog posts cache after sync
-    cacheService.invalidate('blogPosts');
-  }
 
   async syncProjects(): Promise<void> {
     const projectsList = await loadProjects();

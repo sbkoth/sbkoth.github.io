@@ -6,7 +6,6 @@ import path from "path";
 import fs from "fs";
 import fsPromises from "fs/promises";
 import express from "express";
-import { ensureBlogDir } from "./blog-utils";
 import { ensureProjectDir } from "./project-utils";
 import { cacheService } from "./cache-service";
 
@@ -38,11 +37,6 @@ export async function registerRoutes(app: Express) {
 
   // Admin-related endpoints have been removed
 
-  app.get("/api/blog-posts", async (_req, res) => {
-    const posts = await storage.getBlogPosts();
-    res.json(posts);
-  });
-
   app.get("/api/services", async (_req, res) => {
     const services = await storage.getServices();
     res.json(services);
@@ -64,9 +58,7 @@ export async function registerRoutes(app: Express) {
   app.use("/uploads", express.static(UPLOAD_DIR));
 
   const httpServer = createServer(app);
-  await ensureBlogDir();
   await ensureProjectDir();
-  await storage.syncBlogPosts();
   await storage.syncProjects();
   return httpServer;
 }
