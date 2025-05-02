@@ -1,12 +1,12 @@
 ---
 title: Data Science
 icon: LineChart
-description: We deliver actionable insights through advanced analytics and machine learning models
+description: Delivery of actionable insights through advanced analytics and machine learning models
 ---
 
 # Data Science
 
-We develop advanced analytical solutions to extract actionable insights from complex data sources. Our services include:
+Development of advanced analytical solutions to extract actionable insights from complex data sources. Services include:
 
 - Advanced analytical model development
 - Supervised and unsupervised machine learning

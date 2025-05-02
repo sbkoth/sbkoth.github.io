@@ -6,7 +6,7 @@ description: Strategic cloud adoption and migration with zero downtime
 
 # Cloud Migration Services
 
-We help organizations successfully transition to the cloud with minimal disruption. Our approach includes:
+Helping organizations successfully transition to the cloud with minimal disruption. The approach includes:
 
 - Cloud readiness assessment
 - Migration strategy development

@@ -1,12 +1,12 @@
 ---
 title: Kubernetes & Container Orchestration
 icon: Boxes
-description: We design, implement, and manage enterprise-grade Kubernetes clusters for containerized applications and data services
+description: Design, implementation, and management of enterprise-grade Kubernetes clusters for containerized applications and data services
 ---
 
 # Kubernetes & Container Orchestration
 
-Navigating the complexities of container orchestration can be challenging. Our team excels at building resilient, scalable Kubernetes environments that empower your development teams to focus on innovation. From zero to production, we handle:
+Navigating the complexities of container orchestration can be challenging. Building resilient, scalable Kubernetes environments that empower development teams to focus on innovation. From zero to production, services include:
 
 - Enterprise Kubernetes cluster design and deployment
 - Multi-node, high-availability Kubernetes architecture

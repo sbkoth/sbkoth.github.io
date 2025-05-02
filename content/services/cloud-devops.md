@@ -1,12 +1,12 @@
 ---
 title: Cloud DevOps & Data Engineering
 icon: Cloud
-description: Build scalable, secure CI/CD pipelines and data platforms across hybrid and multi-cloud environments
+description: Building scalable, secure CI/CD pipelines and data platforms across hybrid and multi-cloud environments
 ---
 
 # Cloud DevOps & Data Engineering
 
-We design and implement enterprise-grade DevOps practices and data engineering solutions for modern cloud environments. Our services include:
+Design and implementation of enterprise-grade DevOps practices and data engineering solutions for modern cloud environments. Services include:
 
 - CI/CD pipeline design and implementation
 - Hybrid and multi-cloud infrastructure automation

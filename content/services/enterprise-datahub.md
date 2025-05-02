@@ -1,12 +1,12 @@
 ---
 title: Enterprise Data Hub Platform
 icon: Database
-description: Design and implement scalable, secure stream data platforms with Kafka, Kubernetes, and cloud infrastructure
+description: Design and implementation of scalable, secure stream data platforms with Kafka, Kubernetes, and cloud infrastructure
 ---
 
 # Enterprise Data Hub Platform
 
-We architect and implement robust enterprise data hub platforms that serve as the backbone for modern data-driven organizations. Our services include:
+Architecture and implementation of robust enterprise data hub platforms that serve as the backbone for modern data-driven organizations. Services include:
 
 - Multi-cloud Kafka cluster architecture and implementation
 - Cross-datacenter data replication and synchronization
