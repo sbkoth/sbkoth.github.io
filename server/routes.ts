@@ -8,6 +8,7 @@ import fsPromises from "fs/promises";
 import express from "express";
 import { ensureBlogDir } from "./blog-utils";
 import { ensureProjectDir } from "./project-utils";
+import { cacheService } from "./cache-service";
 
 const UPLOAD_DIR = path.join(process.cwd(), "uploads");
 
@@ -24,6 +25,8 @@ export async function registerRoutes(app: Express) {
   }));
 
   app.get("/api/profile", async (_req, res) => {
+    // Invalidate the cache to force fresh data fetch
+    cacheService.invalidate('profile');
     const profile = await storage.getProfile();
     res.json(profile);
   });
@@ -49,6 +52,12 @@ export async function registerRoutes(app: Express) {
   app.get("/api/features", async (_req, res) => {
     const features = await storage.getFeatures();
     res.json(features);
+  });
+  
+  // Cache control endpoint
+  app.get("/api/cache/clear", async (_req, res) => {
+    cacheService.clear();
+    res.json({ success: true, message: "Cache cleared successfully" });
   });
 
   // Serve uploaded files
