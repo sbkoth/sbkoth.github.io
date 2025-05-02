@@ -1,12 +1,12 @@
 ---
 title: Cloud Infrastructure & Networking
 icon: Network
-description: We design and implement secure, scalable cloud infrastructure with advanced networking for hybrid and multi-cloud environments
+description: Design and implementation of secure, scalable cloud infrastructure with advanced networking for hybrid and multi-cloud environments
 ---
 
 # Cloud Infrastructure & Networking
 
-We specialize in designing and implementing robust cloud infrastructure and networking solutions that enable secure, efficient operations across hybrid and multi-cloud environments. Our services include:
+Design and implementation of robust cloud infrastructure and networking solutions that enable secure, efficient operations across hybrid and multi-cloud environments. Services include:
 
 - AWS, Google Cloud, and Azure architecture and implementation
 - Cloud buildout strategies across multiple environments

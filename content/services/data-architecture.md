@@ -1,12 +1,12 @@
 ---
 title: Data Architecture
 icon: Database
-description: We design and implement scalable data solutions, from warehouses to lakes
+description: Design and implementation of scalable data solutions, from warehouses to lakes
 ---
 
 # Data Architecture Services
 
-Our data architecture services focus on building robust, scalable data infrastructure that serves business needs. We specialize in:
+Data architecture services focused on building robust, scalable data infrastructure that serves business needs. Specializations include:
 
 - End-to-end platform governance frameworks with quality, security, and compliance controls
 - Reverse ETL pipelines that sync data from warehouses to marketing and sales tools
