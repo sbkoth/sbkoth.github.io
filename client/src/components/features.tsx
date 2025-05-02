@@ -96,10 +96,11 @@ function FeaturesComponent() {
         </div>
       </div>
 
+      {/* Render feature content dialog with error handling */}
       {selectedFeature && (
         <ContentDialog
           title={selectedFeature.title}
-          content={selectedFeature.content}
+          content={selectedFeature.content || 'No detailed information available for this expertise area.'}
           isOpen={!!selectedFeature}
           onClose={() => setSelectedFeature(null)}
         />

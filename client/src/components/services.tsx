@@ -95,10 +95,11 @@ function ServicesComponent() {
         </div>
       </div>
 
+      {/* Render service content dialog with error handling */}
       {selectedService && (
         <ContentDialog
           title={selectedService.title}
-          content={selectedService.content}
+          content={selectedService.content || 'No detailed information available for this service.'}
           isOpen={!!selectedService}
           onClose={() => setSelectedService(null)}
         />

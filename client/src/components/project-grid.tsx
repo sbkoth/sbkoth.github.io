@@ -63,10 +63,11 @@ function ProjectGridComponent({ projects }: ProjectGridProps) {
         </div>
       </div>
 
+      {/* Render content dialog with proper error handling */}
       {selectedProject && (
         <ContentDialog
           title={selectedProject.title}
-          content={selectedProject.content}
+          content={selectedProject.content || 'No content available for this project.'}
           isOpen={!!selectedProject}
           onClose={() => setSelectedProject(null)}
         />
