@@ -15,7 +15,7 @@ This application is a modern, performance-optimized professional portfolio websi
 - **Performance**: Memoized components and server-side caching
 - **Design**: Consistent card styling with border-top treatments across all components
 
-The application is designed to showcase professional services, expertise, project work, and blog content in a cohesive, visually appealing format. All content maintains a consistent second-person plural voice (we, us, our) throughout to present a unified professional brand.
+The application is designed to showcase professional services, expertise, and project work in a cohesive, visually appealing format. All content maintains a consistent second-person plural voice (we, us, our) throughout to present a unified professional brand.
 
 ## Prerequisites
 
@@ -84,7 +84,6 @@ This command will create all necessary tables in your database based on the sche
 
 The application loads content from Markdown files in the `content` directory. The repository includes sample content in these directories:
 
-- `content/blog/` - Blog posts
 - `content/projects/` - Portfolio projects
 - `content/services/` - Service offerings (individual service details)
 - `content/features/` - Professional expertise categories (higher-level service domains)
@@ -99,8 +98,7 @@ The portfolio website consists of the following main sections:
 2. **Professional Expertise** - High-level service domains with key highlights (from `features` content)
 3. **Services** - Detailed professional services with specialized offerings (from `services` content)
 4. **Projects** - Showcased project work with case studies (from `projects` content)
-5. **Blog** - Professional articles and publications (from `blog` content)
-6. **Contact** - Contact information and social links
+5. **Contact** - Contact information and social links
 
 Note: The application intentionally doesn't include Process or Testimonials sections as they've been removed from the design for a more streamlined user experience. Additionally, there is no admin interface as content is managed through Markdown files.
 
@@ -256,37 +254,7 @@ Any additional information about the project...
 
 For project thumbnails, add images to the `client/public` directory and reference them with paths starting with `/`.
 
-### Updating Blog Posts
 
-Create or modify markdown files in `content/blog/` following this template:
-
-```markdown
----
-title: Blog Post Title
-slug: blog-post-slug
-excerpt: Brief excerpt of the blog post (appears in previews)
-thumbnail: /path/to/thumbnail.jpg
-publishedAt: 2023-01-01
----
-
-# Blog Post Title
-
-Blog post content in markdown format. You can use all standard markdown 
-formatting including:
-
-## Headings
-
-- Bullet points
-- More bullet points
-
-### Code examples
-
-```javascript
-const example = "This is a code example";
-console.log(example);
-```
-
-For blog post thumbnails, add images to the `client/public` directory and reference them with paths starting with `/`.
 
 ## Database Management
 
