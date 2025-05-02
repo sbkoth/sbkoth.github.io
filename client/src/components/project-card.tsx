@@ -81,38 +81,56 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Card className="cursor-pointer group hover:shadow-lg transition-shadow border-t-4 border-t-primary">
-          <CardHeader className="space-y-1">
+        <Card className="cursor-pointer group hover:shadow-xl transition-all duration-300 border-t-4 border-t-primary hover:scale-[1.02] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <CardHeader className="space-y-1 relative z-10">
             <div className="flex items-center gap-2">
-              <div className="text-primary bg-primary/10 p-2 rounded-lg">
-                {getPrimaryTechIcon()}
+              <div className="text-primary bg-primary/10 p-2 rounded-lg shadow-sm group-hover:shadow transition-all duration-300 group-hover:bg-primary/20">
+                <div className="transform transition-transform duration-300 group-hover:scale-110">
+                  {getPrimaryTechIcon()}
+                </div>
               </div>
-              <CardTitle>{project.title}</CardTitle>
+              <CardTitle className="group-hover:text-primary transition-colors duration-300">{project.title}</CardTitle>
             </div>
           </CardHeader>
-          <CardContent>
-            <img 
-              src={project.thumbnail} 
-              alt={project.title}
-              className="w-full aspect-video object-cover rounded-md mb-4"
-            />
-            <p className="text-sm text-muted-foreground mb-4">
+          <CardContent className="relative z-10">
+            <div className="overflow-hidden rounded-md mb-4 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+              <img 
+                src={project.thumbnail} 
+                alt={project.title}
+                className="w-full aspect-video object-cover transform transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <p className="text-sm text-muted-foreground mb-4 group-hover:text-foreground/90 transition-colors duration-300 line-clamp-3">
               {project.description}
             </p>
-            {project.technologies && (
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.slice(0, 3).map((tech) => (
-                  <Badge key={tech} variant="secondary" className="text-xs">
-                    {tech}
-                  </Badge>
-                ))}
-                {project.technologies.length > 3 && (
-                  <Badge variant="secondary" className="text-xs">
-                    +{project.technologies.length - 3} more
-                  </Badge>
-                )}
+            <div className="flex items-center justify-between">
+              {project.technologies && (
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.slice(0, 3).map((tech) => (
+                    <Badge 
+                      key={tech} 
+                      variant="secondary" 
+                      className="text-xs transition-all duration-300 hover:bg-primary/10"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                  {project.technologies.length > 3 && (
+                    <Badge 
+                      variant="secondary" 
+                      className="text-xs transition-all duration-300 hover:bg-primary/10"
+                    >
+                      +{project.technologies.length - 3} more
+                    </Badge>
+                  )}
+                </div>
+              )}
+              <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1 text-sm font-medium mr-2">
+                <span>View details</span>
+                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" />
               </div>
-            )}
+            </div>
           </CardContent>
         </Card>
       </DialogTrigger>

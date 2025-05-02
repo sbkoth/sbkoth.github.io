@@ -56,8 +56,10 @@ export class DatabaseStorage implements IStorage {
         technologies: project.technologies || []
       }));
       
-      // Insert all projects in a single batch
-      await db.insert(projects).values(projectsData);
+      // Insert all projects one by one to ensure type safety
+      for (const projectData of projectsData) {
+        await db.insert(projects).values(projectData);
+      }
     }
     // Invalidate projects cache after sync
     cacheService.invalidate('projects');
