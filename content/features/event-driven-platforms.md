@@ -16,7 +16,7 @@ We design and implement high-performance event streaming platforms that transfor
 
 ## Event Streaming Foundations
 
-- **Kafka Cluster Architecture** - Design production-grade Kafka deployments with proper sizing, scaling, and security controls
+- **Kafka Cluster Architecture** - Design and implement production-grade Kafka deployments with proper sizing, scaling, and security controls
 - **Stream Processing Framework** - Implement Kafka Streams, Flink, or Spark Streaming for complex event processing
 - **Schema Management** - Establish schema registries with proper evolution strategies and compatibility controls
 - **Event Domain Modeling** - Design comprehensive event taxonomies and schemas aligned with business domains
@@ -25,7 +25,7 @@ We design and implement high-performance event streaming platforms that transfor
 ## Enterprise Event Platforms
 
 - **Multi-Datacenter Replication** - Implement cross-region Kafka clusters with proper replication and disaster recovery
-- **Cloud-Native Streaming** - Deploy managed services like Confluent Cloud or MSK with proper configuration and monitoring
+- **Cloud-Native Streaming** - Deploy enterprise Kafka platforms across AWS, Google Cloud, and on-premises environments
 - **Event Sourcing Patterns** - Implement event sourcing architectures with append-only logs and materialized views
 - **CQRS Implementation** - Build systems separating command and query responsibilities for optimal performance
 - **Stream Governance** - Establish data contracts, lineage tracking, and quality controls for streaming data
@@ -36,12 +36,12 @@ We design and implement high-performance event streaming platforms that transfor
 - **Stream Analytics** - Create real-time analytics using windowing, aggregation, and complex event processing
 - **Event-Driven Microservices** - Design reactive microservice architectures with event-based communication
 - **Change Data Capture** - Implement CDC patterns to stream database changes with proper transformation
-- **Machine Learning Integration** - Build streaming ML pipelines for real-time scoring and model serving
+- **Stream Processing Applications** - Develop Kafka Streams applications that process real-time data for immediate business actions
 
 ## Operational Excellence
 
 - **Stream Monitoring** - Implement comprehensive observability for Kafka clusters and streaming applications
 - **Performance Optimization** - Tune systems for optimal throughput, latency, and resource utilization
 - **Stream Security** - Establish encryption, authentication, and authorization controls for sensitive data streams
-- **Stream Testing** - Create frameworks for properly testing stream processing logic and failure scenarios
-- **Capacity Planning** - Develop forecasting models for growth with appropriate scaling strategies
+- **Disaster Recovery** - Design and implement robust backup, recovery, and failover strategies for mission-critical streams
+- **Infrastructure Automation** - Create infrastructure-as-code solutions using Terraform, Ansible, and Kubernetes

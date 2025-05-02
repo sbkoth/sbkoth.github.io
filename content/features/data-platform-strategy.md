@@ -24,7 +24,7 @@ We design and implement transformative data platforms that turn fragmented data 
 
 ## Data Governance & Quality
 
-- **Metadata Management** - Establish comprehensive technical and business metadata with advanced discovery capabilities
+- **Platform Governance** - Establish end-to-end platform governance frameworks ensuring data quality, security, and compliance
 - **Data Quality Framework** - Implement multi-layered quality controls with proper measurement and improvement cycles
 - **Data Contracts** - Create explicit agreements governing data exchanges between producers and consumers
 - **Governance Operating Model** - Design practical governance processes balancing control and agility
@@ -40,8 +40,8 @@ We design and implement transformative data platforms that turn fragmented data 
 
 ## Platform Operations
 
+- **Platform Operations** - Manage all aspects of data platform operations including monitoring, performance tuning, and incident response
+- **Reverse ETL Pipelines** - Design and implement data synchronization from data warehouses to operational systems 
 - **DataOps Implementation** - Create automated pipelines with CI/CD practices optimized for data workloads
-- **Observability Framework** - Establish comprehensive monitoring covering data freshness, quality, and system health
 - **Cost Optimization** - Implement architectural patterns and operational practices to control cloud data costs
-- **Scalability Planning** - Design platforms capable of handling order-of-magnitude growth in data volume and users
 - **Security Architecture** - Create defense-in-depth strategies with appropriate access controls and data protection
