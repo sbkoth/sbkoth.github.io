@@ -1,15 +1,22 @@
 /**
  * Static content paths for GitHub Pages (and local static builds).
- * Paths are rooted at Vite's BASE_URL (default `/` for root hosting).
+ * Default Vite base is `./` (root of the deployment directory).
  */
+
+function normalizeBase(base: string): string {
+  if (base === "." || base === "./") return "./";
+  if (base === "/") return "/";
+  return base.endsWith("/") ? base : `${base}/`;
+}
 
 /** Pure helpers — take explicit base so unit tests drive the same code as production. */
 export function resolveDataUrl(
   name: "profile" | "projects" | "services" | "features",
   base: string,
 ): string {
-  const normalized = base.endsWith("/") ? base : `${base}/`;
-  return `${normalized}data/${name}.json`;
+  const b = normalizeBase(base);
+  if (b === "./") return `./data/${name}.json`;
+  return `${b}data/${name}.json`;
 }
 
 export function resolveAssetUrl(
@@ -18,20 +25,28 @@ export function resolveAssetUrl(
 ): string {
   if (!path) return "";
   if (/^https?:\/\//i.test(path) || path.startsWith("data:")) return path;
-  const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
-  if (path.startsWith("/")) {
-    return `${normalizedBase}${path}`;
+
+  const b = normalizeBase(base);
+  if (b === "./") {
+    return path.startsWith("/") ? `.${path}` : `./${path}`;
   }
-  return `${normalizedBase}/${path}`;
+  if (b === "/") {
+    return path.startsWith("/") ? path : `/${path}`;
+  }
+  const prefix = b.endsWith("/") ? b.slice(0, -1) : b;
+  if (path.startsWith("/")) {
+    return `${prefix}${path}`;
+  }
+  return `${prefix}/${path}`;
 }
 
 export function dataUrl(
   name: "profile" | "projects" | "services" | "features",
 ): string {
-  return resolveDataUrl(name, import.meta.env.BASE_URL || "/");
+  return resolveDataUrl(name, import.meta.env.BASE_URL || "./");
 }
 
 /** Prefix site-relative asset paths (e.g. /uploads/...) with the Vite base. */
 export function assetUrl(path: string | undefined | null): string {
-  return resolveAssetUrl(path, import.meta.env.BASE_URL || "/");
+  return resolveAssetUrl(path, import.meta.env.BASE_URL || "./");
 }

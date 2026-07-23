@@ -47,9 +47,10 @@ jobs:
       - name: Unit tests
         run: npm test
 
-      - name: Build client for GitHub Pages (root path /)
+      - name: Build client for GitHub Pages (root-relative ./)
         env:
-          VITE_BASE: /
+          # Root of the deployment folder (works at / and under /repo/)
+          VITE_BASE: ./
         run: npx vite build
 
       - name: Ensure .nojekyll for Pages asset paths

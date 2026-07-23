@@ -34,14 +34,17 @@ npm run build        # static export + Vite client + optional server bundle
 npm run build:pages  # client-only static build for Pages
 ```
 
-The production build uses **root base path `/`** (see `vite.config.ts`, `VITE_BASE=/`). Routes and assets are `/`, `/data/*`, `/assets/*`, `/uploads/*`.
+The production build uses a **root-relative** base (`./` in `vite.config.ts`). The app is served from the root of its deployment directory (routes `/`, assets `./assets/*`, data `./data/*`) so it works at:
+
+- https://sbkoth.github.io/sbkoth-intro-page/ (project Pages), and  
+- a user site or custom domain at `/` if you host there later.
 
 ## Deploy (GitHub Pages — free)
 
-`.github/workflows/deploy-pages.yml` builds with `VITE_BASE=/` and publishes to the **`gh-pages`** branch on every push to `main`.
+`.github/workflows/deploy-pages.yml` builds with `VITE_BASE=./` and publishes to the **`gh-pages`** branch on every push to `main`.
 
 **Pages source:** Settings → Pages → Deploy from a branch → **`gh-pages`** / **(root)**.
 
-Project Pages URL: https://sbkoth.github.io/sbkoth-intro-page/
+Live: https://sbkoth.github.io/sbkoth-intro-page/
 
 No paid hosting or database is required for the public site.

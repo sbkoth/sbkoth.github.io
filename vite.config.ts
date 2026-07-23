@@ -6,9 +6,11 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Served at site root (e.g. https://sbkoth.github.io/ or a custom domain).
-// Override with VITE_BASE=/some-prefix/ only if hosting under a subpath.
-const base = process.env.VITE_BASE ?? "/";
+// Root-relative base so the app serves from the deployment root:
+// - User site / custom domain: https://sbkoth.github.io/  → paths ./assets, ./data
+// - Project Pages: https://sbkoth.github.io/sbkoth-intro-page/ → same relative to that folder
+// Absolute "/" would break project Pages (assets would hit github.io/assets, not the repo path).
+const base = process.env.VITE_BASE ?? "./";
 
 export default defineConfig({
   base,

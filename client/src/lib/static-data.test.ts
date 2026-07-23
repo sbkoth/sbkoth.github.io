@@ -7,24 +7,25 @@ import assert from "node:assert/strict";
 import { resolveDataUrl, resolveAssetUrl } from "./static-data.ts";
 
 describe("resolveDataUrl / resolveAssetUrl (shipped)", () => {
-  it("builds data URLs under default base /", () => {
-    assert.equal(resolveDataUrl("profile", "/"), "/data/profile.json");
-    assert.equal(resolveDataUrl("projects", "/"), "/data/projects.json");
-    assert.equal(resolveAssetUrl("/uploads/photo.jpg", "/"), "/uploads/photo.jpg");
+  it("builds data URLs under root-relative base ./", () => {
+    assert.equal(resolveDataUrl("profile", "./"), "./data/profile.json");
+    assert.equal(resolveDataUrl("projects", "./"), "./data/projects.json");
+    assert.equal(resolveAssetUrl("/uploads/photo.jpg", "./"), "./uploads/photo.jpg");
     assert.equal(
-      resolveAssetUrl("https://example.com/x.png", "/"),
+      resolveAssetUrl("https://example.com/x.png", "./"),
       "https://example.com/x.png",
     );
   });
 
-  it("prefixes data and assets with project Pages base path", () => {
+  it("builds data URLs under absolute root base /", () => {
+    assert.equal(resolveDataUrl("profile", "/"), "/data/profile.json");
+    assert.equal(resolveAssetUrl("/uploads/photo.jpg", "/"), "/uploads/photo.jpg");
+  });
+
+  it("prefixes data and assets with an explicit project subpath", () => {
     assert.equal(
       resolveDataUrl("features", "/sbkoth-intro-page/"),
       "/sbkoth-intro-page/data/features.json",
-    );
-    assert.equal(
-      resolveDataUrl("services", "/sbkoth-intro-page/"),
-      "/sbkoth-intro-page/data/services.json",
     );
     assert.equal(
       resolveAssetUrl(
