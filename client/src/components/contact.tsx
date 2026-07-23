@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { SiX } from "react-icons/si";
+import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import type { Profile } from "@shared/schema";
 
@@ -15,16 +14,6 @@ export default function Contact({ profile }: ContactProps) {
       href: socials.github,
       label: "GitHub",
       icon: <FaGithub className="h-5 w-5" />,
-    },
-    {
-      href: socials.linkedin,
-      label: "LinkedIn",
-      icon: <FaLinkedin className="h-5 w-5" />,
-    },
-    {
-      href: socials.twitter,
-      label: "X",
-      icon: <SiX className="h-5 w-5" />,
     },
     {
       href: socials.email ? `mailto:${socials.email}` : undefined,
