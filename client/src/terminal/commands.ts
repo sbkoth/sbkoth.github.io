@@ -8,7 +8,6 @@ export type PortfolioData = {
     name: string;
     title: string;
     bio: string;
-    avatar?: string;
     socials: {
       github?: string;
       linkedin?: string;
@@ -70,7 +69,6 @@ export type DispatchResult = {
   /** Rich welcome layout: logo + portrait side-by-side */
   variant?: "welcome";
   welcomeName?: string;
-  welcomeAvatar?: string;
 };
 
 function usage(cmd: string, detail?: string): DispatchResult {
@@ -129,7 +127,6 @@ export function dispatchCommand(
         lines: welcomeBannerLines(data.profile.name),
         variant: "welcome",
         welcomeName: data.profile.name,
-        welcomeAvatar: data.profile.avatar,
       };
 
     case "whoami":

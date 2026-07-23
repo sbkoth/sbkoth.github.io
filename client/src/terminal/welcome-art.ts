@@ -1,6 +1,7 @@
 /**
  * Welcome banner art: SBKOTH wordmark (left) + terminal portrait (right).
- * Layout mirrors terminal.satnaing.dev — logo + character art.
+ * Portrait is monospace-only silhouette of the formal headshot
+ * (glasses, full beard, collar/tie, three-piece suit + pocket square).
  */
 
 export const SBKOTH_LOGO: string[] = [
@@ -22,26 +23,33 @@ export const SBKOTH_LOGO_MOBILE: string[] = [
 ];
 
 /**
- * Formal portrait (glasses, beard, suit) — terminal illu for the hero.
- * Inspired by the operator photo; pure monospace art.
+ * Formal portrait silhouette (no photo) — short hair, rectangular glasses,
+ * full beard, white collar, necktie, navy suit lapels, waistcoat, pocket square.
+ * Designed to read at IBM Plex Mono terminal sizes.
  */
 export const PORTRAIT_ART: string[] = [
-  "          .·´¯`·.          ",
-  "       .·´#######`·.       ",
-  "      /#############\\      ",
-  "     |###┌───────┐###|     ",
-  "     |###│ ◉   ◉ │###|     ",
-  "     |###│   ▽   │###|     ",
-  "     |###└───╤───┘###|     ",
-  "      \\#####║#####/      ",
-  "     ╔═╧████║████╧═╗     ",
-  "     ║▓▓▓████████▓▓▓║     ",
-  "     ║▓▓▓│ ▓▓▓ │▓▓▓║     ",
-  "     ║▓▓▓│▓▓▓▓▓│▓▓▓║     ",
-  "     ║▓▓▓│▓▓▓▓▓│▓▓▓║     ",
-  "     ╚═══╧═════╧═══╝     ",
-  "        │ │   │ │        ",
-  "       ═╧═╧═══╧═╧═       ",
+  "            ▄▄████▄▄            ",
+  "         ▄████████████▄         ",
+  "       ▄████████████████▄       ",
+  "      ████▀▀▀▀████▀▀▀▀████      ",
+  "     ███┌──────────────┐███     ",
+  "     ███│ ▄██▄    ▄██▄ │███     ",
+  "     ███│ ████    ████ │███     ",
+  "     ███│ ▀██▀ ██ ▀██▀ │███     ",
+  "     ███└──────╨───────┘███     ",
+  "      ████▄  ▄▄▄▄▄▄  ▄████      ",
+  "       ██████████████████       ",
+  "      ▄██████████████████▄      ",
+  "   ▄████████████████████████▄   ",
+  "  ████▀  ▀████████████▀  ▀████  ",
+  " ████    ████ ▐██▌ ████    ████ ",
+  "████    ███   ▐██▌   ███    ████",
+  "████   ███    ▐██▌    ███   ████",
+  "████  ███  ·  ▐██▌  ·  ███  ████",
+  " ████ ███     ▐██▌     ███ ████ ",
+  "  ████████▄   ▐██▌   ▄████████  ",
+  "   ██████████████████████████   ",
+  "    ████████████████████████    ",
 ];
 
 /**

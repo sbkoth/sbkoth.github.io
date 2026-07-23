@@ -235,26 +235,6 @@
   position: relative;
 }
 
-.welcome-art-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.welcome-photo {
-  width: 7rem;
-  height: 7rem;
-  object-fit: cover;
-  object-position: top center;
-  border: 1px solid color-mix(in srgb, var(--term-primary) 45%, transparent);
-  border-radius: 0.35rem;
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--term-secondary) 25%, transparent),
-    0 0 28px -6px color-mix(in srgb, var(--term-primary) 40%, transparent);
-  filter: contrast(1.05) saturate(0.95);
-}
-
 .welcome-pre {
   margin: 0;
   font-family: inherit;

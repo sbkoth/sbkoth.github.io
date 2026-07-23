@@ -74,7 +74,6 @@ export default function Terminal() {
         name: profile.name,
         title: profile.title,
         bio: profile.bio,
-        avatar: profile.avatar,
         socials: profile.socials,
       },
       projects: projects.map((p) => ({
@@ -279,10 +278,7 @@ export default function Terminal() {
               }
             >
               {entry.result.variant === "welcome" && entry.result.welcomeName ? (
-                <WelcomeBanner
-                  name={entry.result.welcomeName}
-                  avatar={entry.result.welcomeAvatar}
-                />
+                <WelcomeBanner name={entry.result.welcomeName} />
               ) : (
                 entry.result.lines.map((line, i) => (
                   <div key={i} className="term-output-line">
