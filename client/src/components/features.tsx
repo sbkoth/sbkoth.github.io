@@ -17,15 +17,15 @@ import { dataUrl } from "@/lib/static-data";
 import TerminalPanel from "./terminal-panel";
 
 const iconMap: Record<string, React.ReactNode> = {
-  Code2: <Code2 className="h-5 w-5" />,
-  GitMerge: <GitMerge className="h-5 w-5" />,
-  AlertCircle: <AlertCircle className="h-5 w-5" />,
-  Zap: <Zap className="h-5 w-5" />,
-  Database: <Database className="h-5 w-5" />,
-  Brain: <Brain className="h-5 w-5" />,
-  Cloud: <Cloud className="h-5 w-5" />,
-  Shield: <Shield className="h-5 w-5" />,
-  CreditCard: <CreditCard className="h-5 w-5" />,
+  Code2: <Code2 className="h-4 w-4" />,
+  GitMerge: <GitMerge className="h-4 w-4" />,
+  AlertCircle: <AlertCircle className="h-4 w-4" />,
+  Zap: <Zap className="h-4 w-4" />,
+  Database: <Database className="h-4 w-4" />,
+  Brain: <Brain className="h-4 w-4" />,
+  Cloud: <Cloud className="h-4 w-4" />,
+  Shield: <Shield className="h-4 w-4" />,
+  CreditCard: <CreditCard className="h-4 w-4" />,
 };
 
 function FeaturesComponent() {
@@ -37,8 +37,8 @@ function FeaturesComponent() {
 
   if (isError) {
     return (
-      <TerminalPanel title="~/expertise" prompt="ls expertise/">
-        <p className="text-destructive text-sm">error: failed to load expertise</p>
+      <TerminalPanel prompt="ls expertise/">
+        <p className="text-sm text-destructive">error: failed to load expertise</p>
       </TerminalPanel>
     );
   }
@@ -49,19 +49,18 @@ function FeaturesComponent() {
 
   return (
     <>
-      <TerminalPanel title="~/expertise" prompt="ls -la expertise/">
-        <div className="mb-6">
+      <TerminalPanel prompt="ls -la expertise/" delayMs={80}>
+        <div className="mb-5">
           <h2 className="tui-section-title">Professional Expertise</h2>
-          <p className="mt-2 text-sm text-muted-foreground max-w-3xl">
-            End-to-end solutions across technology domains — strategic vision with
-            systems that ship.
+          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+            End-to-end systems work — strategy that still compiles.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <article
               key={`${feature.title}-${index}`}
-              className="tui-card p-4"
+              className="tui-card"
               onClick={() => setSelectedFeature(feature)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -73,33 +72,30 @@ function FeaturesComponent() {
               tabIndex={0}
             >
               <div className="flex items-start gap-3">
-                <div className="text-primary border border-primary/30 p-2 shrink-0">
-                  {iconMap[feature.icon] ?? <Code2 className="h-5 w-5" />}
+                <div className="shrink-0 border border-primary/30 p-2 text-primary">
+                  {iconMap[feature.icon] ?? <Code2 className="h-4 w-4" />}
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm font-semibold text-primary leading-snug">
-                    <span className="text-muted-foreground font-normal">./</span>
+                  <h3 className="text-sm font-medium leading-snug text-primary">
+                    <span className="font-normal text-muted-foreground">./</span>
                     {feature.title}
                   </h3>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                     {feature.description}
                   </p>
                   {feature.highlights?.length > 0 && (
                     <ul className="mt-3 space-y-1">
-                      {feature.highlights.map((highlight, i) => (
+                      {feature.highlights.slice(0, 4).map((highlight, i) => (
                         <li
                           key={i}
-                          className="text-[11px] text-foreground/80 flex gap-2"
+                          className="flex gap-2 text-[11px] text-foreground/80"
                         >
-                          <span className="text-primary shrink-0">▸</span>
+                          <span className="shrink-0 text-primary">▸</span>
                           <span>{highlight}</span>
                         </li>
                       ))}
                     </ul>
                   )}
-                  <p className="mt-3 text-[10px] uppercase tracking-wider text-accent/80">
-                    cat → details
-                  </p>
                 </div>
               </div>
             </article>

@@ -56,9 +56,9 @@ export default function ContentDialog({
         if (!open) onClose();
       }}
     >
-      <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto rounded-none border-primary/40 bg-card font-mono shadow-[0_0_40px_-10px_hsl(var(--primary)/0.35)]">
+      <DialogContent className="max-h-[80vh] max-w-3xl overflow-y-auto rounded-lg border-primary/35 bg-card font-mono shadow-[0_24px_80px_-20px_hsl(0_0%_0%_/_0.7)] duration-200">
         <DialogHeader className="border-b border-border pb-3">
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
+          <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
             $ cat {title.toLowerCase().replace(/\s+/g, "-")}.md
           </p>
           <DialogTitle className="text-lg font-semibold text-primary">

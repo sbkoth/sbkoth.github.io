@@ -17,7 +17,7 @@ export default function Hero({ profile }: HeroProps) {
         if (calendarButtonRef.current.childElementCount > 0) return;
         window.calendar.schedulingButton.load({
           url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3jn57Z8GRePdNpJDHhz1kInTrYIl_KwK6RYDkBOp6eWZ1BIIiFnG-sNf1oPI4RPgwFDsTD69dZ?gv=true",
-          color: "#22c55e",
+          color: "#27c93f",
           label: "schedule --consultation",
           target: calendarButtonRef.current,
         });
@@ -55,38 +55,45 @@ export default function Hero({ profile }: HeroProps) {
     .toUpperCase();
 
   return (
-    <TerminalPanel title="~/whoami" prompt="whoami --verbose">
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
-        <Avatar className="w-24 h-24 md:w-32 md:h-32 rounded-none border border-primary/40">
+    <TerminalPanel prompt="whoami --verbose" delayMs={40}>
+      <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
+        <Avatar className="h-24 w-24 shrink-0 rounded-md border border-primary/35 sm:h-28 sm:w-28">
           <AvatarImage
             src={assetUrl(profile.avatar)}
             alt={profile.name}
-            className="object-cover rounded-none"
+            className="object-cover"
           />
-          <AvatarFallback className="text-xl rounded-none bg-muted text-primary font-mono">
+          <AvatarFallback className="rounded-md bg-muted font-mono text-xl text-primary">
             {initials}
           </AvatarFallback>
         </Avatar>
+
         <div className="min-w-0 flex-1 space-y-3">
           <p className="text-xs text-muted-foreground">
             <span className="text-accent">#</span> identity
           </p>
-          <h1 className="text-2xl md:text-4xl font-semibold text-primary tracking-tight break-words">
+          <h1 className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl md:text-4xl">
             {profile.name}
-            <span className="tui-blink ml-1 inline-block h-6 w-2.5 bg-primary align-middle" />
+            <span
+              className="tui-blink ml-1 inline-block h-[0.9em] w-[0.5em] translate-y-0.5 bg-primary align-baseline"
+              aria-hidden
+            />
           </h1>
-          <h2 className="text-sm md:text-base text-accent">
+          <h2 className="text-sm text-accent sm:text-base">
             <span className="text-muted-foreground">role=</span>
             {profile.title}
           </h2>
-          <p className="text-sm md:text-[15px] leading-relaxed text-foreground/90 max-w-2xl border-l-2 border-primary/40 pl-3">
+          <p className="max-w-2xl border-l-2 border-primary/35 pl-3 text-sm leading-relaxed text-foreground/90">
             {profile.bio}
           </p>
-          <div className="pt-2 flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 pt-1">
             <span className="text-xs text-muted-foreground">
               $ schedule --consultation
             </span>
-            <div ref={calendarButtonRef} className="inline-block [&_button]:!font-mono [&_button]:!rounded-none" />
+            <div
+              ref={calendarButtonRef}
+              className="inline-block [&_button]:!rounded-md [&_button]:!font-mono [&_button]:!text-sm"
+            />
           </div>
         </div>
       </div>

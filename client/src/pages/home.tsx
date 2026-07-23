@@ -9,11 +9,11 @@ import { dataUrl } from "@/lib/static-data";
 import type { Profile, Project } from "@shared/schema";
 
 const LoadingSkeleton = () => (
-  <div className="min-h-screen flex items-center justify-center font-mono text-primary">
-    <p className="text-sm">
-      <span className="text-muted-foreground">loading</span>
-      <span className="tui-blink ml-1 inline-block h-4 w-2 bg-primary align-middle" />
-    </p>
+  <div className="tui-shell">
+    <div className="tui-window flex items-center justify-center p-10 text-sm text-primary">
+      <span className="text-muted-foreground">booting portfolio</span>
+      <span className="tui-blink ml-2 inline-block h-4 w-2 bg-primary" />
+    </div>
   </div>
 );
 
@@ -28,10 +28,12 @@ export default function Home() {
 
   if (profileError || projectsError) {
     return (
-      <div className="min-h-screen flex items-center justify-center font-mono">
-        <p className="text-destructive text-sm">
-          <span className="text-primary">error:</span> failed to load content
-        </p>
+      <div className="tui-shell">
+        <div className="tui-window flex items-center justify-center p-10 text-sm">
+          <p>
+            <span className="text-destructive">error:</span> failed to load content
+          </p>
+        </div>
       </div>
     );
   }
@@ -41,33 +43,40 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-mono">
-      <div className="mx-auto max-w-6xl px-3 py-6 md:px-6 md:py-10 space-y-6 md:space-y-8">
-        <header className="border border-border px-3 py-2 text-xs text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="text-primary">sbkoth@github.io</span>
-          <span className="text-border">|</span>
-          <span>session=portfolio</span>
-          <span className="text-border">|</span>
-          <span className="text-accent">tty1</span>
-          <span className="ml-auto text-muted-foreground/80">
-            type scroll · click cards for details
+    <div className="tui-shell">
+      <div className="tui-window">
+        <div className="tui-titlebar">
+          <span className="flex items-center gap-1.5" aria-hidden>
+            <span className="tui-dot tui-dot-red" />
+            <span className="tui-dot tui-dot-yellow" />
+            <span className="tui-dot tui-dot-green" />
           </span>
-        </header>
-
-        <Suspense fallback={<LoadingSkeleton />}>
-          <Hero profile={profile} />
-          <Features />
-          <Services />
-          <ProjectGrid projects={projects} />
-          <Contact profile={profile} />
-        </Suspense>
-
-        <footer className="border border-border px-3 py-2 text-[11px] text-muted-foreground flex justify-between gap-2">
-          <span>
-            <span className="text-primary">$</span> exit 0
+          <span className="ml-2 truncate text-primary/90">
+            visitor@sbkoth — portfolio
           </span>
-          <span>© {new Date().getFullYear()} {profile.name}</span>
-        </footer>
+          <span className="ml-auto hidden text-[10px] tracking-wide text-muted-foreground sm:inline">
+            bash · zsh · tty1
+          </span>
+        </div>
+
+        <div className="tui-body">
+          <Suspense fallback={<LoadingSkeleton />}>
+            <Hero profile={profile} />
+            <Features />
+            <Services />
+            <ProjectGrid projects={projects} />
+            <Contact profile={profile} />
+          </Suspense>
+
+          <footer className="flex items-center justify-between gap-2 px-4 py-3 text-[11px] text-muted-foreground sm:px-6">
+            <span>
+              <span className="text-primary">$</span> exit 0
+            </span>
+            <span>
+              © {new Date().getFullYear()} {profile.name}
+            </span>
+          </footer>
+        </div>
       </div>
     </div>
   );

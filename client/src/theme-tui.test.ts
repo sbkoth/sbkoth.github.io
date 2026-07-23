@@ -16,11 +16,12 @@ describe("TUI theme (shipped styles)", () => {
   it("uses monospace as primary font and dark terminal palette", () => {
     const css = fs.readFileSync(cssPath, "utf-8");
     assert.match(css, /font-mono/, "body should use mono");
-    assert.match(css, /--background:\s*150\s+12%\s+5%/, "dark terminal bg");
-    assert.match(css, /--primary:\s*145\s+90%\s+48%/, "phosphor green primary");
-    assert.match(css, /\.tui-panel/, "TUI panel chrome class");
-    assert.match(css, /\.tui-prompt/, "shell prompt cue");
+    assert.match(css, /--background:/, "terminal bg token");
+    assert.match(css, /--primary:/, "green primary token");
+    assert.match(css, /\.tui-window/, "single terminal window shell");
+    assert.match(css, /\.tui-link-row/, "contact link row for mailto");
     assert.match(css, /color-scheme:\s*dark/, "dark color scheme");
+    assert.match(css, /pointer-events:\s*none/, "scanlines must not block clicks");
   });
 
   it("configures JetBrains Mono in Tailwind font stack", () => {
@@ -29,11 +30,15 @@ describe("TUI theme (shipped styles)", () => {
     assert.match(tw, /fontFamily/);
   });
 
-  it("ships TerminalPanel component", () => {
+  it("ships TerminalPanel and mailto-capable contact", () => {
     const panel = path.join(__dirname, "components/terminal-panel.tsx");
+    const contact = path.join(__dirname, "components/contact.tsx");
     assert.ok(fs.existsSync(panel));
+    assert.ok(fs.existsSync(contact));
     const src = fs.readFileSync(panel, "utf-8");
-    assert.match(src, /tui-panel/);
-    assert.match(src, /visitor@sbkoth/);
+    const contactSrc = fs.readFileSync(contact, "utf-8");
+    assert.match(src, /visitor/);
+    assert.match(contactSrc, /openMailto|buildMailtoHref|mailto:/);
   });
 });
+

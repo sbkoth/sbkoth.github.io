@@ -19,30 +19,28 @@ function ProjectGridComponent({ projects }: ProjectGridProps) {
 
   if (!projects.length) {
     return (
-      <TerminalPanel title="~/projects" prompt="ls projects/">
-        <p className="text-muted-foreground text-sm">
-          # projects will appear here soon
-        </p>
+      <TerminalPanel prompt="ls projects/">
+        <p className="text-sm text-muted-foreground"># projects will appear here soon</p>
       </TerminalPanel>
     );
   }
 
   return (
     <>
-      <TerminalPanel title="~/projects" prompt="git log --oneline --projects">
-        <div className="mb-6">
+      <TerminalPanel prompt="git log --oneline --projects" delayMs={120}>
+        <div className="mb-5">
           <h2 className="tui-section-title">Projects</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             <span className="text-primary">{projects.length}</span> entries in tree
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => {
             const dateLabel = formatPublishedAt(project.publishedAt);
             return (
               <article
                 key={project.id ?? project.slug}
-                className="tui-card p-4 group"
+                className="tui-card group"
                 onClick={() => setSelectedProject(project)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -54,17 +52,16 @@ function ProjectGridComponent({ projects }: ProjectGridProps) {
                 tabIndex={0}
               >
                 <div className="flex items-baseline justify-between gap-2">
-                  <h3 className="text-sm font-semibold text-primary group-hover:text-accent transition-colors">
-                    <span className="text-muted-foreground font-normal">*</span>{" "}
-                    {project.title}
+                  <h3 className="text-sm font-medium text-primary transition-colors group-hover:text-accent">
+                    <span className="text-muted-foreground">*</span> {project.title}
                   </h3>
                   {dateLabel && (
-                    <time className="text-[10px] text-muted-foreground shrink-0 font-mono">
+                    <time className="shrink-0 font-mono text-[10px] text-muted-foreground">
                       {dateLabel}
                     </time>
                   )}
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+                <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
                   {project.description}
                 </p>
                 <p className="mt-3 text-[10px] text-accent/80">
