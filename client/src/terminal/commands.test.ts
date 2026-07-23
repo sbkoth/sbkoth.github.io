@@ -1,13 +1,16 @@
 /**
  * Unit tests for shipped terminal command dispatch.
  */
-import { describe, it } from "node:test";
+
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import {
   COMMAND_NAMES,
+  COMMAND_REGISTRY,
   dispatchCommand,
-  welcomeLines,
+  getCommand,
   type PortfolioData,
+  welcomeLines,
 } from "./commands.ts";
 
 const data: PortfolioData = {
@@ -126,5 +129,22 @@ describe("dispatchCommand (shipped)", () => {
 
   it("welcomeLines is non-empty art", () => {
     assert.ok(welcomeLines("Test").length > 5);
+  });
+
+  it("COMMAND_REGISTRY is the source of COMMAND_NAMES and handlers", () => {
+    assert.ok(COMMAND_REGISTRY.length >= 10);
+    assert.equal(COMMAND_NAMES.length, COMMAND_REGISTRY.length);
+    for (const def of COMMAND_REGISTRY) {
+      assert.ok(typeof def.handler === "function", def.cmd);
+      assert.equal(getCommand(def.cmd)?.cmd, def.cmd);
+    }
+    // help text is derived from the same registry
+    const help = dispatchCommand("help", data, [], themes);
+    for (const def of COMMAND_REGISTRY) {
+      assert.ok(
+        help.lines.some((l) => l.includes(def.cmd)),
+        `help should list ${def.cmd}`,
+      );
+    }
   });
 });

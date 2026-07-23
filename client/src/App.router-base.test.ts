@@ -2,8 +2,9 @@
  * Unit tests for router base (shipped App.tsx).
  * Run: npx tsx --test client/src/App.router-base.test.ts
  */
-import { describe, it } from "node:test";
+
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import { routerBase } from "./App.tsx";
 
 describe("routerBase (shipped)", () => {

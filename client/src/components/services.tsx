@@ -1,24 +1,26 @@
-import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
-  Database,
-  Cloud,
-  Shield,
-  Code,
+  Activity,
+  Bot,
+  Boxes,
   Brain,
   ChartBar,
-  Server,
-  Network,
-  Bot,
-  GitMerge,
+  Cloud,
+  Code,
   Cpu,
-  Boxes,
-  Waves,
   CreditCard,
-  Activity,
+  Database,
+  GitMerge,
   LineChart,
+  Network,
+  Server,
+  Shield,
+  Waves,
 } from "lucide-react";
-import ContentDialog from "./content-dialog";
+import React, { lazy, Suspense, useState } from "react";
+
+const ContentDialog = lazy(() => import("./content-dialog"));
+
 import { dataUrl } from "@/lib/static-data";
 import TerminalPanel from "./terminal-panel";
 
@@ -112,12 +114,14 @@ function ServicesComponent() {
       </TerminalPanel>
 
       {selectedService && (
-        <ContentDialog
-          title={selectedService.title}
-          content={selectedService.content}
-          isOpen={!!selectedService}
-          onClose={() => setSelectedService(null)}
-        />
+        <Suspense fallback={null}>
+          <ContentDialog
+            title={selectedService.title}
+            content={selectedService.content}
+            isOpen={!!selectedService}
+            onClose={() => setSelectedService(null)}
+          />
+        </Suspense>
       )}
     </>
   );

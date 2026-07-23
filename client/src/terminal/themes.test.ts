@@ -1,11 +1,6 @@
-import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import {
-  DEFAULT_THEME,
-  THEME_NAMES,
-  getTheme,
-  hexToHslTriplet,
-} from "./themes.ts";
+import { describe, it } from "node:test";
+import { DEFAULT_THEME, getTheme, hexToHslTriplet, THEME_NAMES } from "./themes.ts";
 
 describe("themes (shipped)", () => {
   it("includes several named palettes", () => {

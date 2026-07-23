@@ -1,4 +1,4 @@
-import { SBKOTH_LOGO, SBKOTH_LOGO_MOBILE, PORTRAIT_ART } from "./welcome-art";
+import { PORTRAIT_ART, SBKOTH_LOGO, SBKOTH_LOGO_MOBILE } from "./welcome-art";
 
 type Props = {
   name: string;
@@ -22,7 +22,7 @@ export default function WelcomeBanner({ name }: Props) {
 
         <div className="welcome-art-col" aria-hidden>
           <pre className="welcome-pre welcome-portrait">{PORTRAIT_ART.join("\n")}</pre>
-          <div className="welcome-art-caption">// operator</div>
+          <div className="welcome-art-caption">{"// operator"}</div>
         </div>
       </div>
 
@@ -32,9 +32,7 @@ export default function WelcomeBanner({ name }: Props) {
         <div>
           Type <span className="welcome-cmd">help</span> for available commands.
         </div>
-        <div className="welcome-keys">
-          Tab / Ctrl+I autocomplete · ↑/↓ history · Ctrl+L clear
-        </div>
+        <div className="welcome-keys">Tab / Ctrl+I autocomplete · ↑/↓ history · Ctrl+L clear</div>
         <div className="welcome-sep">----</div>
       </div>
     </div>

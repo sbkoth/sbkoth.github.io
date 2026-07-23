@@ -59,12 +59,7 @@ export function autocomplete(
     }
 
     // "themes set " → list themes
-    if (
-      cmd === "themes" &&
-      parts.length === 3 &&
-      parts[1] === "set" &&
-      parts[2] === ""
-    ) {
+    if (cmd === "themes" && parts.length === 3 && parts[1] === "set" && parts[2] === "") {
       return { hints: [...themeNames] };
     }
 

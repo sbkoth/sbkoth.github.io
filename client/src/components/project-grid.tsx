@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import type { Project } from "@shared/schema";
-import ContentDialog from "./content-dialog";
-import { format, isValid } from "date-fns";
+import React, { lazy, Suspense, useState } from "react";
 import TerminalPanel from "./terminal-panel";
+
+const ContentDialog = lazy(() => import("./content-dialog"));
 
 interface ProjectGridProps {
   projects: Project[];
@@ -10,8 +10,11 @@ interface ProjectGridProps {
 
 function formatPublishedAt(value: string | Date): string | null {
   const date = value instanceof Date ? value : new Date(value);
-  if (!isValid(date) || date.getTime() === 0) return null;
-  return format(date, "yyyy-MM-dd");
+  if (Number.isNaN(date.getTime()) || date.getTime() === 0) return null;
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(date.getUTCDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
 function ProjectGridComponent({ projects }: ProjectGridProps) {
@@ -75,12 +78,14 @@ function ProjectGridComponent({ projects }: ProjectGridProps) {
       </TerminalPanel>
 
       {selectedProject && (
-        <ContentDialog
-          title={selectedProject.title}
-          content={selectedProject.content}
-          isOpen={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
+        <Suspense fallback={null}>
+          <ContentDialog
+            title={selectedProject.title}
+            content={selectedProject.content}
+            isOpen={!!selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        </Suspense>
       )}
     </>
   );

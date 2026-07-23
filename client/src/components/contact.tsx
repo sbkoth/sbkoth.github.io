@@ -1,8 +1,8 @@
+import type { Profile } from "@shared/schema";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import type { Profile } from "@shared/schema";
-import TerminalPanel from "./terminal-panel";
 import { buildMailtoHref, openMailto } from "@/lib/mailto";
+import TerminalPanel from "./terminal-panel";
 
 interface ContactProps {
   profile: Profile;
@@ -44,9 +44,7 @@ export default function Contact({ profile }: ContactProps) {
                   {socials.github}
                 </span>
               </span>
-              <span className="text-[10px] uppercase tracking-wider text-accent/80">
-                exec
-              </span>
+              <span className="text-[10px] uppercase tracking-wider text-accent/80">exec</span>
             </a>
           </li>
         ) : null}
@@ -74,13 +72,9 @@ export default function Contact({ profile }: ContactProps) {
                   <span className="text-muted-foreground">$ </span>
                   mail {email}
                 </span>
-                <span className="block truncate text-[11px] text-muted-foreground">
-                  {mailto}
-                </span>
+                <span className="block truncate text-[11px] text-muted-foreground">{mailto}</span>
               </span>
-              <span className="text-[10px] uppercase tracking-wider text-accent/80">
-                exec
-              </span>
+              <span className="text-[10px] uppercase tracking-wider text-accent/80">exec</span>
             </a>
           </li>
         ) : null}

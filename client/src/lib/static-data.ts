@@ -19,10 +19,7 @@ export function resolveDataUrl(
   return `${b}data/${name}.json`;
 }
 
-export function resolveAssetUrl(
-  path: string | undefined | null,
-  base: string,
-): string {
+export function resolveAssetUrl(path: string | undefined | null, base: string): string {
   if (!path) return "";
   if (/^https?:\/\//i.test(path) || path.startsWith("data:")) return path;
 
@@ -40,9 +37,7 @@ export function resolveAssetUrl(
   return `${prefix}/${path}`;
 }
 
-export function dataUrl(
-  name: "profile" | "projects" | "services" | "features",
-): string {
+export function dataUrl(name: "profile" | "projects" | "services" | "features"): string {
   return resolveDataUrl(name, import.meta.env.BASE_URL || "/");
 }
 

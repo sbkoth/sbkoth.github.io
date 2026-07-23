@@ -1,6 +1,6 @@
-import express, { type Request, Response, NextFunction } from "express";
+import express, { type NextFunction, type Request, type Response } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { log, serveStatic, setupVite } from "./vite";
 
 const app = express();
 app.use(express.json());
@@ -12,7 +12,7 @@ app.use((req, res, next) => {
   let capturedJsonResponse: Record<string, unknown> | undefined;
 
   const originalResJson = res.json.bind(res);
-  res.json = function (bodyJson, ...args) {
+  res.json = (bodyJson, ...args) => {
     capturedJsonResponse = bodyJson as Record<string, unknown>;
     return originalResJson(bodyJson, ...args);
   };

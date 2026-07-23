@@ -55,11 +55,7 @@ export const PORTRAIT_ART: string[] = [
 /**
  * Pad two string arrays into side-by-side monospace columns.
  */
-export function sideBySide(
-  left: string[],
-  right: string[],
-  gap = 3,
-): string[] {
+export function sideBySide(left: string[], right: string[], gap = 3): string[] {
   const widthL = Math.max(0, ...left.map((l) => l.length));
   const rows = Math.max(left.length, right.length);
   const spacer = " ".repeat(gap);

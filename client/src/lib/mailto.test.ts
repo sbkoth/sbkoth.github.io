@@ -2,16 +2,14 @@
  * Unit tests for shipped mail helpers.
  * Run: npx tsx --test client/src/lib/mailto.test.ts
  */
-import { describe, it } from "node:test";
+
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import { buildGmailComposeHref, buildMailtoHref } from "./mailto.ts";
 
 describe("buildMailtoHref (shipped)", () => {
   it("builds a plain mailto from email", () => {
-    assert.equal(
-      buildMailtoHref("bobby@prameya.legal"),
-      "mailto:bobby@prameya.legal",
-    );
+    assert.equal(buildMailtoHref("bobby@prameya.legal"), "mailto:bobby@prameya.legal");
   });
 
   it("trims whitespace and ignores empty", () => {

@@ -1,14 +1,8 @@
+import type { Project } from "@shared/schema";
+import { BookOpen, Laptop, Lightbulb, TrendingUp, Wrench } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import type { Project } from "@shared/schema";
-import { 
-  BookOpen, 
-  Lightbulb, 
-  Wrench, 
-  TrendingUp,
-  Laptop 
-} from "lucide-react";
 
 interface CaseStudyProps {
   project: Project;
@@ -19,9 +13,7 @@ export default function CaseStudy({ project }: CaseStudyProps) {
     <Card className="max-w-4xl mx-auto">
       <CardHeader>
         <CardTitle className="text-3xl">{project.title}</CardTitle>
-        <p className="text-lg text-muted-foreground mt-2">
-          {project.description}
-        </p>
+        <p className="text-lg text-muted-foreground mt-2">{project.description}</p>
       </CardHeader>
       <CardContent className="space-y-8">
         {/* Challenge Section */}

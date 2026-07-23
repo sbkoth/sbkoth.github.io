@@ -1,7 +1,10 @@
 /**
  * Pure command registry + dispatch for the interactive terminal.
  * Portfolio data is injected so unit tests drive the real functions.
+ * Help and autocomplete derive from the same registry metadata.
  */
+
+import { welcomeBannerLines } from "./welcome-art";
 
 export type PortfolioData = {
   profile: {
@@ -32,31 +35,6 @@ export type PortfolioData = {
   }>;
 };
 
-export type CommandMeta = {
-  cmd: string;
-  desc: string;
-};
-
-export const COMMANDS: CommandMeta[] = [
-  { cmd: "about", desc: "about Srinivas Kothapalli" },
-  { cmd: "clear", desc: "clear the terminal" },
-  { cmd: "echo", desc: "print out anything" },
-  { cmd: "email", desc: "send an email" },
-  { cmd: "features", desc: "professional expertise areas" },
-  { cmd: "gui", desc: "show non-terminal tip" },
-  { cmd: "help", desc: "check available commands" },
-  { cmd: "history", desc: "view command history" },
-  { cmd: "projects", desc: "view projects" },
-  { cmd: "pwd", desc: "print current working directory" },
-  { cmd: "services", desc: "list services offered" },
-  { cmd: "socials", desc: "social / contact links" },
-  { cmd: "themes", desc: "list or set terminal themes" },
-  { cmd: "welcome", desc: "display hero section" },
-  { cmd: "whoami", desc: "about current user" },
-];
-
-export const COMMAND_NAMES = COMMANDS.map((c) => c.cmd);
-
 export type SideEffect =
   | { type: "clear" }
   | { type: "theme"; name: string }
@@ -71,11 +49,27 @@ export type DispatchResult = {
   welcomeName?: string;
 };
 
+export type CommandContext = {
+  args: string[];
+  data: PortfolioData;
+  history: string[];
+  themeNames: string[];
+};
+
+export type CommandHandler = (ctx: CommandContext) => DispatchResult;
+
+export type CommandDefinition = {
+  cmd: string;
+  desc: string;
+  handler: CommandHandler;
+};
+
+/** @deprecated Prefer CommandDefinition; kept for older import paths */
+export type CommandMeta = Pick<CommandDefinition, "cmd" | "desc">;
+
 function usage(cmd: string, detail?: string): DispatchResult {
   return {
-    lines: detail
-      ? [`Usage: ${cmd} ${detail}`]
-      : [`Usage: ${cmd}`],
+    lines: detail ? [`Usage: ${cmd} ${detail}`] : [`Usage: ${cmd}`],
   };
 }
 
@@ -83,83 +77,54 @@ function padCmd(cmd: string, width = 12): string {
   return cmd + " ".repeat(Math.max(1, width - cmd.length));
 }
 
-import { welcomeBannerLines } from "./welcome-art";
-
 export { welcomeBannerLines as welcomeLines } from "./welcome-art";
 
-export function dispatchCommand(
-  raw: string,
-  data: PortfolioData,
-  history: string[],
-  themeNames: string[],
-): DispatchResult {
-  const trimmed = raw.trim();
-  if (trimmed === "") {
-    return { lines: [] };
+function socialEntries(data: PortfolioData): Array<{ label: string; url: string }> {
+  const entries: Array<{ label: string; url: string }> = [];
+  if (data.profile.socials.github) {
+    entries.push({ label: "GitHub", url: data.profile.socials.github });
   }
-
-  const parts = trimmed.split(/\s+/);
-  const cmd = parts[0].toLowerCase();
-  const args = parts.slice(1);
-
-  if (!COMMAND_NAMES.includes(cmd)) {
-    return { lines: [`command not found: ${cmd}`] };
+  if (data.profile.socials.email) {
+    entries.push({
+      label: "Email",
+      url: `mailto:${data.profile.socials.email}`,
+    });
   }
+  if (data.profile.socials.linkedin) {
+    entries.push({ label: "LinkedIn", url: data.profile.socials.linkedin });
+  }
+  if (data.profile.socials.twitter) {
+    entries.push({ label: "X", url: data.profile.socials.twitter });
+  }
+  return entries;
+}
 
-  switch (cmd) {
-    case "clear":
-      return { lines: [], sideEffect: { type: "clear" } };
-
-    case "help":
-      return {
-        lines: [
-          ...COMMANDS.map((c) => `${padCmd(c.cmd)}- ${c.desc}`),
-          "",
-          "Tab or Ctrl + i  => autocompletes the command",
-          "Up Arrow         => go back to previous command",
-          "Down Arrow       => go forward in history",
-          "Ctrl + l         => clear the terminal",
-        ],
-      };
-
-    case "welcome":
-      return {
-        lines: welcomeBannerLines(data.profile.name),
-        variant: "welcome",
-        welcomeName: data.profile.name,
-      };
-
-    case "whoami":
-      return { lines: ["visitor"] };
-
-    case "about":
+/** Data-driven command registry — single source of truth for help + dispatch. */
+export const COMMAND_REGISTRY: readonly CommandDefinition[] = [
+  {
+    cmd: "about",
+    desc: "about Srinivas Kothapalli",
+    handler: ({ args, data }) => {
       if (args.length > 0) return usage("about");
       return {
-        lines: [
-          data.profile.name,
-          data.profile.title,
-          "----",
-          data.profile.bio,
-        ],
+        lines: [data.profile.name, data.profile.title, "----", data.profile.bio],
       };
-
-    case "pwd":
-      if (args.length > 0) return usage("pwd");
-      return { lines: ["/home/sbkoth"] };
-
-    case "echo":
-      return { lines: [args.join(" ")] };
-
-    case "history": {
-      if (args.length > 0) return usage("history");
-      // history is newest-first in UI store; show chronological oldest→newest for readability
-      const chrono = [...history].reverse();
-      return {
-        lines: chrono.map((h, i) => `  ${String(i + 1).padStart(3, " ")}  ${h}`),
-      };
-    }
-
-    case "email": {
+    },
+  },
+  {
+    cmd: "clear",
+    desc: "clear the terminal",
+    handler: () => ({ lines: [], sideEffect: { type: "clear" } }),
+  },
+  {
+    cmd: "echo",
+    desc: "print out anything",
+    handler: ({ args }) => ({ lines: [args.join(" ")] }),
+  },
+  {
+    cmd: "email",
+    desc: "send an email",
+    handler: ({ args, data }) => {
       if (args.length > 0) return usage("email");
       const email = data.profile.socials.email;
       return {
@@ -171,9 +136,25 @@ export function dispatchCommand(
         ],
         sideEffect: { type: "mailto", email },
       };
-    }
-
-    case "gui":
+    },
+  },
+  {
+    cmd: "features",
+    desc: "professional expertise areas",
+    handler: ({ args, data }) => {
+      if (args.length > 0) return usage("features");
+      return {
+        lines: data.features.flatMap((f, i) => {
+          const hs = (f.highlights || []).map((h) => `   - ${h}`);
+          return [`${i + 1}. ${f.title}`, `   ${f.description}`, ...hs, ""];
+        }),
+      };
+    },
+  },
+  {
+    cmd: "gui",
+    desc: "show non-terminal tip",
+    handler: ({ args }) => {
       if (args.length > 0) return usage("gui");
       return {
         lines: [
@@ -182,8 +163,38 @@ export function dispatchCommand(
           "Schedule: type `email` or use socials.",
         ],
       };
-
-    case "projects": {
+    },
+  },
+  {
+    cmd: "help",
+    desc: "check available commands",
+    handler: () => ({
+      lines: [
+        ...COMMAND_REGISTRY.map((c) => `${padCmd(c.cmd)}- ${c.desc}`),
+        "",
+        "Tab or Ctrl + i  => autocompletes the command",
+        "Up Arrow         => go back to previous command",
+        "Down Arrow       => go forward in history",
+        "Ctrl + l         => clear the terminal",
+      ],
+    }),
+  },
+  {
+    cmd: "history",
+    desc: "view command history",
+    handler: ({ args, history }) => {
+      if (args.length > 0) return usage("history");
+      // history is newest-first in UI store; show chronological oldest→newest
+      const chrono = [...history].reverse();
+      return {
+        lines: chrono.map((h, i) => `  ${String(i + 1).padStart(3, " ")}  ${h}`),
+      };
+    },
+  },
+  {
+    cmd: "projects",
+    desc: "view projects",
+    handler: ({ args, data }) => {
       if (args.length === 0) {
         const lines = data.projects.flatMap((p, i) => [
           `${i + 1}. ${p.title}`,
@@ -210,44 +221,31 @@ export function dispatchCommand(
         };
       }
       return usage("projects", "[go <id>]");
-    }
-
-    case "features": {
-      if (args.length > 0) return usage("features");
-      return {
-        lines: data.features.flatMap((f, i) => {
-          const hs = (f.highlights || []).map((h) => `   - ${h}`);
-          return [`${i + 1}. ${f.title}`, `   ${f.description}`, ...hs, ""];
-        }),
-      };
-    }
-
-    case "services": {
+    },
+  },
+  {
+    cmd: "pwd",
+    desc: "print current working directory",
+    handler: ({ args }) => {
+      if (args.length > 0) return usage("pwd");
+      return { lines: ["/home/sbkoth"] };
+    },
+  },
+  {
+    cmd: "services",
+    desc: "list services offered",
+    handler: ({ args, data }) => {
       if (args.length > 0) return usage("services");
       return {
-        lines: data.services.map(
-          (s, i) => `${i + 1}. ${s.title} — ${s.description}`,
-        ),
+        lines: data.services.map((s, i) => `${i + 1}. ${s.title} — ${s.description}`),
       };
-    }
-
-    case "socials": {
-      const entries: Array<{ label: string; url: string }> = [];
-      if (data.profile.socials.github) {
-        entries.push({ label: "GitHub", url: data.profile.socials.github });
-      }
-      if (data.profile.socials.email) {
-        entries.push({
-          label: "Email",
-          url: `mailto:${data.profile.socials.email}`,
-        });
-      }
-      if (data.profile.socials.linkedin) {
-        entries.push({ label: "LinkedIn", url: data.profile.socials.linkedin });
-      }
-      if (data.profile.socials.twitter) {
-        entries.push({ label: "X", url: data.profile.socials.twitter });
-      }
+    },
+  },
+  {
+    cmd: "socials",
+    desc: "social / contact links",
+    handler: ({ args, data }) => {
+      const entries = socialEntries(data);
 
       if (args.length === 0) {
         return {
@@ -279,9 +277,12 @@ export function dispatchCommand(
         };
       }
       return usage("socials", "[go <id>]");
-    }
-
-    case "themes": {
+    },
+  },
+  {
+    cmd: "themes",
+    desc: "list or set terminal themes",
+    handler: ({ args, themeNames }) => {
       if (args.length === 0) {
         return {
           lines: [
@@ -309,9 +310,59 @@ export function dispatchCommand(
         };
       }
       return usage("themes", "set <theme-name>");
-    }
+    },
+  },
+  {
+    cmd: "welcome",
+    desc: "display hero section",
+    handler: ({ data }) => ({
+      lines: welcomeBannerLines(data.profile.name),
+      variant: "welcome",
+      welcomeName: data.profile.name,
+    }),
+  },
+  {
+    cmd: "whoami",
+    desc: "about current user",
+    handler: () => ({ lines: ["visitor"] }),
+  },
+] as const satisfies readonly CommandDefinition[];
 
-    default:
-      return { lines: [`command not found: ${cmd}`] };
+/** Sorted metadata for help listing (registry order). */
+export const COMMANDS: CommandMeta[] = COMMAND_REGISTRY.map(({ cmd, desc }) => ({
+  cmd,
+  desc,
+}));
+
+export const COMMAND_NAMES = COMMAND_REGISTRY.map((c) => c.cmd);
+
+const HANDLER_MAP: ReadonlyMap<string, CommandHandler> = new Map(
+  COMMAND_REGISTRY.map((c) => [c.cmd, c.handler]),
+);
+
+export function getCommand(name: string): CommandDefinition | undefined {
+  return COMMAND_REGISTRY.find((c) => c.cmd === name);
+}
+
+export function dispatchCommand(
+  raw: string,
+  data: PortfolioData,
+  history: string[],
+  themeNames: string[],
+): DispatchResult {
+  const trimmed = raw.trim();
+  if (trimmed === "") {
+    return { lines: [] };
   }
+
+  const parts = trimmed.split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  const args = parts.slice(1);
+
+  const handler = HANDLER_MAP.get(cmd);
+  if (!handler) {
+    return { lines: [`command not found: ${cmd}`] };
+  }
+
+  return handler({ args, data, history, themeNames });
 }

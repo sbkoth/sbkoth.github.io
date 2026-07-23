@@ -1,6 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+/* Map design tokens for Tailwind utilities (bg-background, text-primary, …) */
+@theme {
+  --font-mono:
+    "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-sans:
+    "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+
+  --radius-lg: var(--radius);
+  --radius-md: var(--radius);
+  --radius-sm: var(--radius);
+  --radius-DEFAULT: var(--radius);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Interactive terminal portfolio — theme vars set by JS (themes.ts) */
 @layer base {
@@ -46,7 +83,7 @@
   body {
     margin: 0;
     min-height: 100vh;
-    font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--font-mono);
     font-weight: 500;
     background-color: var(--term-body);
     color: var(--term-text);
@@ -89,7 +126,7 @@
   box-sizing: border-box;
   background: var(--term-body);
   color: var(--term-text);
-  font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.95rem;
   line-height: 1.55;
 }
@@ -191,6 +228,19 @@
   outline: none;
 }
 
+/* Live region for screen readers — visually near latest output */
+.term-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 550px) {
   .term-wrapper {
     padding: 0.65rem 0.85rem 1rem;
@@ -231,7 +281,8 @@
 .welcome-art-col {
   flex: 0 0 auto;
   color: var(--term-secondary);
-  text-shadow: 0 0 14px color-mix(in srgb, var(--term-secondary) 30%, transparent);
+  text-shadow: 0 0 14px
+    color-mix(in srgb, var(--term-secondary) 30%, transparent);
   position: relative;
 }
 
@@ -323,3 +374,47 @@
   }
 }
 
+/* Markdown body inside content dialogs */
+.prose-terminal {
+  color: var(--term-text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.prose-terminal h1,
+.prose-terminal h2,
+.prose-terminal h3 {
+  color: var(--term-primary);
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+}
+
+.prose-terminal a {
+  color: var(--term-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-terminal p {
+  margin: 0.5rem 0;
+}
+
+.prose-terminal code {
+  background: hsl(var(--muted));
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.2rem;
+  font-size: 0.85em;
+}
+
+.prose-terminal pre {
+  background: hsl(var(--muted));
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.prose-terminal pre code {
+  background: transparent;
+  padding: 0;
+}

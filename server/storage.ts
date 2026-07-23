@@ -1,9 +1,9 @@
-import type { Project, Profile, Feature } from "@shared/schema";
+import type { Feature, Profile, Project } from "@shared/schema";
 import {
-  loadProjects as loadMarkdownProjects,
-  loadServices,
   loadFeatures,
+  loadProjects as loadMarkdownProjects,
   loadProfile,
+  loadServices,
   type ServiceData,
 } from "../scripts/export-content";
 import { cacheService } from "./cache-service";

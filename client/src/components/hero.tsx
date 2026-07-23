@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import type { Profile } from "@shared/schema";
+import { useEffect, useRef } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { assetUrl } from "@/lib/static-data";
 import TerminalPanel from "./terminal-panel";
 
@@ -58,11 +58,7 @@ export default function Hero({ profile }: HeroProps) {
     <TerminalPanel prompt="whoami --verbose" delayMs={40}>
       <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
         <Avatar className="h-24 w-24 shrink-0 rounded-md border border-primary/35 sm:h-28 sm:w-28">
-          <AvatarImage
-            src={assetUrl(profile.avatar)}
-            alt={profile.name}
-            className="object-cover"
-          />
+          <AvatarImage src={assetUrl(profile.avatar)} alt={profile.name} className="object-cover" />
           <AvatarFallback className="rounded-md bg-muted font-mono text-xl text-primary">
             {initials}
           </AvatarFallback>
@@ -87,9 +83,7 @@ export default function Hero({ profile }: HeroProps) {
             {profile.bio}
           </p>
           <div className="flex flex-wrap items-center gap-3 pt-1">
-            <span className="text-xs text-muted-foreground">
-              $ schedule --consultation
-            </span>
+            <span className="text-xs text-muted-foreground">$ schedule --consultation</span>
             <div
               ref={calendarButtonRef}
               className="inline-block [&_button]:!rounded-md [&_button]:!font-mono [&_button]:!text-sm"
@@ -105,12 +99,7 @@ declare global {
   interface Window {
     calendar?: {
       schedulingButton: {
-        load: (config: {
-          url: string;
-          color: string;
-          label: string;
-          target: HTMLElement;
-        }) => void;
+        load: (config: { url: string; color: string; label: string; target: HTMLElement }) => void;
       };
     };
   }

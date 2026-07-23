@@ -1,21 +1,30 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from "wouter";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+    <div className="term-wrapper" role="main" aria-labelledby="not-found-title">
+      <h1 id="not-found-title" className="sr-only">
+        404 Page Not Found
+      </h1>
+      <div className="term-line">
+        <span className="term-prompt" aria-hidden="true">
+          <span className="term-user">visitor</span>
+          <span className="term-at">@</span>
+          <span className="term-host">sbkoth.github.io</span>
+          <span className="term-path">:~$</span>
+        </span>{" "}
+        <span className="term-cmd">cat /404</span>
+      </div>
+      <div className="term-output">
+        <div className="term-output-line">command not found: page</div>
+        <div className="term-output-line">&nbsp;</div>
+        <div className="term-output-line">No route matched. Return home and open the terminal:</div>
+        <div className="term-output-line">
+          <Link href="/" className="text-primary underline underline-offset-2">
+            cd /
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

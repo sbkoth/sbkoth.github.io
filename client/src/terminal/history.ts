@@ -9,10 +9,7 @@ export type HistoryNav = {
 };
 
 /** Move older in history (ArrowUp). pointer -1 means not navigating. */
-export function historyUp(
-  history: string[],
-  pointer: number,
-): HistoryNav | null {
+export function historyUp(history: string[], pointer: number): HistoryNav | null {
   if (history.length === 0) return null;
   if (pointer + 1 >= history.length) return null;
   const next = pointer + 1;
@@ -20,10 +17,7 @@ export function historyUp(
 }
 
 /** Move newer in history (ArrowDown). */
-export function historyDown(
-  history: string[],
-  pointer: number,
-): HistoryNav | null {
+export function historyDown(history: string[], pointer: number): HistoryNav | null {
   if (pointer < 0) return null;
   if (pointer === 0) {
     return { value: "", pointer: -1 };

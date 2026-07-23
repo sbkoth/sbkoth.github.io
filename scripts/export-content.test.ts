@@ -2,18 +2,19 @@
  * Unit tests for build-time content export (real loaders + real content dir).
  * Run: npx tsx --test scripts/export-content.test.ts
  */
-import { describe, it } from "node:test";
+
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import fs from "fs/promises";
 import path from "path";
 import {
+  CONTENT_DIR,
+  DATA_DIR,
+  exportStaticContent,
+  loadFeatures,
   loadProfile,
   loadProjects,
   loadServices,
-  loadFeatures,
-  exportStaticContent,
-  DATA_DIR,
-  CONTENT_DIR,
 } from "./export-content.ts";
 
 describe("export-content loaders", () => {
@@ -43,10 +44,7 @@ describe("export-content loaders", () => {
   });
 
   it("loads services and features from markdown", async () => {
-    const [services, features] = await Promise.all([
-      loadServices(),
-      loadFeatures(),
-    ]);
+    const [services, features] = await Promise.all([loadServices(), loadFeatures()]);
     assert.ok(services.length >= 5, `services: ${services.length}`);
     assert.ok(features.length >= 3, `features: ${features.length}`);
     for (const s of services) {

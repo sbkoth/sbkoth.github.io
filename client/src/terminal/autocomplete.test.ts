@@ -1,5 +1,5 @@
-import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import { autocomplete } from "./autocomplete.ts";
 import { COMMAND_NAMES } from "./commands.ts";
 
@@ -20,10 +20,7 @@ describe("autocomplete (shipped)", () => {
   });
 
   it("completes themes set and theme names", () => {
-    assert.equal(
-      autocomplete("themes ", COMMAND_NAMES, themes).completion,
-      "themes set ",
-    );
+    assert.equal(autocomplete("themes ", COMMAND_NAMES, themes).completion, "themes set ");
     const hints = autocomplete("themes set ", COMMAND_NAMES, themes).hints;
     assert.deepEqual(hints, themes);
     const one = autocomplete("themes set u", COMMAND_NAMES, themes);
@@ -31,9 +28,6 @@ describe("autocomplete (shipped)", () => {
   });
 
   it("completes projects go", () => {
-    assert.equal(
-      autocomplete("projects ", COMMAND_NAMES, themes).completion,
-      "projects go ",
-    );
+    assert.equal(autocomplete("projects ", COMMAND_NAMES, themes).completion, "projects go ");
   });
 });

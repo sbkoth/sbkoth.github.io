@@ -1,17 +1,14 @@
-import { Switch, Route, Router } from "wouter";
-import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import NotFound from "@/pages/not-found";
+import { Route, Router, Switch } from "wouter";
 import Home from "@/pages/home";
+import NotFound from "@/pages/not-found";
+import { queryClient } from "./lib/queryClient";
 
 /**
  * wouter base for https://sbkoth.github.io/ (user site root).
  * Empty string when BASE_URL is / or ./ so routes are absolute from domain root.
  */
-export function routerBase(
-  envBase: string = import.meta.env.BASE_URL || "/",
-): string {
+export function routerBase(envBase: string = import.meta.env.BASE_URL || "/"): string {
   if (!envBase || envBase === "/" || envBase === "./" || envBase === ".") {
     return "";
   }
@@ -33,7 +30,6 @@ function App() {
       <Router base={routerBase()}>
         <AppRouter />
       </Router>
-      <Toaster />
     </QueryClientProvider>
   );
 }

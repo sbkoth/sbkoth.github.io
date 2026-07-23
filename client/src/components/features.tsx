@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import type { Feature } from "@shared/schema";
 import { useQuery } from "@tanstack/react-query";
 import {
-  Code2,
-  GitMerge,
   AlertCircle,
-  Zap,
-  Database,
   Brain,
   Cloud,
-  Shield,
+  Code2,
   CreditCard,
+  Database,
+  GitMerge,
+  Shield,
+  Zap,
 } from "lucide-react";
-import type { Feature } from "@shared/schema";
-import ContentDialog from "./content-dialog";
+import React, { lazy, Suspense, useState } from "react";
 import { dataUrl } from "@/lib/static-data";
 import TerminalPanel from "./terminal-panel";
+
+const ContentDialog = lazy(() => import("./content-dialog"));
 
 const iconMap: Record<string, React.ReactNode> = {
   Code2: <Code2 className="h-4 w-4" />,
@@ -86,10 +87,7 @@ function FeaturesComponent() {
                   {feature.highlights?.length > 0 && (
                     <ul className="mt-3 space-y-1">
                       {feature.highlights.slice(0, 4).map((highlight, i) => (
-                        <li
-                          key={i}
-                          className="flex gap-2 text-[11px] text-foreground/80"
-                        >
+                        <li key={i} className="flex gap-2 text-[11px] text-foreground/80">
                           <span className="shrink-0 text-primary">▸</span>
                           <span>{highlight}</span>
                         </li>
@@ -104,12 +102,14 @@ function FeaturesComponent() {
       </TerminalPanel>
 
       {selectedFeature && (
-        <ContentDialog
-          title={selectedFeature.title}
-          content={selectedFeature.content}
-          isOpen={!!selectedFeature}
-          onClose={() => setSelectedFeature(null)}
-        />
+        <Suspense fallback={null}>
+          <ContentDialog
+            title={selectedFeature.title}
+            content={selectedFeature.content}
+            isOpen={!!selectedFeature}
+            onClose={() => setSelectedFeature(null)}
+          />
+        </Suspense>
       )}
     </>
   );

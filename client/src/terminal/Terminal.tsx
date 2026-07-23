@@ -1,44 +1,23 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type FormEvent,
-  type KeyboardEvent,
-} from "react";
-import { useQuery } from "@tanstack/react-query";
-import { dataUrl } from "@/lib/static-data";
-import { openMailto } from "@/lib/mailto";
 import type { Feature, Profile, Project } from "@shared/schema";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useRef } from "react";
+import { dataUrl } from "@/lib/static-data";
+import type { PortfolioData } from "./commands";
 import {
-  COMMAND_NAMES,
-  dispatchCommand,
-  type DispatchResult,
-  type PortfolioData,
-} from "./commands";
-import { autocomplete } from "./autocomplete";
-import { historyDown, historyUp } from "./history";
-import {
-  THEME_NAMES,
-  applyThemeToDocument,
-  getTheme,
-  loadStoredThemeName,
-  storeThemeName,
-} from "./themes";
+  useBootWelcome,
+  useLatestOutputAnnouncement,
+  useRunSideEffect,
+  useTerminalFocus,
+  useTerminalKeyboard,
+  useTerminalState,
+  useTerminalSubmit,
+  useTerminalTheme,
+} from "./hooks";
 import WelcomeBanner from "./WelcomeBanner";
-
-type HistoryEntry = {
-  id: number;
-  input: string;
-  result: DispatchResult;
-};
-
-let entryId = 0;
 
 function TermPrompt() {
   return (
-    <span className="term-prompt">
+    <span className="term-prompt" aria-hidden="true">
       <span className="term-user">visitor</span>
       <span className="term-at">@</span>
       <span className="term-host">sbkoth.github.io</span>
@@ -94,52 +73,13 @@ export default function Terminal() {
     };
   }, [profile, projects, features, services]);
 
-  const [inputVal, setInputVal] = useState("");
-  const [cmdHistory, setCmdHistory] = useState<string[]>([]);
-  const [entries, setEntries] = useState<HistoryEntry[]>([]);
-  const [hints, setHints] = useState<string[]>([]);
-  const [pointer, setPointer] = useState(-1);
-  const [themeName, setThemeName] = useState(DEFAULT_THEME_SAFE);
-  const [booted, setBooted] = useState(false);
+  const [state, dispatch] = useTerminalState();
+  const { entries, cmdHistory, pointer, hints, inputVal } = state;
+  const { setThemeName } = useTerminalTheme();
+  const runSideEffect = useRunSideEffect(setThemeName);
 
-  // Apply theme on mount + changes
-  useEffect(() => {
-    const name = loadStoredThemeName();
-    setThemeName(name);
-    applyThemeToDocument(getTheme(name));
-  }, []);
-
-  useEffect(() => {
-    applyThemeToDocument(getTheme(themeName));
-    storeThemeName(themeName);
-  }, [themeName]);
-
-  // Prevent page scroll on arrow keys (match example)
-  useEffect(() => {
-    const onKey = (e: globalThis.KeyboardEvent) => {
-      if (e.code === "ArrowUp" || e.code === "ArrowDown") {
-        e.preventDefault();
-      }
-    };
-    window.addEventListener("keydown", onKey, false);
-    return () => window.removeEventListener("keydown", onKey, false);
-  }, []);
-
-  // Focus input when terminal surface is clicked
-  useEffect(() => {
-    const focusInput = () => inputRef.current?.focus();
-    document.addEventListener("click", focusInput);
-    return () => document.removeEventListener("click", focusInput);
-  }, []);
-
-  // Initial welcome once portfolio data is ready
-  useEffect(() => {
-    if (!portfolio || booted) return;
-    const welcome = dispatchCommand("welcome", portfolio, [], THEME_NAMES);
-    setEntries([{ id: ++entryId, input: "welcome", result: welcome }]);
-    setCmdHistory(["welcome"]);
-    setBooted(true);
-  }, [portfolio, booted]);
+  useTerminalFocus(inputRef);
+  useBootWelcome(portfolio, dispatch);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -150,100 +90,31 @@ export default function Terminal() {
     return () => clearTimeout(t);
   }, [inputVal, pointer, entries]);
 
-  const runSideEffect = useCallback((result: DispatchResult) => {
-    const fx = result.sideEffect;
-    if (!fx) return;
-    if (fx.type === "theme") {
-      setThemeName(fx.name);
-    } else if (fx.type === "mailto") {
-      // Must stay synchronous inside the submit gesture for popups
-      openMailto(fx.email, "Hello from your portfolio");
-    } else if (fx.type === "open") {
-      window.open(fx.url, "_blank", "noopener,noreferrer");
-    }
-  }, []);
+  const handleKeyDown = useTerminalKeyboard({
+    inputVal,
+    cmdHistory,
+    pointer,
+    dispatch,
+  });
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!portfolio) return;
-    const line = inputVal;
-    const result = dispatchCommand(line, portfolio, cmdHistory, THEME_NAMES);
+  const handleSubmit = useTerminalSubmit({
+    portfolio,
+    inputVal,
+    cmdHistory,
+    dispatch,
+    runSideEffect,
+  });
 
-    // Run side effects first while still in the user-gesture stack
-    // (popup blockers ignore delayed window.open).
-    if (result.sideEffect?.type === "clear") {
-      setEntries([]);
-      setCmdHistory((h) => [line, ...h]);
-      setInputVal("");
-      setHints([]);
-      setPointer(-1);
-      return;
-    }
-
-    runSideEffect(result);
-
-    setEntries((prev) => [
-      ...prev,
-      { id: ++entryId, input: line, result },
-    ]);
-    setCmdHistory((h) => [line, ...h]);
-    setInputVal("");
-    setHints([]);
-    setPointer(-1);
-  };
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    const ctrlI = e.ctrlKey && e.key.toLowerCase() === "i";
-    const ctrlL = e.ctrlKey && e.key.toLowerCase() === "l";
-
-    if (e.key === "Tab" || ctrlI) {
-      e.preventDefault();
-      if (!inputVal) return;
-      const r = autocomplete(inputVal, COMMAND_NAMES, THEME_NAMES);
-      if (r.completion) {
-        setInputVal(r.completion);
-        setHints([]);
-      } else if (r.hints.length > 1) {
-        setHints(r.hints);
-      } else if (r.hints.length === 1) {
-        setInputVal(r.hints[0]);
-        setHints([]);
-      } else {
-        setHints(r.hints);
-      }
-      return;
-    }
-
-    if (ctrlL) {
-      e.preventDefault();
-      setEntries([]);
-      setHints([]);
-      return;
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      const nav = historyUp(cmdHistory, pointer);
-      if (nav) {
-        setInputVal(nav.value);
-        setPointer(nav.pointer);
-      }
-      return;
-    }
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      const nav = historyDown(cmdHistory, pointer);
-      if (nav) {
-        setInputVal(nav.value);
-        setPointer(nav.pointer);
-      }
-    }
-  };
+  const liveAnnouncement = useLatestOutputAnnouncement(entries);
 
   if (!portfolio) {
     return (
-      <div className="term-wrapper" data-testid="terminal-wrapper">
+      <div
+        className="term-wrapper"
+        data-testid="terminal-wrapper"
+        role="application"
+        aria-label="Terminal portfolio loading"
+      >
         <div className="term-line">
           <TermPrompt /> <span className="term-dim">loading data…</span>
         </div>
@@ -256,8 +127,20 @@ export default function Terminal() {
       className="term-wrapper"
       data-testid="terminal-wrapper"
       ref={containerRef}
+      role="application"
+      aria-label="Interactive terminal portfolio"
     >
       <h1 className="sr-only">Terminal Portfolio — Srinivas Kothapalli</h1>
+
+      <div
+        className="term-live"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        data-testid="terminal-live-region"
+      >
+        {liveAnnouncement}
+      </div>
 
       {entries.map((entry) => (
         <div key={entry.id} className="term-block">
@@ -267,14 +150,11 @@ export default function Terminal() {
               {entry.input}
             </span>
           </div>
-          {(entry.result.variant === "welcome" ||
-            entry.result.lines.length > 0) && (
+          {(entry.result.variant === "welcome" || entry.result.lines.length > 0) && (
             <div
               className="term-output"
               data-testid={
-                entry.id === entries[entries.length - 1]?.id
-                  ? "latest-output"
-                  : undefined
+                entry.id === entries[entries.length - 1]?.id ? "latest-output" : undefined
               }
             >
               {entry.result.variant === "welcome" && entry.result.welcomeName ? (
@@ -292,9 +172,14 @@ export default function Terminal() {
       ))}
 
       {hints.length > 1 && (
-        <div className="term-hints" data-testid="hints">
+        <div
+          className="term-hints"
+          data-testid="hints"
+          role="listbox"
+          aria-label="Autocomplete suggestions"
+        >
           {hints.map((h) => (
-            <span key={h} className="term-hint">
+            <span key={h} className="term-hint" role="option">
               {h}
             </span>
           ))}
@@ -316,20 +201,17 @@ export default function Terminal() {
           autoCapitalize="off"
           ref={inputRef}
           value={inputVal}
-          onChange={(e) => {
-            setInputVal(e.target.value);
-            setHints([]);
-          }}
+          onChange={(e) => dispatch({ type: "set_input", value: e.target.value })}
           onKeyDown={handleKeyDown}
           aria-label="Terminal command input"
+          aria-describedby="terminal-shortcuts-help"
         />
       </form>
+      <p id="terminal-shortcuts-help" className="sr-only">
+        Tab or Control I to autocomplete. Up and Down arrows for history. Control L to clear. Type
+        help for commands.
+      </p>
       <div ref={bottomRef} />
     </div>
   );
-}
-
-function DEFAULT_THEME_SAFE(): string {
-  if (typeof window === "undefined") return "dark";
-  return loadStoredThemeName();
 }

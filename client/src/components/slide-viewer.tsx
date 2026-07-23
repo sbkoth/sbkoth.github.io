@@ -1,6 +1,6 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface SlideViewerProps {
   slides: string[];
@@ -14,18 +14,13 @@ export default function SlideViewer({ slides }: SlideViewerProps) {
 
   return (
     <div className="relative">
-      <img 
-        src={slides[currentSlide]} 
+      <img
+        src={slides[currentSlide]}
         alt={`Slide ${currentSlide + 1}`}
         className="w-full aspect-video object-contain"
       />
       <div className="absolute inset-0 flex items-center justify-between p-4">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={prev}
-          disabled={currentSlide === 0}
-        >
+        <Button variant="outline" size="icon" onClick={prev} disabled={currentSlide === 0}>
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <Button
