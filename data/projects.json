@@ -1,0 +1,367 @@
+[
+  {
+    "id": 1,
+    "slug": "agentic-terminal-portfolio",
+    "title": "Agentic Terminal Portfolio",
+    "description": "Terminal-first personal site modernized and maintained with heavy multi-agent coding—static GitHub Pages, Zod content, and verification gates",
+    "content": "# Agentic Terminal Portfolio\n\n## Overview\n\nThis portfolio ([sbkoth.github.io](https://sbkoth.github.io/)) is an interactive terminal—not a multi-section marketing page. It is actively developed with **agentic coding**: multi-step agent sessions that implement plans, delete dead code, expand tests, and only declare done when the quality suite is green.\n\n## Challenge\n\nPersonal sites rot when the stack is heavy and the UX is unclear. The goal was a durable, Terminal-first experience that stays pure static in production, while making **agentic software engineering** a visible, honest part of how the site is built and maintained.\n\n## Approach\n\n- **Terminal-first product** — Commands (`about`, `projects`, `features`, `services`, themes, history) from a data-driven registry\n- **Static production** — Markdown + Zod-validated export to JSON; no runtime server on GitHub Pages\n- **Agent-friendly architecture** — Pure modules for dispatch, autocomplete, sanitize, and export so agents can prove changes with unit tests\n- **Verification loops** — `check`, `test`, `lint`, and `build:pages` as the definition of done for agent runs\n- **Sanitized dialog path** — `marked` + DOMPurify for any markdown HTML surface\n\n## Implementation highlights\n\n1. Modernized stack: React 19, Vite 8, TypeScript 7, Tailwind 4, Zod 4, Biome\n2. Removed unreachable marketing-era components; kept only the terminal path plus content-dialog\n3. Accessibility: combobox autocomplete, live regions, welcome + help announcements\n4. Performance: optimized uploads, trimmed font weights, history caps for long sessions\n5. Content reflects current practice: agentic coding in profile, features, services, and this project\n\n## Technologies\n\nReact, Vite, TypeScript, Tailwind CSS, TanStack Query, Zod, marked, isomorphic-dompurify, GitHub Pages, multi-agent coding workflows",
+    "publishedAt": "2026-07-24T00:00:00.000Z",
+    "thumbnail": "/uploads/profile-formal.jpg",
+    "type": "text",
+    "challenge": "Keep a personal portfolio modern and maintainable without a heavy marketing stack, while using agentic coding as the primary way to implement, clean up, and verify changes.\n",
+    "approach": "Terminal-first UX as the product surface; pure static export for production; data-driven command registry; agents handle multi-file cleanup, a11y, tests, and deploys under human-directed plans and quality gates.\n",
+    "implementation": null,
+    "outcomes": [
+      "Shipped React 19 + Vite 8 + Tailwind 4 terminal portfolio on pure static GitHub Pages",
+      "Purged pre-v3 marketing components and unused Radix/shadcn surface from the live import graph",
+      "Strengthened accessibility (live regions, combobox autocomplete) and data-load error UX",
+      "Content and code changes driven by agent sessions with check / test / lint / build gates"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "React",
+      "Vite",
+      "TypeScript",
+      "Tailwind CSS",
+      "Zod",
+      "Agentic coding",
+      "GitHub Pages"
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "cloud-migration-devops",
+    "title": "Cloud Migration & DevOps Transformation",
+    "description": "Led enterprise cloud migration and DevOps transformation for sensitive financial applications",
+    "content": "# Cloud Migration & DevOps Transformation\n\n## Project Overview\n\nI led a comprehensive cloud migration and DevOps transformation initiative for financial applications handling sensitive payment processing data. This project established secure, automated pipelines for both infrastructure and application code, dramatically improving deployment speed while maintaining strict security and compliance requirements for systems processing financial transactions. The transformation enabled rapid innovation while ensuring the security controls necessary for payment card industry standards.\n\n## Key Contributions\n\n- Designed and implemented multi-stage CI/CD pipelines for application and infrastructure code with separated environments\n- Created reusable Terraform modules for consistent AWS resource provisioning with security guardrails\n- Developed comprehensive Groovy/Bash scripts for Jenkins pipeline automation with robust error handling\n- Collaborated with InfoSec to implement over 100 PCI-DSS control policies in automated form\n- Established zero-trust security model for cloud infrastructure with proper network segmentation\n- Implemented secure secrets management using HashiCorp Vault with strict access controls\n- Onboarded applications to CloudFoundry with proper logging, monitoring, and auto-scaling configurations\n- Established formal change management processes for safe production deployments of financial systems\n- Configured complex firewall rules and security groups for secure multi-cloud connectivity\n- Implemented infrastructure-as-code best practices with code reviews and automated testing\n- Created developer self-service portal for deployment and monitoring\n- Developed comprehensive documentation and training programs for new DevOps processes and tools\n- Integrated automated security scanning and compliance checks at every stage of the pipeline\n- Implemented comprehensive disaster recovery procedures with regular testing\n\n## Technical Approach\n\nThe solution included a multi-layered approach to DevOps transformation for financial applications. Infrastructure provisioning was automated using Terraform, with reusable modules for various AWS services that enforced security best practices and compliance requirements. Application deployment leveraged CloudFoundry for containerization, isolation, and scalability with proper resource constraints and monitoring.\n\nA key aspect was incorporating security at every stage of the pipeline for financial data protection. This included static code analysis, dependency scanning, infrastructure validation, container image scanning, and runtime security monitoring. The system implemented least-privilege access controls, network segmentation, and comprehensive audit logging to ensure visibility into all aspects of the deployment process.\n\nThe migration followed a careful phased approach with extensive testing at each stage. A parallel run strategy was implemented for critical payment systems to ensure zero downtime during the transition. Data migration procedures included validation, reconciliation, and rollback capabilities to protect financial transaction integrity.\n\n## Results\n\nThe DevOps transformation dramatically improved the speed and reliability of deployments while enhancing security for sensitive financial applications. Deployment times decreased from days to minutes, allowing for more frequent releases with higher quality. The automated security controls ensured that all deployments met PCI-DSS compliance requirements, reducing risk while enabling innovation.\n\nThe cloud migration reduced infrastructure costs by 40% while improving resilience and scalability for handling transaction volume spikes. Incident response time decreased by 75% due to improved monitoring and automation. The standardized deployment process eliminated configuration drift and reduced human error, leading to zero security findings in subsequent audits of the payment processing infrastructure.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/cloud-migration.jpg",
+    "type": "text",
+    "challenge": "Traditional deployment processes were slow, error-prone, and lacked proper security controls for sensitive financial applications, hindering business agility and innovation.",
+    "approach": "Designed comprehensive DevOps transformation strategy with secure CI/CD pipelines, infrastructure as code, and automated compliance checks.",
+    "implementation": "Implemented Jenkins pipelines, Terraform for AWS resources, CloudFoundry for application deployment, and integrated security scanning at every stage.",
+    "outcomes": [
+      "Established secure, automated deployment pipelines that reduced deployment time while enhancing security and compliance",
+      "Reduced deployment time by 85%, achieved zero security findings in production, and enabled 10x more frequent releases"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Jenkins",
+      "Terraform",
+      "CloudFoundry",
+      "AWS",
+      "Groovy",
+      "Bash",
+      "ITSM",
+      "Git",
+      "Infrastructure as Code",
+      "Docker",
+      "Security Scanning"
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "example-project",
+    "title": "Cloud Migration Strategy",
+    "description": "Enterprise-scale cloud migration framework and implementation strategy",
+    "content": "# Cloud Migration Framework\n\n## Overview\n\nThis project delivered a comprehensive cloud migration strategy for a large enterprise, focusing on:\n\n- Infrastructure modernization\n- Cost optimization\n- Zero-downtime migration\n- Security compliance\n\n## Key Achievements\n\n1. Successfully migrated 200+ applications\n2. Reduced infrastructure costs by 40%\n3. Implemented automated deployment pipelines\n4. Achieved 99.99% uptime during migration\n\n## Technologies Used\n\n- AWS CloudFormation\n- Terraform\n- Docker\n- Kubernetes\n- Jenkins",
+    "publishedAt": "2024-02-21T00:00:00.000Z",
+    "thumbnail": "/uploads/1740109013236-profile-photo.jpg",
+    "type": "text",
+    "challenge": null,
+    "approach": null,
+    "implementation": null,
+    "outcomes": [],
+    "clientTestimonial": null,
+    "technologies": []
+  },
+  {
+    "id": 4,
+    "slug": "data-governance",
+    "title": "Data Governance Framework",
+    "description": "A comprehensive data governance framework implementation for enterprise data management",
+    "content": "# Enterprise Data Governance Framework\n\n## Overview\n\nThis project established a robust data governance framework for a Fortune 500 company, focusing on:\n\n- Data quality assurance\n- Regulatory compliance\n- Data lifecycle management\n- Security and access control\n\n## Key Achievements\n\n1. Implemented automated data quality checks\n2. Established data stewardship program\n3. Created comprehensive data catalog\n4. Reduced data-related incidents by 75%\n\n## Technologies Used\n\n- AWS Glue for data catalog\n- Apache Atlas for metadata management\n- Custom data quality tools\n- Tableau for data quality dashboards",
+    "publishedAt": "2024-02-21T00:00:00.000Z",
+    "thumbnail": "/uploads/1740109013236-profile-photo.jpg",
+    "type": "text",
+    "challenge": "The client, a Fortune 500 company, was struggling with data quality issues, regulatory compliance risks, and inefficient data management processes across their global operations. They needed a robust framework to ensure data consistency, security, and compliance.",
+    "approach": "We took a phased approach, starting with a thorough assessment of current data practices and pain points. Working closely with stakeholders, we designed a framework that balanced governance requirements with operational efficiency.",
+    "implementation": "The implementation focused on four key pillars - data quality, metadata management, security, and compliance. We established automated data quality checks, implemented AWS Glue for the data catalog, and created comprehensive documentation and training materials.",
+    "outcomes": [
+      "Reduced data-related incidents by 75% through automated quality checks",
+      "Achieved 100% compliance with industry regulations",
+      "Decreased data retrieval time by 60%",
+      "Saved $2M annually in data cleanup and reconciliation costs"
+    ],
+    "clientTestimonial": {
+      "quote": "The data governance framework transformed how we handle data. The automated quality checks and clear processes have significantly reduced errors and improved our decision-making capabilities.",
+      "author": "Michael Chen",
+      "role": "Chief Data Officer",
+      "company": "Global Financial Services Inc."
+    },
+    "technologies": [
+      "AWS Glue",
+      "Apache Atlas",
+      "Python",
+      "Tableau",
+      "Docker"
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "data-highway",
+    "title": "Enterprise Data Highway",
+    "description": "Built a scalable event streaming platform to serve as the central nervous system for enterprise data",
+    "content": "# Enterprise Data Highway\n\n## Project Overview\n\nI designed and implemented a large-scale enterprise data streaming platform that became the central nervous system for the organization's data. This platform enabled real-time event processing, decoupled integrations, and formed the foundation for event-driven architecture across the enterprise.\n\n## Key Contributions\n\n- Architected multi-datacenter Kafka deployment with active-active replication\n- Implemented comprehensive monitoring and alerting solutions\n- Created automated deployment pipelines for infrastructure and configurations\n- Designed and implemented robust security with Kerberos and mTLS\n- Built a self-service portal for stream management and discovery\n- Established data governance and stream lifecycle management\n- Developed standardized producer and consumer patterns for Java, Python, and .NET\n- Created comprehensive documentation and training materials\n\n## Technical Approach\n\nThe solution centered around a highly-available Kafka cluster deployed across multiple data centers, with automated failover capabilities. The architecture included proper network segmentation, robust security controls, and comprehensive monitoring.\n\nA key aspect was the development of a self-service portal that allowed teams to create and manage their own event streams while enforcing governance policies. This democratized access while maintaining appropriate controls.\n\n## Results\n\nThe data highway dramatically transformed how data flowed through the organization. Previously siloed systems became integrated parts of a cohesive ecosystem. Real-time analytics capabilities were enabled, and integration times were slashed from months to days or hours. The platform processed billions of daily events with 99.99% reliability.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/data-highway.jpg",
+    "type": "text",
+    "challenge": "Siloed data systems were creating integration bottlenecks, preventing real-time analytics, and slowing down business operations. The organization needed a centralized, reliable data backbone.",
+    "approach": "Designed and implemented a multi-datacenter Kafka-based streaming platform with advanced monitoring, security, and self-service capabilities.",
+    "implementation": "Built a robust, fault-tolerant Kafka cluster architecture with automated deployment, monitoring, and disaster recovery, along with a self-service portal for stream management.",
+    "outcomes": [
+      "Created a reliable, scalable data highway that became the backbone for enterprise event streams",
+      "Achieved 99.99% uptime, processed over 2 billion daily events, reduced integration time by 85%, and enabled real-time analytics capabilities"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Apache Kafka",
+      "Confluent Platform",
+      "Kubernetes",
+      "Terraform",
+      "Prometheus",
+      "Grafana",
+      "Spring Boot",
+      "Kerberos",
+      "mTLS",
+      "Avro",
+      "Schema Registry"
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "enterprise-datahub-platform",
+    "title": "Enterprise Data Hub Platform",
+    "description": "Designed and implemented a multi-cloud Enterprise Data Hub for scalable, secure data streaming",
+    "content": "# Enterprise Data Hub Platform\n\n## Project Overview\n\nI designed and implemented a comprehensive Enterprise Data Hub (EDH) Platform to address the challenges of data movement, integration, and preparation across a complex multi-cloud environment. This platform serves as the foundation for data-driven initiatives throughout the organization, enabling analysts and data scientists to access high-quality data streams without the traditional overhead of data preparation and integration.\n\n## Key Contributions\n\n- **Multi-Cloud Architecture** - Designed and implemented a 10-node 32TB Kafka cluster spanning AWS, Google Cloud, and corporate datacenters with cross-environment replication capabilities\n- **Network Infrastructure** - Collaborated with network architecture and security teams to establish secure VPN connections and firewall configurations between cloud environments and corporate datacenters\n- **Infrastructure as Code** - Extensively used Terraform for infrastructure orchestration and Ansible for configuration management to achieve reproducible, scalable, and maintainable deployments\n- **Security Implementation** - Implemented comprehensive security measures including TLS v1.2 encryption for all communications, SSL-based authentication, and topic-level access controls for sensitive data\n- **Schema Management** - Deployed Confluent Schema Registry in a highly available cross-datacenter configuration for storing and managing Avro schema metadata\n- **Monitoring & Alerting** - Implemented a comprehensive monitoring solution using Prometheus, Grafana, Elasticsearch, and Kibana with real-time alerting to Slack\n- **Container Orchestration** - Set up Kubernetes clusters to run monitoring tools and administrative applications with proper scaling and resource management\n- **Performance Tuning** - Optimized cluster performance through careful tuning of CPU, network, log cleaner, and I/O parameters to handle over 2,000 partitions per broker efficiently\n- **CI/CD Pipeline Integration** - Established automated build and deployment pipelines using Jenkins with integration to GitHub and AWS S3\n- **Data Integration** - Created seamless data pipelines from Oracle Exadata, Teradata, MySQL, and Microsoft SQL Server to Kafka topics with automatic schema inference\n\n## Technical Approach\n\nThe solution centered around a high-performance Kafka cluster as the backbone for all data movement, with careful attention to security, scalability, and resilience. The infrastructure was provisioned and managed using Infrastructure as Code principles, ensuring consistency across environments and enabling rapid recovery in case of failures.\n\nA key aspect of the implementation was the cross-environment connectivity, allowing data to flow seamlessly between on-premises systems and multiple cloud providers. This was achieved through secure VPN connections, VPC peering, and careful network design to avoid CIDR block overlaps.\n\nThe platform incorporated advanced features including Schema Registry for managing data formats, Kafka Connect for database integration, and REST Proxy for HTTP-based access. All components were deployed with high availability configurations and proper monitoring to ensure reliability for mission-critical data pipelines.\n\n## Results\n\nThe Enterprise Data Hub Platform transformed how data moved throughout the organization, providing a unified, reliable, and secure foundation for all data initiatives. Data scientists and analysts reduced their data preparation time by 70%, allowing them to focus on deriving insights rather than managing data logistics.\n\nThe platform successfully handles over 100 million records per day flowing between systems, with 99.99% uptime and consistent sub-second latency for data access. More than 250 data pipelines have been established on the platform, enabling diverse use cases from real-time analytics to complex business event processing.\n\nBy providing a standardized approach to data movement and integration, the platform dramatically accelerated the organization's data initiatives while improving governance, security, and reliability of critical data flows.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/data-hub.jpg",
+    "type": "text",
+    "challenge": "Data scientists and analysts spent 75% of their time searching, collating, cleaning, and preparing data from multiple legacy systems and incompatible ETL pipelines, severely limiting analytical productivity.",
+    "approach": "Designed a unified platform to transport data across multiple clouds, edge locations, and corporate datacenters in a secure, reliable, and efficient manner using Kafka as the foundation.",
+    "implementation": "Built a 10-node 32TB Kafka cluster spanning AWS, Google Cloud, and corporate datacenters with cross-datacenter replication, enterprise-grade security, and comprehensive monitoring.",
+    "outcomes": [
+      "Delivered a transformative data platform that enabled seamless data movement, reduced data preparation time by 70%, and supported advanced real-time analytics",
+      "Successfully handled over 100 million records per day, enabled 250+ data pipelines, and achieved 99.99% platform availability"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Apache Kafka",
+      "Confluent Platform",
+      "AWS",
+      "Google Cloud",
+      "Terraform",
+      "Ansible",
+      "Kubernetes",
+      "Docker",
+      "Prometheus",
+      "Grafana",
+      "HashiCorp Vault",
+      "Schema Registry",
+      "Elasticsearch",
+      "Jenkins",
+      "SSL/TLS"
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "infrastructure-automation",
+    "title": "Enterprise Infrastructure Automation",
+    "description": "Implemented infrastructure automation for reliable, repeatable deployment of critical enterprise systems",
+    "content": "# Enterprise Infrastructure Automation\n\n## Project Overview\n\nI designed and implemented comprehensive infrastructure automation for enterprise-critical systems, focusing on reliability, repeatability, and security. This project transformed manual, error-prone processes into fully automated deployments.\n\n## Key Contributions\n\n- Developed modular Terraform configurations for cloud infrastructure provisioning\n- Created Ansible playbooks for configuration management across environments\n- Built CI/CD pipelines for automated infrastructure deployments\n- Implemented AWS PrivateLink for secure cross-account connectivity\n- Integrated with ServiceNow for change management compliance\n- Designed and implemented configuration for multiple environments\n- Created disaster recovery automation capabilities\n- Established infrastructure testing and validation processes\n\n## Technical Approach\n\nThe solution leveraged a combination of Terraform for infrastructure provisioning, Ansible for configuration management, and CI/CD pipelines for automated deployment. All infrastructure was defined as code and stored in version control, enabling complete traceability and repeatability.\n\nThe architecture included proper separation of concerns, with modular components that could be reused across environments. Security was built in from the ground up, with proper IAM roles, network isolation, and secure secret management.\n\n## Results\n\nThe infrastructure automation project dramatically improved deployment speed and reliability. What previously took days of manual work could now be accomplished in minutes with consistent results. This enabled faster feature delivery, more reliable testing, and confident disaster recovery capabilities.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/infrastructure-automation.jpg",
+    "type": "text",
+    "challenge": "Manual infrastructure provisioning and configuration was causing inconsistencies across environments, slowing down deployments, and making disaster recovery challenging.",
+    "approach": "Developed comprehensive infrastructure automation using Terraform, Ansible, and CI/CD pipelines to ensure consistent, reliable deployments across all environments.",
+    "implementation": "Created modular Terraform configurations, Ansible playbooks, and automated deployment pipelines that could provision and configure complete environments from scratch.",
+    "outcomes": [
+      "Achieved fully automated infrastructure provisioning and configuration across multiple environments",
+      "Reduced infrastructure deployment time by 90%, eliminated configuration drift, and enabled reliable disaster recovery capabilities"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Terraform",
+      "AWS",
+      "Ansible",
+      "CI/CD",
+      "Bamboo",
+      "ServiceNow",
+      "AWS PrivateLink",
+      "OpenShift",
+      "Infrastructure as Code",
+      "GitOps"
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "financial-analytics-platform",
+    "title": "Financial Analytics Platform",
+    "description": "Designed and implemented a comprehensive financial analytics platform for merchant insights",
+    "content": "# Financial Analytics Platform\n\n## Project Overview\n\nI designed and implemented a comprehensive financial analytics platform that provided merchants with deep insights into their transaction patterns, fees, and overall financial performance. This project combined technical implementation with business analysis to ensure the platform delivered actionable insights.\n\n## Key Contributions\n\n- Analyzed Oracle stored procedures to understand data and business logic\n- Designed optimal Cassandra data models for various analytics use cases\n- Developed Python scripts for data cleansing, transformation, and enrichment\n- Created documentation for business users and technical stakeholders\n- Integrated exchange rate data from external APIs\n- Identified and documented business requirements for analytics dashboards\n- Collaborated with product owners to prioritize use cases\n- Isolated data fields and API requirements for transaction integrity\n- Implemented data lineage and governance mechanisms\n- Wrote comprehensive data definitions and metadata documentation\n\n## Technical Approach\n\nThe solution leveraged a carefully designed data architecture with Cassandra as the analytics datastore, chosen for its ability to handle high write throughput and flexible query patterns. Data modeling focused on optimizing for specific query patterns identified through business analysis.\n\nPython scripts handled the complex process of data transformation, including cleaning, deduplication, and enrichment with external data sources. The platform included proper documentation of data lineage and transformations to ensure transparency and auditability.\n\n## Results\n\nThe financial analytics platform transformed how merchants understood their payment operations, providing unprecedented visibility into transaction patterns, fees, and financial performance. This enabled data-driven decision making, fee optimization, and improved financial forecasting. The platform handled billions of transactions while maintaining sub-second query response times for key analytics.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/financial-analytics.jpg",
+    "type": "text",
+    "challenge": "Merchants lacked detailed visibility into transaction patterns, fee structures, and financial performance metrics needed to optimize their payment operations.",
+    "approach": "Created a holistic analytics solution combining transactional data from multiple sources with careful attention to data governance and access controls.",
+    "implementation": "Built an end-to-end analytics platform with Cassandra for optimal data modeling, Python for data processing, and comprehensive documentation for business users.",
+    "outcomes": [
+      "Delivered a comprehensive financial analytics platform that transformed merchant decision-making capabilities",
+      "Enabled analysis of billions of transactions, reduced report generation time by 90%, and created 25+ high-value analytics dashboards"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Apache Cassandra",
+      "Python",
+      "SQL",
+      "Oracle",
+      "Avro",
+      "AWS S3",
+      "Data Modeling",
+      "Hortonworks",
+      "ETL Pipeline",
+      "Data Governance",
+      "REST APIs"
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "kubernetes-streaming-platform",
+    "title": "Kubernetes Streaming Platform",
+    "description": "Built a scalable, high-performance Kubernetes platform for stream processing applications",
+    "content": "# Kubernetes Streaming Platform\n\n## Project Overview\n\nI designed and implemented a comprehensive Kubernetes-based platform specifically engineered for deploying, managing, and scaling stream processing applications. This initiative transformed how the organization approached real-time data processing, moving from static deployments to a dynamic, scalable, and resilient containerized architecture.\n\n## Key Contributions\n\n- **Kubernetes Cluster Architecture** - Designed and deployed a highly available Kubernetes cluster with 2 master nodes and multiple worker nodes using kubeadm with an external etcd cluster\n- **etcd Optimization** - Configured and tuned the etcd cluster for low-latency reads and writes, ensuring reliable metadata storage for the Kubernetes control plane\n- **Helm Package Management** - Implemented Helm as the package manager for the enterprise Kubernetes cluster, enabling standardized application deployments\n- **Docker Integration** - Created and configured specialized Docker images for stream processing applications including Kafka Connect and KSQL\n- **Stream Processing Deployments** - Established efficient processes to prepare, test, validate, and deploy KSQL queries and batch scripts in Kubernetes\n- **Resource Management** - Configured and tuned parameters for stream processing instances including timeouts, topic partitions/replicas, and underlying producer/consumer properties\n- **Change Data Capture** - Set up specialized Kubernetes pods to process change-data-capture streams from enterprise systems, separating data into appropriate Kafka topics\n- **Monitoring & Alerting** - Implemented comprehensive monitoring with Prometheus, Alertmanager, and Grafana, including Slack integration for real-time alerts\n- **Service Mesh Exploration** - Performed proof-of-concept integrations with Istio service mesh for unified service orchestration with Kafka\n- **Documentation & Onboarding** - Created comprehensive documentation for users and conducted training sessions to enable team adoption\n- **Infrastructure Automation** - Established Terraform and Ansible workflows for consistent infrastructure provisioning and configuration\n- **CI/CD Integration** - Implemented CI/CD pipelines in Jenkins for automated deployment of streaming applications\n\n## Technical Approach\n\nThe solution centered around a carefully architected Kubernetes cluster designed specifically for the unique requirements of stream processing applications. This included proper configuration of node resources, networking, and storage to handle the high throughput and low latency requirements of these workloads.\n\nA key aspect of the implementation was the automation of deployment processes through custom Helm charts and CI/CD pipelines. This allowed teams to define their stream processing applications declaratively, with proper versioning and rollback capabilities.\n\nThe platform incorporated advanced monitoring and alerting to provide comprehensive visibility into both platform health and application performance. This included specialized metrics for stream processing workloads, ensuring early detection of potential issues.\n\nSecurity was integrated at every level, from network policies to pod security contexts, ensuring proper isolation between workloads and protection of sensitive data streams.\n\n## Results\n\nThe Kubernetes Streaming Platform dramatically transformed how stream processing applications were deployed and managed. Teams could now deploy new stream processing workloads in minutes rather than days, with proper isolation, monitoring, and scaling capabilities.\n\nThe platform successfully supported over 250 stream processing pods handling diverse workloads from simple transformations to complex event processing. Resource utilization improved by 40% compared to traditional deployments through dynamic scaling and proper resource allocation.\n\nBy providing a standardized platform for stream processing, the initiative enabled greater collaboration between teams, accelerated development cycles, and improved the reliability of critical data pipelines throughout the organization.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/kubernetes-platform.jpg",
+    "type": "text",
+    "challenge": "Stream processing workloads required dynamic scaling, high availability, and resource efficiency that traditional deployment models couldn't deliver, while ensuring proper isolation and security for multiple teams.",
+    "approach": "Designed a comprehensive Kubernetes-based platform specifically tailored for stream processing applications with proper resource management, monitoring, and security controls.",
+    "implementation": "Built a highly available Kubernetes cluster with optimized networking, custom Helm charts, and infrastructure automation to support hundreds of stream processing pods.",
+    "outcomes": [
+      "Delivered a production-ready Kubernetes platform that enabled teams to deploy and scale stream processing applications with unprecedented agility and reliability",
+      "Successfully deployed 250+ stream processing pods, reduced deployment time by 85%, and achieved 40% better resource utilization compared to traditional deployments"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Kubernetes",
+      "Docker",
+      "Helm",
+      "etcd",
+      "Prometheus",
+      "Grafana",
+      "Kafka",
+      "KSQL",
+      "AWS",
+      "Terraform",
+      "Ansible",
+      "Istio",
+      "Python",
+      "Jenkins",
+      "GitOps"
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "multicloud-data-integration",
+    "title": "Multi-Cloud Data Integration",
+    "description": "Built secure, high-performance data pipelines connecting on-premises databases with cloud platforms",
+    "content": "# Multi-Cloud Data Integration\n\n## Project Overview\n\nI designed and implemented a comprehensive data integration solution that enabled secure, efficient data movement between on-premises enterprise systems and cloud-based platforms. This initiative addressed the critical challenge of data silos that hindered cloud adoption and modern analytics, creating a bridge between legacy systems and cloud-native applications.\n\n## Key Contributions\n\n- **Kafka Connect Framework** - Designed, built, and deployed a scalable Kafka Connect framework for elegant data transport from enterprise databases to cloud platforms\n- **Schema Management** - Implemented automatic schema inference and generation for diverse data sources, enabling seamless data format conversion and compatibility\n- **Database Connectivity** - Created integrations with multiple database platforms including Oracle Exadata, Teradata, MySQL, Microsoft SQL Server, and PostgreSQL\n- **Cloud Database Integration** - Established reliable data pipelines to AWS RDS, Aurora, and Google Cloud SQL instances with proper security and performance optimizations\n- **Containerized Deployment** - Configured and deployed Kafka Connect workers using Docker with appropriate resource allocation and scaling capabilities\n- **Schema Registry Integration** - Leveraged Schema Registry for durable storage of inferred schemas with proper versioning and compatibility management\n- **Security Implementation** - Ensured secure data transfer through VPN connections, encrypted communication, and proper access controls\n- **Infrastructure Automation** - Used Terraform and Ansible to create reproducible deployment processes for the entire data pipeline infrastructure\n- **Driver Management** - Established a process for storing and updating database driver artifacts in AWS S3 with automatic CLASSPATH updates\n- **Performance Tuning** - Optimized data pipeline performance through careful connector configuration, batching parameters, and network optimization\n- **Python Integration** - Developed Python utilities to support data validation, transformation, and pipeline monitoring\n- **Documentation** - Created comprehensive technical documentation covering architecture, configuration, and troubleshooting for all data pipelines\n\n## Technical Approach\n\nThe solution centered around a carefully architected Kafka Connect framework that served as the bridge between diverse data sources and destinations. This included proper configuration of connectors for each database type, with attention to data type mapping, batching, and error handling.\n\nA key aspect of the implementation was the automatic schema inference and management. By leveraging Avro and Schema Registry, the solution could automatically generate appropriate schemas for data sources, manage schema evolution, and ensure compatibility as data structures changed over time.\n\nThe architecture incorporated security at every level, from network connections to data encryption, ensuring that sensitive enterprise data was protected throughout the integration process. Cross-environment connectivity was established through secure VPN connections with appropriate firewall rules and access controls.\n\n## Results\n\nThe Multi-Cloud Data Integration solution transformed how data moved between on-premises systems and cloud platforms, enabling a new generation of cloud-based analytics and applications. The organization successfully migrated over 100 million records daily from Oracle Exadata and other legacy systems to cloud databases, with reliable schema translation and minimal latency.\n\nThe project achieved significant operational improvements, including:\n\n- Reduction in data integration development time from weeks to days through standardized connectors and frameworks\n- Improved data quality through consistent schema management and validation\n- Enhanced security and compliance for data in transit between environments\n- Increased availability and reliability of integrated data\n- Cost reduction through efficient, automated data pipelines replacing manual extract-load processes\n\nBy providing a robust foundation for cross-platform data integration, the solution accelerated the organization's cloud adoption strategy while preserving the value of existing on-premises data assets.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/data-integration.jpg",
+    "type": "text",
+    "challenge": "Enterprise data remained siloed in on-premises systems like Oracle Exadata and Teradata, preventing cloud-based analytics and applications from accessing critical information in a timely manner.",
+    "approach": "Designed a comprehensive data integration strategy using Kafka Connect and custom connectors to securely and efficiently stream data between on-premises systems and cloud platforms.",
+    "implementation": "Implemented a scalable Kafka Connect framework with custom configurations for each data source, automated schema inference, and secure cross-environment data transfer.",
+    "outcomes": [
+      "Delivered a robust data integration solution that enabled seamless data movement between on-premises systems and cloud platforms",
+      "Successfully moved over 100 million records daily from Oracle Exadata to cloud databases with reliable schema translation and minimal latency"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Kafka Connect",
+      "Avro",
+      "Oracle Exadata",
+      "Teradata",
+      "PostgreSQL",
+      "MySQL",
+      "AWS RDS",
+      "AWS S3",
+      "VPN",
+      "Docker",
+      "JDBC",
+      "Schema Registry",
+      "Aurora",
+      "Google Cloud SQL",
+      "Terraform",
+      "Python"
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "payment-data-pipeline",
+    "title": "Payment Processing Data Pipeline",
+    "description": "Built secure, scalable data pipeline for high-volume merchant transaction processing and analytics",
+    "content": "# Payment Processing Data Pipeline\n\n## Project Overview\n\nI designed and implemented a secure, scalable data pipeline to process merchant payment transactions, enabling timely and accurate financial reporting. This mission-critical system handled sensitive payment card data with enterprise-grade security while meeting strict compliance requirements.\n\n## Key Contributions\n\n- Architected end-to-end data pipeline from Oracle to AWS using Kafka and Kinesis\n- Implemented envelope encryption for sensitive payment data\n- Created Terraform modules for AWS services (Kinesis, Athena, Redshift, KMS)\n- Designed Avro schemas for various payment event types\n- Built Spring Kafka producers and consumers with transaction support\n- Established CI/CD pipelines for infrastructure and application code\n- Implemented comprehensive monitoring and alerting\n- Created optimal Cassandra data models for financial analytics\n- Integrated exchange rate data from external APIs\n- Collaborated with InfoSec to implement security controls\n- Deployed applications to CloudFoundry with proper logging and monitoring\n\n## Technical Approach\n\nThe solution leveraged a layered architecture with Oracle as the source system, Kafka for event streaming, Kinesis Firehose for cloud ingestion, S3 for storage, and multiple query engines for analytics. Security was paramount, with encryption at rest and in transit, fine-grained access controls, and comprehensive audit logging.\n\nThe data pipeline supported various event types, including payments, refunds, chargebacks, and deposits, each with their own schemas and processing requirements. The system was designed for fault tolerance, with proper error handling, replay capabilities, and monitoring.\n\n## Results\n\nThe payment data pipeline significantly improved reporting capabilities for merchants, providing timely, accurate insights into transactions, fees, and other financial metrics. The system's reliability and security met the stringent requirements of the financial industry, while its scalability handled growing transaction volumes without degradation.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/payment-data-pipeline.jpg",
+    "type": "text",
+    "challenge": "Merchants needed timely, accurate reports for transactions, fees, taxes, and other payment-related data, but existing systems lacked the security, scalability, and reliability needed for this business-critical function.",
+    "approach": "Designed an end-to-end data pipeline leveraging Kafka, AWS services, and data lake technologies with enterprise-grade security and compliance features.",
+    "implementation": "Built a secure pipeline using Terraform, Kafka, Kinesis Firehose, S3, Athena, Redshift, and Cassandra with comprehensive encryption, monitoring, and CI/CD automation.",
+    "outcomes": [
+      "Delivered a highly secure, fault-tolerant payment data pipeline meeting strict financial industry requirements",
+      "Processed millions of daily transactions with 99.99% reliability, reduced reporting latency by 75%, and achieved complete compliance with security standards"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Apache Kafka",
+      "AWS Kinesis",
+      "AWS S3",
+      "AWS Redshift",
+      "Terraform",
+      "Spring Boot",
+      "CloudFoundry",
+      "Apache Cassandra",
+      "Jenkins",
+      "Avro",
+      "Python"
+    ]
+  },
+  {
+    "id": 12,
+    "slug": "schema-governance",
+    "title": "Schema Governance Framework",
+    "description": "Established an enterprise schema governance framework for distributed event streams",
+    "content": "# Schema Governance Framework\n\n## Project Overview\n\nI established a comprehensive enterprise schema governance framework that standardized how data contracts were created, reviewed, and evolved across distributed systems. This framework balanced developer autonomy with the need for centralized data governance while addressing specific needs for sensitive financial data. The solution provided a foundation for reliable event-driven architectures handling payment processing and financial transactions.\n\n## Key Contributions\n\n- Designed and implemented a multi-datacenter mirrored Schema Registry setup with failover capabilities\n- Created detailed workflows for schema creation, review, and evolution with appropriate stakeholder involvement\n- Established compatibility rules and enforcement mechanisms for backward and forward compatibility\n- Developed PCI-compliant schema classification and handling procedures for payment card data\n- Implemented automated testing and validation in CI/CD pipelines for schema correctness\n- Created schema evolution patterns for complex financial transaction events\n- Trained development teams on schema best practices and evolution patterns\n- Integrated schema review into existing development processes while minimizing workflow disruption\n- Created interactive schema visualization tools for business and technical stakeholders\n- Developed automated schema validation testing frameworks with robust error handling\n- Established data quality monitoring for schema compliance in production\n- Created a self-service developer portal for schema exploration and documentation\n\n## Technical Approach\n\nThe solution centered around a distributed Schema Registry that served as the source of truth for all data contracts. By implementing strict compatibility rules, we ensured that schema changes wouldn't break existing consumers while enabling necessary evolution. The system supported multiple serialization formats including Avro, JSON Schema, and Protobuf to accommodate diverse application needs.\n\nThe governance framework included clear documentation of ownership, role-based approval processes, and seamless integration with existing developer workflows through Git-based reviews. This approach ensured that governance requirements were met without imposing undue burden on development teams.\n\nFor sensitive financial data, additional controls were implemented including field-level encryption patterns, PII handling guidelines, and data classification schemes that integrated with the overall data governance program. The framework also included comprehensive auditing capabilities to track schema changes over time.\n\n## Results\n\nThe schema governance framework dramatically improved data quality and reduced integration problems across teams working with financial data systems. With clear contracts and compatibility rules in place, teams could evolve their data structures with confidence while maintaining strict compliance requirements. \n\nThe framework also improved visibility into data assets across the organization, enabling better reuse and understanding of key financial data entities. Development velocity increased as teams spent less time debugging data integration issues, while production incidents related to schema incompatibilities decreased by over 80%. The standardized approach to data contracts created a foundation for reliable, scalable event-driven architectures handling mission-critical financial transactions.",
+    "publishedAt": "1970-01-01T00:00:00.000Z",
+    "thumbnail": "/uploads/schema-governance.jpg",
+    "type": "text",
+    "challenge": "As data streams proliferated across the organization, there was an urgent need for standardized schema management, governance, and evolution processes that balanced developer autonomy with enterprise data quality.",
+    "approach": "Designed a comprehensive schema governance framework with clear approval workflows, compatibility rules, and evolution patterns while maintaining developer productivity.",
+    "implementation": "Implemented a multi-datacenter schema registry infrastructure, documented evolution patterns, and created streamlined approval processes that included all relevant stakeholders.",
+    "outcomes": [
+      "Established a robust schema governance framework that maintained data quality while enabling rapid development",
+      "Reduced schema-related production incidents by 80%, improved developer productivity, and enhanced cross-team data sharing"
+    ],
+    "clientTestimonial": null,
+    "technologies": [
+      "Schema Registry",
+      "Avro",
+      "Protobuf",
+      "JSON Schema",
+      "Confluent Platform",
+      "Data Contracts",
+      "GitOps",
+      "CI/CD Pipeline Integration"
+    ]
+  }
+]

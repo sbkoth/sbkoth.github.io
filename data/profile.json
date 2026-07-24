@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "name": "Srinivas Kothapalli",
+  "title": "Data Platform Architect · Agentic Software Engineer",
+  "bio": "A seasoned technologist with over twelve years of specialized expertise in NoSQL databases, data storage and transport tools, and cloud platforms—now building and shipping heavily with agentic coding workflows. Experience spans engineering, architecture, development, operations, and customer success, delivering end-to-end governance for enterprise-scale data platforms, products, and applications. Day to day that means pairing human judgment with multi-agent coding systems for design, implementation, review, and verification—keeping terminal-first UX, static deployment, and production safety in the loop. With a formal background in economics, the focus is on scalable, resilient systems that drive business expansion while maintaining cost efficiency and operational excellence.",
+  "avatar": "/uploads/profile-formal.jpg",
+  "socials": {
+    "github": "https://github.com/sbkoth",
+    "email": "bobby@prameya.legal"
+  }
+}
