@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@plugin "@tailwindcss/typography";
 
 /* Map design tokens for Tailwind utilities (bg-background, text-primary, …) */
 @theme {
@@ -194,6 +193,33 @@
 
 .term-hint {
   margin-right: 0.25rem;
+  padding: 0.05rem 0.2rem;
+  border-radius: 0.15rem;
+}
+
+.term-hint-active {
+  background: color-mix(in srgb, var(--term-secondary) 22%, transparent);
+  color: var(--term-secondary);
+  outline: 1px solid color-mix(in srgb, var(--term-secondary) 55%, transparent);
+}
+
+.term-retry {
+  appearance: none;
+  border: 1px solid var(--term-primary);
+  background: transparent;
+  color: var(--term-primary);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  border-radius: 0.15rem;
+}
+
+.term-retry:hover,
+.term-retry:focus-visible {
+  background: color-mix(in srgb, var(--term-primary) 18%, transparent);
+  outline: 2px solid var(--term-primary);
+  outline-offset: 2px;
 }
 
 .term-form {
@@ -245,6 +271,9 @@
   .term-wrapper {
     padding: 0.65rem 0.85rem 1rem;
     font-size: 0.875rem;
+    /* Keep terminal usable with mobile browser chrome */
+    max-height: 100dvh;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
   .term-form {
@@ -255,6 +284,44 @@
   .term-input {
     min-width: 85%;
     width: 100%;
+    font-size: 16px; /* avoid iOS focus zoom */
+  }
+
+  .term-hints {
+    gap: 0.4rem 0.65rem;
+  }
+}
+
+/* High-contrast / forced-colors: keep prompt and focus visible */
+@media (prefers-contrast: more) {
+  .term-user,
+  .term-host,
+  .welcome-cmd,
+  .welcome-help-title {
+    font-weight: 600;
+  }
+
+  .term-input:focus-visible {
+    outline: 2px solid var(--term-primary);
+    outline-offset: 2px;
+  }
+
+  .term-hint-active {
+    outline-width: 2px;
+  }
+}
+
+@media (forced-colors: active) {
+  .term-user,
+  .term-host,
+  .term-hint-active,
+  .term-retry {
+    forced-color-adjust: none;
+  }
+
+  .term-retry {
+    border: 1px solid ButtonText;
+    color: ButtonText;
   }
 }
 

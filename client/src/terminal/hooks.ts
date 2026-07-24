@@ -38,11 +38,18 @@ export type HistoryEntry = {
   result: DispatchResult;
 };
 
+/** Cap rendered terminal blocks so long sessions stay snappy without virtualization. */
+export const MAX_VISIBLE_ENTRIES = 120;
+/** Cap command recall history (ArrowUp/Down). */
+export const MAX_CMD_HISTORY = 200;
+
 type TerminalState = {
   entries: HistoryEntry[];
   cmdHistory: string[];
   pointer: number;
   hints: string[];
+  /** Index into hints for listbox keyboard navigation; -1 when none active */
+  activeHintIndex: number;
   inputVal: string;
   nextId: number;
 };
@@ -50,6 +57,7 @@ type TerminalState = {
 type TerminalAction =
   | { type: "set_input"; value: string }
   | { type: "set_hints"; hints: string[] }
+  | { type: "set_active_hint"; index: number }
   | { type: "clear_screen" }
   | {
       type: "append_entry";
@@ -61,14 +69,30 @@ type TerminalAction =
   | { type: "set_pointer"; pointer: number; inputVal: string }
   | { type: "boot_welcome"; result: DispatchResult };
 
+function trimEntries(entries: HistoryEntry[]): HistoryEntry[] {
+  if (entries.length <= MAX_VISIBLE_ENTRIES) return entries;
+  return entries.slice(entries.length - MAX_VISIBLE_ENTRIES);
+}
+
+function trimCmdHistory(history: string[]): string[] {
+  if (history.length <= MAX_CMD_HISTORY) return history;
+  return history.slice(0, MAX_CMD_HISTORY);
+}
+
 function terminalReducer(state: TerminalState, action: TerminalAction): TerminalState {
   switch (action.type) {
     case "set_input":
-      return { ...state, inputVal: action.value, hints: [] };
+      return { ...state, inputVal: action.value, hints: [], activeHintIndex: -1 };
     case "set_hints":
-      return { ...state, hints: action.hints };
+      return {
+        ...state,
+        hints: action.hints,
+        activeHintIndex: action.hints.length > 0 ? 0 : -1,
+      };
+    case "set_active_hint":
+      return { ...state, activeHintIndex: action.index };
     case "clear_screen":
-      return { ...state, entries: [], hints: [] };
+      return { ...state, entries: [], hints: [], activeHintIndex: -1 };
     case "boot_welcome": {
       const id = state.nextId + 1;
       return {
@@ -80,24 +104,30 @@ function terminalReducer(state: TerminalState, action: TerminalAction): Terminal
     }
     case "append_entry": {
       const id = state.nextId + 1;
+      const nextHistory = trimCmdHistory([action.input, ...state.cmdHistory]);
       if (action.historyOnly) {
         return {
           ...state,
           nextId: id,
           entries: [],
-          cmdHistory: [action.input, ...state.cmdHistory],
+          cmdHistory: nextHistory,
           inputVal: "",
           hints: [],
+          activeHintIndex: -1,
           pointer: -1,
         };
       }
       return {
         ...state,
         nextId: id,
-        entries: [...state.entries, { id, input: action.input, result: action.result }],
-        cmdHistory: [action.input, ...state.cmdHistory],
+        entries: trimEntries([
+          ...state.entries,
+          { id, input: action.input, result: action.result },
+        ]),
+        cmdHistory: nextHistory,
         inputVal: "",
         hints: [],
+        activeHintIndex: -1,
         pointer: -1,
       };
     }
@@ -106,6 +136,8 @@ function terminalReducer(state: TerminalState, action: TerminalAction): Terminal
         ...state,
         pointer: action.pointer,
         inputVal: action.inputVal,
+        hints: [],
+        activeHintIndex: -1,
       };
     default: {
       const _exhaustive: never = action;
@@ -119,10 +151,10 @@ const initialState: TerminalState = {
   cmdHistory: [],
   pointer: -1,
   hints: [],
+  activeHintIndex: -1,
   inputVal: "",
   nextId: 0,
 };
-
 export function useTerminalState() {
   return useReducer(terminalReducer, initialState);
 }
@@ -168,14 +200,46 @@ export function useTerminalKeyboard(options: {
   inputVal: string;
   cmdHistory: string[];
   pointer: number;
+  hints: string[];
+  activeHintIndex: number;
   dispatch: Dispatch<TerminalAction>;
 }) {
-  const { inputVal, cmdHistory, pointer, dispatch } = options;
+  const { inputVal, cmdHistory, pointer, hints, activeHintIndex, dispatch } = options;
 
   return useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       const ctrlI = e.ctrlKey && e.key.toLowerCase() === "i";
       const ctrlL = e.ctrlKey && e.key.toLowerCase() === "l";
+      const listboxOpen = hints.length > 1;
+
+      if (e.key === "Escape" && listboxOpen) {
+        e.preventDefault();
+        dispatch({ type: "set_hints", hints: [] });
+        return;
+      }
+
+      // Combobox: arrow through autocomplete options when listbox is open
+      if (listboxOpen && e.key === "ArrowDown") {
+        e.preventDefault();
+        dispatch({
+          type: "set_active_hint",
+          index: nextHintIndex(hints.length, activeHintIndex, 1),
+        });
+        return;
+      }
+      if (listboxOpen && e.key === "ArrowUp") {
+        e.preventDefault();
+        dispatch({
+          type: "set_active_hint",
+          index: nextHintIndex(hints.length, activeHintIndex, -1),
+        });
+        return;
+      }
+      if (listboxOpen && e.key === "Enter" && activeHintIndex >= 0 && hints[activeHintIndex]) {
+        e.preventDefault();
+        dispatch({ type: "set_input", value: hints[activeHintIndex] });
+        return;
+      }
 
       if (e.key === "Tab" || ctrlI) {
         e.preventDefault();
@@ -183,12 +247,10 @@ export function useTerminalKeyboard(options: {
         const r = autocomplete(inputVal, COMMAND_NAMES, THEME_NAMES);
         if (r.completion) {
           dispatch({ type: "set_input", value: r.completion });
-          dispatch({ type: "set_hints", hints: [] });
         } else if (r.hints.length > 1) {
           dispatch({ type: "set_hints", hints: r.hints });
         } else if (r.hints.length === 1) {
           dispatch({ type: "set_input", value: r.hints[0] });
-          dispatch({ type: "set_hints", hints: [] });
         } else {
           dispatch({ type: "set_hints", hints: r.hints });
         }
@@ -218,10 +280,9 @@ export function useTerminalKeyboard(options: {
         }
       }
     },
-    [inputVal, cmdHistory, pointer, dispatch],
+    [inputVal, cmdHistory, pointer, hints, activeHintIndex, dispatch],
   );
 }
-
 export function useTerminalSubmit(options: {
   portfolio: PortfolioData | null;
   inputVal: string;
@@ -286,20 +347,55 @@ export function useBootWelcome(
   }, [portfolio, dispatch]);
 }
 
-export function useLatestOutputAnnouncement(entries: HistoryEntry[]): string {
-  return useMemo(() => {
-    const last = entries[entries.length - 1];
-    if (!last) return "";
-    if (last.result.variant === "welcome") {
-      const name = last.result.welcomeName ?? "visitor";
-      // Prefer full welcome lines (includes help menu) when present.
-      if (last.result.lines.length > 0) {
-        return last.result.lines.join("\n");
-      }
-      return `Welcome to ${name}'s terminal portfolio. Commands: ${COMMAND_NAMES.join(", ")}.`;
+/**
+ * Pure live-region text for the latest command output / welcome banner.
+ * Used by the Terminal screen-reader status region.
+ */
+export function announceLatestOutput(entries: HistoryEntry[]): string {
+  const last = entries[entries.length - 1];
+  if (!last) return "";
+  if (last.result.variant === "welcome") {
+    const name = last.result.welcomeName ?? "visitor";
+    // Prefer full welcome lines (includes help menu) when present.
+    if (last.result.lines.length > 0) {
+      return last.result.lines.join("\n");
     }
-    return last.result.lines.join("\n");
-  }, [entries]);
+    return `Welcome to ${name}'s terminal portfolio. Available commands: ${COMMAND_NAMES.join(", ")}. Type help for details. Tab or Control I to autocomplete.`;
+  }
+  if (last.result.lines.length === 0) {
+    return `Command completed: ${last.input}`;
+  }
+  return last.result.lines.join("\n");
+}
+
+export function useLatestOutputAnnouncement(entries: HistoryEntry[]): string {
+  return useMemo(() => announceLatestOutput(entries), [entries]);
+}
+
+/** Pure: build combobox aria-activedescendant id for a hint index. */
+export function hintOptionId(index: number): string {
+  return `terminal-hint-${index}`;
+}
+
+/** Pure helpers used by the reducer — exported for unit tests. */
+export function limitVisibleEntries(entries: HistoryEntry[]): HistoryEntry[] {
+  return trimEntries(entries);
+}
+
+export function limitCmdHistory(history: string[]): string[] {
+  return trimCmdHistory(history);
+}
+
+/**
+ * Pure: next active hint index when navigating the autocomplete listbox.
+ * direction: +1 down, -1 up.
+ */
+export function nextHintIndex(length: number, current: number, direction: 1 | -1): number {
+  if (length <= 0) return -1;
+  if (direction === 1) {
+    return current < 0 ? 0 : (current + 1) % length;
+  }
+  return current <= 0 ? length - 1 : current - 1;
 }
 
 export type { Dispatch, SetStateAction };

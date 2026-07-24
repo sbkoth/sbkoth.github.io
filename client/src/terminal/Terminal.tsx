@@ -1,9 +1,10 @@
 import type { Feature, Profile, Project } from "@shared/schema";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useRef } from "react";
+import { memo, useEffect, useId, useMemo, useRef } from "react";
 import { dataUrl } from "@/lib/static-data";
 import type { PortfolioData } from "./commands";
 import {
+  hintOptionId,
   useBootWelcome,
   useLatestOutputAnnouncement,
   useRunSideEffect,
@@ -15,7 +16,7 @@ import {
 } from "./hooks";
 import WelcomeBanner from "./WelcomeBanner";
 
-function TermPrompt() {
+const TermPrompt = memo(function TermPrompt() {
   return (
     <span className="term-prompt" aria-hidden="true">
       <span className="term-user">visitor</span>
@@ -24,27 +25,81 @@ function TermPrompt() {
       <span className="term-path">:~$</span>
     </span>
   );
+});
+
+type ServiceRow = { title: string; description: string; content?: string };
+
+function DataLoadError({ message, onRetry }: { message: string; onRetry: () => void }) {
+  return (
+    <div
+      className="term-wrapper"
+      data-testid="terminal-wrapper"
+      role="alert"
+      aria-live="assertive"
+      aria-label="Terminal portfolio data failed to load"
+    >
+      <div className="term-line">
+        <TermPrompt /> <span className="term-dim">error</span>
+      </div>
+      <div className="term-output" data-testid="terminal-error">
+        <div className="term-output-line">Failed to load portfolio data.</div>
+        <div className="term-output-line">{message}</div>
+        <div className="term-output-line">&nbsp;</div>
+        <div className="term-output-line">
+          <button
+            type="button"
+            className="term-retry"
+            onClick={onRetry}
+            data-testid="terminal-retry"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function Terminal() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const listboxId = useId();
 
-  const { data: profile } = useQuery<Profile>({
+  const profileQuery = useQuery<Profile>({
     queryKey: [dataUrl("profile")],
   });
-  const { data: projects } = useQuery<Project[]>({
+  const projectsQuery = useQuery<Project[]>({
     queryKey: [dataUrl("projects")],
   });
-  const { data: features } = useQuery<Feature[]>({
+  const featuresQuery = useQuery<Feature[]>({
     queryKey: [dataUrl("features")],
   });
-  const { data: services } = useQuery<
-    Array<{ title: string; description: string; content?: string }>
-  >({
+  const servicesQuery = useQuery<ServiceRow[]>({
     queryKey: [dataUrl("services")],
   });
+
+  const profile = profileQuery.data;
+  const projects = projectsQuery.data;
+  const features = featuresQuery.data;
+  const services = servicesQuery.data;
+
+  const loadError =
+    profileQuery.isError || projectsQuery.isError || featuresQuery.isError || servicesQuery.isError;
+
+  const errorMessage = useMemo(() => {
+    const err =
+      profileQuery.error ?? projectsQuery.error ?? featuresQuery.error ?? servicesQuery.error;
+    if (!err) return "Unknown error";
+    return err instanceof Error ? err.message : String(err);
+  }, [profileQuery.error, projectsQuery.error, featuresQuery.error, servicesQuery.error]);
+
+  const retryLoad = () => {
+    void profileQuery.refetch();
+    void projectsQuery.refetch();
+    void featuresQuery.refetch();
+    void servicesQuery.refetch();
+  };
 
   const portfolio: PortfolioData | null = useMemo(() => {
     if (!profile || !projects || !features || !services) return null;
@@ -74,7 +129,7 @@ export default function Terminal() {
   }, [profile, projects, features, services]);
 
   const [state, dispatch] = useTerminalState();
-  const { entries, cmdHistory, pointer, hints, inputVal } = state;
+  const { entries, cmdHistory, pointer, hints, activeHintIndex, inputVal } = state;
   const { setThemeName } = useTerminalTheme();
   const runSideEffect = useRunSideEffect(setThemeName);
 
@@ -94,6 +149,8 @@ export default function Terminal() {
     inputVal,
     cmdHistory,
     pointer,
+    hints,
+    activeHintIndex,
     dispatch,
   });
 
@@ -106,6 +163,13 @@ export default function Terminal() {
   });
 
   const liveAnnouncement = useLatestOutputAnnouncement(entries);
+  const listboxOpen = hints.length > 1;
+  const activeDescendant =
+    listboxOpen && activeHintIndex >= 0 ? hintOptionId(activeHintIndex) : undefined;
+
+  if (loadError && !portfolio) {
+    return <DataLoadError message={errorMessage} onRetry={retryLoad} />;
+  }
 
   if (!portfolio) {
     return (
@@ -113,10 +177,14 @@ export default function Terminal() {
         className="term-wrapper"
         data-testid="terminal-wrapper"
         role="application"
+        aria-busy="true"
         aria-label="Terminal portfolio loading"
       >
         <div className="term-line">
           <TermPrompt /> <span className="term-dim">loading data…</span>
+        </div>
+        <div className="term-live" role="status" aria-live="polite" aria-atomic="true">
+          Loading portfolio data.
         </div>
       </div>
     );
@@ -171,15 +239,22 @@ export default function Terminal() {
         </div>
       ))}
 
-      {hints.length > 1 && (
+      {listboxOpen && (
         <div
+          id={listboxId}
           className="term-hints"
           data-testid="hints"
           role="listbox"
           aria-label="Autocomplete suggestions"
         >
-          {hints.map((h) => (
-            <span key={h} className="term-hint" role="option">
+          {hints.map((h, i) => (
+            <span
+              key={h}
+              id={hintOptionId(i)}
+              className={i === activeHintIndex ? "term-hint term-hint-active" : "term-hint"}
+              role="option"
+              aria-selected={i === activeHintIndex}
+            >
               {h}
             </span>
           ))}
@@ -194,6 +269,7 @@ export default function Terminal() {
           id="terminal-input"
           title="terminal-input"
           type="text"
+          role="combobox"
           className="term-input"
           autoComplete="off"
           spellCheck={false}
@@ -205,11 +281,16 @@ export default function Terminal() {
           onKeyDown={handleKeyDown}
           aria-label="Terminal command input"
           aria-describedby="terminal-shortcuts-help"
+          aria-autocomplete="list"
+          aria-expanded={listboxOpen}
+          aria-controls={listboxOpen ? listboxId : undefined}
+          aria-activedescendant={activeDescendant}
         />
       </form>
       <p id="terminal-shortcuts-help" className="sr-only">
-        Tab or Control I to autocomplete. Up and Down arrows for history. Control L to clear. Type
-        help for commands.
+        Tab or Control I to autocomplete. When suggestions appear, use Up and Down arrows to move,
+        Enter to select, Escape to dismiss. Up and Down without suggestions walk command history.
+        Control L to clear. Type help for commands.
       </p>
       <div ref={bottomRef} />
     </div>

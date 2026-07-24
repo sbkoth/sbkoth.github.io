@@ -42,9 +42,7 @@ export default function WelcomeBanner({ name }: Props) {
             ))}
           </ul>
         </div>
-        <div className="welcome-keys">
-          Tab / Ctrl+I autocomplete · ↑/↓ history · Ctrl+L clear
-        </div>
+        <div className="welcome-keys">Tab / Ctrl+I autocomplete · ↑/↓ history · Ctrl+L clear</div>
         <div className="welcome-sep">----</div>
       </div>
     </div>

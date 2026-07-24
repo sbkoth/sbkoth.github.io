@@ -79,3 +79,6 @@ Live: **https://sbkoth.github.io/**
 - Zod 3 → 4; export pipeline validates with shared schemas.
 - Heavy unused shadcn/Radix surface (recharts, carousel, day-picker, …) pruned.
 - Command switch replaced by registry/map; Terminal hooks extracted to `hooks.ts`.
+- Marketing-era components (`hero`, `project-grid`, `features`, …) removed; only
+  `content-dialog` + `ui/dialog` remain under `client/src/components/` for the
+  sanitized markdown dialog path. Theme tokens live in `terminal/themes.ts`.
