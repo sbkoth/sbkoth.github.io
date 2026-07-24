@@ -1,10 +1,11 @@
 ---
 title: Technical Leadership
 icon: Code2
-description: Architecting and delivering scalable, secure enterprise systems with modern engineering practices
+description: Architecting and delivering scalable, secure enterprise systems—with modern practices and agentic coding as a force multiplier
 highlights:
   - Enterprise architecture design
   - Financial data system expertise
+  - Agentic engineering workflows
   - Security & compliance engineering
   - Technical decision frameworks
   - Performance optimization
@@ -12,7 +13,7 @@ highlights:
 
 # Technical Leadership & Architecture
 
-Bringing deep technical expertise across software architecture, data engineering, and system design with particular focus on financial technology systems. Providing both strategic guidance and hands-on implementation capabilities, ensuring organizations benefit from cutting-edge technical approaches while maintaining enterprise-grade reliability and security.
+Bringing deep technical expertise across software architecture, data engineering, and system design with particular focus on financial technology systems. Providing both strategic guidance and hands-on implementation capabilities—including heavy use of agentic coding for design, implementation, and verification—so organizations benefit from cutting-edge technical approaches while maintaining enterprise-grade reliability and security.
 
 ## Enterprise Architecture
 
@@ -34,6 +35,7 @@ Bringing deep technical expertise across software architecture, data engineering
 
 - **Security by Design** - Implementation of security at every level of the system architecture with defense-in-depth approaches
 - **Code Quality** - Establishment of coding standards, review processes, and quality gates to ensure maintainable systems
+- **Agentic Delivery Loops** - Spec-driven agent sessions with mandatory check/test/lint/build gates before merge
 - **Technical Documentation** - Creation of comprehensive technical documentation, architecture diagrams, and system specifications
 - **Performance Engineering** - Design of systems for optimum performance under varying load conditions with proper capacity planning
 - **Resilience Engineering** - Implementation of fault tolerance, circuit breakers, and recovery mechanisms for mission-critical systems

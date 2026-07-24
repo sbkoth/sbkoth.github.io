@@ -1,7 +1,7 @@
 ---
 title: AI Platform Architecture
 icon: Server
-description: Design and implementation of scalable AI platforms for enterprise applications
+description: Design and implementation of scalable AI platforms—including foundations for agentic coding systems
 ---
 
 # AI Platform Architecture
@@ -14,6 +14,7 @@ Design and implementation of scalable, production-ready AI platforms that suppor
 - Scalable AI model deployment strategies
 - Model monitoring and observability solutions
 - AI platform security and governance implementation
+- Platforms for agentic coding and tool-using agents (sandboxes, MCP, policy)
 - Integration with existing enterprise systems
 - Feature store implementation for ML data management
 - Machine learning pipeline orchestration

@@ -1,18 +1,19 @@
 ---
 title: AI & ML Transformation
 icon: Brain
-description: Strategic AI implementation that creates intelligent systems generating measurable business impact
+description: Strategic AI implementation—from RAG and ML platforms to agentic coding workflows that ship production software faster
 highlights:
   - AI product strategy
   - RAG implementation
   - ML platform architecture
+  - Agentic coding systems
   - Generative AI integration
   - AI ethics & governance
 ---
 
 # AI & Machine Learning Transformation
 
-Partnering with organizations to transform business operations through strategic AI implementation, focusing on creating intelligent systems that deliver measurable business impact. The approach combines cutting-edge technical expertise with pragmatic business strategy, ensuring AI projects move beyond experimentation to production deployment with clear ROI.
+Partnering with organizations to transform business operations through strategic AI implementation, focusing on creating intelligent systems that deliver measurable business impact. The approach combines cutting-edge technical expertise with pragmatic business strategy, ensuring AI projects move beyond experimentation to production deployment with clear ROI—including agentic coding practices that accelerate software delivery with verification and human oversight.
 
 ## AI Strategy & Roadmap
 
@@ -29,6 +30,8 @@ Partnering with organizations to transform business operations through strategic
 - **Prompt Engineering** - Creation of robust prompting strategies with proper evaluation and continuous improvement
 - **Fine-Tuning Strategy** - Development of approaches for model specialization balancing cost and performance
 - **Multimodal Systems** - Building applications combining text, image, audio, and video understanding
+- **Agentic Coding** - Multi-agent software engineering loops (plan, implement, test, review) for real product codebases
+
 
 ## Machine Learning Excellence
 

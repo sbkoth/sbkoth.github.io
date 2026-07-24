@@ -25,6 +25,8 @@ describe("export-content loaders", () => {
     assert.ok(profile.bio && profile.bio.length > 20, "bio required");
     assert.ok(profile.avatar.startsWith("/uploads/"), "avatar path");
     assert.ok(profile.socials?.email, "email required");
+    assert.match(profile.title, /agentic/i, "title surfaces agentic practice");
+    assert.match(profile.bio, /agentic/i, "bio surfaces agentic practice");
   });
 
   it("loads projects from markdown with non-empty titles and content", async () => {
@@ -54,6 +56,22 @@ describe("export-content loaders", () => {
       assert.ok(f.title && f.description && f.content.length > 0, f.title);
       assert.ok(Array.isArray(f.highlights), "highlights array");
     }
+    assert.ok(
+      features.some((f) => /agentic/i.test(f.title) || /agentic/i.test(f.description)),
+      "features include agentic coding expertise",
+    );
+    assert.ok(
+      services.some((s) => /agentic/i.test(s.title) || /agentic/i.test(s.description)),
+      "services include agentic software engineering",
+    );
+  });
+
+  it("includes agentic terminal portfolio project", async () => {
+    const projects = await loadProjects();
+    const agentic = projects.find((p) => p.slug === "agentic-terminal-portfolio");
+    assert.ok(agentic, "agentic-terminal-portfolio project exists");
+    assert.match(agentic.title, /agentic/i);
+    assert.match(agentic.content, /agentic/i);
   });
 
   it("exportStaticContent writes JSON files under client/public/data", async () => {

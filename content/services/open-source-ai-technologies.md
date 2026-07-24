@@ -1,7 +1,7 @@
 ---
 title: Open Source AI Technologies
 icon: Cpu
-description: We implement and customize open source AI solutions like Ollama and LangChain
+description: We implement and customize open source AI solutions like Ollama and LangChain—including agentic coding toolchains
 ---
 
 # Open Source AI Technologies
@@ -15,6 +15,7 @@ Want AI capabilities without the eye-watering costs of commercial solutions? Our
 - Self-hosted vector database implementation
 - Open source model evaluation and selection
 - Custom AI agent development using open frameworks
+- Agentic coding toolchains (CLI agents, MCP servers, workflow orchestration)
 - Integration of multiple open source AI technologies into unified solutions
 - Hugging Face model deployment and optimization
 - Langfuse for LLM observability implementation

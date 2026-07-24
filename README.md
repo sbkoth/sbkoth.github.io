@@ -1,6 +1,6 @@
 # Srinivas Kothapalli — Terminal Portfolio
 
-Personal portfolio site for tech leadership, data platforms, streaming, cloud, and AI work. Content is authored as markdown under `content/` and exported to static JSON for free [GitHub Pages](https://pages.github.com/) hosting.
+Personal portfolio site for tech leadership, data platforms, streaming, cloud, AI, and **agentic coding** practice. Content is authored as markdown under `content/` and exported to static JSON for free [GitHub Pages](https://pages.github.com/) hosting. The site itself is maintained with multi-agent coding workflows under check/test/lint/build gates.
 
 **Live site:** https://sbkoth.github.io/
 
